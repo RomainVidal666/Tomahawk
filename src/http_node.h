@@ -1,22 +1,63 @@
 #ifndef HTTP_NODE_H
 #define HTTP_NODE_H
 
+/*!
+ * \file http_node.h
+ * \brief Gestion de l'arbre n-aire utiliser par le parseur HTTP
+ * \author R. Vidal / A. Lorber / T. Jacumin
+ * \version 1.0
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
 typedef struct HTTP_Node HTTP_Node;
-struct HTTP_Node {
-	char * name;
-	int beg;
-	int end;
 
-	HTTP_Node ** childs;
-	int nb_childs;
+/**
+ * \struct HTTP_Node
+ * \brief Représente un noeud de l'arbre utilisé par le parseur.
+ */
+struct HTTP_Node {
+	char * name; 			/*!< Nom du noeud. */
+	int beg;	 			/*!< Début de l'élément dans la requête HTTP. */
+	int end;				/*!< Fin de l'élément dans la requête HTTP. */
+
+	HTTP_Node ** childs;	/*!< Ensemble de ses enfants. */
+	int nb_childs;			/*!< Nombre d'enfant. */
 };
 
+/**
+ * \fn void init_HTTP_Node ( const char * name, HTTP_Node * node )
+ * \brief Fonction de création d'une nouvelle instance d'un objet HTTP_Node.
+ *
+ * \param name Nom du noeud.
+ * \param node Pointeur vers le noeud à initialiser.
+ */
 void init_HTTP_Node ( const char * name, HTTP_Node * node );
+
+/**
+ * \fn void addChild_HTTP_Node ( HTTP_Node * node, HTTP_Node * child )
+ * \brief Fonction d'ajout d'un fils à un noeud.
+ *
+ * \param node Pointeur vers le noeud parent.
+ * \param child Pointeur vers le noeud fils.
+ */
 void addChild_HTTP_Node ( HTTP_Node * node, HTTP_Node * child );
-void free_HTTP_Node ( HTTP_Node * root );
+
+/**
+ * \fn void free_HTTP_Node ( HTTP_Node * node )
+ * \brief Fonction de suppression d'un noeud.
+ *
+ * \param node Pointeur vers le noeud à supprimer.
+ */
+void free_HTTP_Node ( HTTP_Node * node );
+
+/**
+ * \fn void free_HTTP_Tree ( HTTP_Node * root )
+ * \brief Fonction de suppression d'un arbre.
+ *
+ * \param node Pointeur vers le noeud racine de l'arbre à supprimer.
+ */
 void free_HTTP_Tree ( HTTP_Node * root );
 
 #endif
