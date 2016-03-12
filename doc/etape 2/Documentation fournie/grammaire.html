@@ -1,0 +1,1713 @@
+<html><body>
+
+
+
+<a name="URI">URI </a>  = <a href="#scheme"> scheme </a>  ":"<a href="#hier-part"> hier-part </a>  ["?"<a href="#query"> query </a>  ]["#"<a href="#fragment"> fragment </a>  ]
+
+
+
+<br/>
+
+
+
+<a name="hier-part">hier-part </a>  = "//"<a href="#authority"> authority </a>  <a href="#path-abempty"> path-abempty </a>  
+ 
+  / <a href="#path-absolute"> path-absolute </a>  
+ 
+  / <a href="#path-rootless"> path-rootless </a>  
+ 
+  / <a href="#path-empty"> path-empty </a>  
+
+
+
+<br/>
+
+
+
+<a name="URI-reference">URI-reference </a>  = <a href="#URI"> URI </a>   / <a href="#relative-ref"> relative-ref </a>  
+
+
+
+<br/>
+
+
+
+<a name="absolute-URI">absolute-URI </a>  = <a href="#scheme"> scheme </a>  ":"<a href="#hier-part"> hier-part </a>  ["?"<a href="#query"> query </a>  ]
+
+
+
+<br/>
+
+
+
+<a name="relative-ref">relative-ref </a>  = <a href="#relative-part"> relative-part </a>  ["?"<a href="#query"> query </a>  ]["#"<a href="#fragment"> fragment </a>  ]
+
+
+
+<br/>
+
+
+
+<a name="relative-part">relative-part </a>  = "//"<a href="#authority"> authority </a>  <a href="#path-abempty"> path-abempty </a>  
+ 
+  / <a href="#path-absolute"> path-absolute </a>  
+ 
+  / <a href="#path-noscheme"> path-noscheme </a>  
+ 
+  / <a href="#path-empty"> path-empty </a>  
+
+
+
+<br/>
+
+
+
+<a name="scheme">scheme </a>  = <a href="#ALPHA"> ALPHA </a>  *(<a href="#ALPHA"> ALPHA </a>   / <a href="#DIGIT"> DIGIT </a>   / "+" / "-" / ".")
+
+
+
+<br/>
+
+
+
+<a name="authority">authority </a>  = [<a href="#userinfo"> userinfo </a>  "@"]<a href="#host"> host </a>  [":"<a href="#port"> port </a>  ]
+
+
+
+<br/>
+<a name="userinfo">userinfo </a>  = *(<a href="#unreserved"> unreserved </a>   / <a href="#pct-encoded"> pct-encoded </a>   / <a href="#sub-delims"> sub-delims </a>   / ":")
+
+
+
+<br/>
+<a name="host">host </a>  = <a href="#IP-literal"> IP-literal </a>   / <a href="#IPv4address"> IPv4address </a>   / <a href="#reg-name"> reg-name </a>  
+
+
+
+<br/>
+<a name="port">port </a>  = *<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+
+
+
+<a name="IP-literal">IP-literal </a>  = "["(<a href="#IPv6address"> IPv6address </a>   / <a href="#IPvFuture"> IPvFuture </a>  )"]"
+
+
+
+<br/>
+
+
+
+<a name="IPvFuture">IPvFuture </a>  = "v"1*<a href="#HEXDIG"> HEXDIG </a>  "."1*(<a href="#unreserved"> unreserved </a>   / <a href="#sub-delims"> sub-delims </a>   / ":")
+
+
+
+<br/>
+
+
+
+<a name="IPv6address">IPv6address </a>  = 6(<a href="#h16"> h16 </a>  ":")<a href="#ls32"> ls32 </a>  
+ 
+  / "::"5(<a href="#h16"> h16 </a>  ":")<a href="#ls32"> ls32 </a>  
+ 
+  / [<a href="#h16"> h16 </a>  ]"::"4(<a href="#h16"> h16 </a>  ":")<a href="#ls32"> ls32 </a>  
+ 
+  / [*1(<a href="#h16"> h16 </a>  ":")<a href="#h16"> h16 </a>  ]"::"3(<a href="#h16"> h16 </a>  ":")<a href="#ls32"> ls32 </a>  
+ 
+  / [*2(<a href="#h16"> h16 </a>  ":")<a href="#h16"> h16 </a>  ]"::"2(<a href="#h16"> h16 </a>  ":")<a href="#ls32"> ls32 </a>  
+ 
+  / [*3(<a href="#h16"> h16 </a>  ":")<a href="#h16"> h16 </a>  ]"::"<a href="#h16"> h16 </a>  ":"<a href="#ls32"> ls32 </a>  
+ 
+  / [*4(<a href="#h16"> h16 </a>  ":")<a href="#h16"> h16 </a>  ]"::"<a href="#ls32"> ls32 </a>  
+ 
+  / [*5(<a href="#h16"> h16 </a>  ":")<a href="#h16"> h16 </a>  ]"::"<a href="#h16"> h16 </a>  
+ 
+  / [*6(<a href="#h16"> h16 </a>  ":")<a href="#h16"> h16 </a>  ]"::"
+
+
+
+<br/>
+
+
+
+<a name="h16">h16 </a>  = 1*4<a href="#HEXDIG"> HEXDIG </a>  
+
+
+
+<br/>
+<a name="ls32">ls32 </a>  = (<a href="#h16"> h16 </a>  ":"<a href="#h16"> h16 </a>  ) / <a href="#IPv4address"> IPv4address </a>  
+
+
+
+<br/>
+<a name="IPv4address">IPv4address </a>  = <a href="#dec-octet"> dec-octet </a>  "."<a href="#dec-octet"> dec-octet </a>  "."<a href="#dec-octet"> dec-octet </a>  "."<a href="#dec-octet"> dec-octet </a>  
+
+
+
+<br/>
+
+
+
+<a name="dec-octet">dec-octet </a>  = <a href="#DIGIT"> DIGIT </a>     / %x31-39<a href="#DIGIT"> DIGIT </a>     / "1"2<a href="#DIGIT"> DIGIT </a>     / "2"%x30-34<a href="#DIGIT"> DIGIT </a>     / "25"%x30-35<br/>
+
+
+
+<a name="reg-name">reg-name </a>  = *(<a href="#unreserved"> unreserved </a>   / <a href="#pct-encoded"> pct-encoded </a>   / <a href="#sub-delims"> sub-delims </a>  )
+
+
+
+<br/>
+
+
+
+<a name="path">path </a>  = <a href="#path-abempty"> path-abempty </a>     / <a href="#path-absolute"> path-absolute </a>     / <a href="#path-noscheme"> path-noscheme </a>     / <a href="#path-rootless"> path-rootless </a>     / <a href="#path-empty"> path-empty </a>  <br/>
+
+
+
+<a name="path-abempty">path-abempty </a>  = *("/"<a href="#segment"> segment </a>  )
+
+
+
+<br/>
+<a name="path-absolute">path-absolute </a>  = "/"[<a href="#segment-nz"> segment-nz </a>  *("/"<a href="#segment"> segment </a>  )]
+
+
+
+<br/>
+<a name="path-noscheme">path-noscheme </a>  = <a href="#segment-nz-nc"> segment-nz-nc </a>  *("/"<a href="#segment"> segment </a>  )
+
+
+
+<br/>
+<a name="path-rootless">path-rootless </a>  = <a href="#segment-nz"> segment-nz </a>  *("/"<a href="#segment"> segment </a>  )
+
+
+
+<br/>
+<a name="path-empty">path-empty </a>  = 0<pchar>
+
+
+
+<br/>
+
+
+
+<a name="segment">segment </a>  = *<a href="#pchar"> pchar </a>  
+
+
+
+<br/>
+<a name="segment-nz">segment-nz </a>  = 1*<a href="#pchar"> pchar </a>  
+
+
+
+<br/>
+<a name="segment-nz-nc">segment-nz-nc </a>  = 1*(<a href="#unreserved"> unreserved </a>   / <a href="#pct-encoded"> pct-encoded </a>   / <a href="#sub-delims"> sub-delims </a>   / "@")
+ 
+ 
+ <br/>
+
+
+
+<a name="pchar">pchar </a>  = <a href="#unreserved"> unreserved </a>   / <a href="#pct-encoded"> pct-encoded </a>   / <a href="#sub-delims"> sub-delims </a>   / ":" / "@"
+
+
+
+<br/>
+
+
+
+<a name="query">query </a>  = *(<a href="#pchar"> pchar </a>   / "/" / "?")
+
+
+
+<br/>
+
+
+
+<a name="fragment">fragment </a>  = *(<a href="#pchar"> pchar </a>   / "/" / "?")
+
+
+
+<br/>
+
+
+
+<a name="pct-encoded">pct-encoded </a>  = "%"<a href="#HEXDIG"> HEXDIG </a>  <a href="#HEXDIG"> HEXDIG </a>  
+
+
+
+<br/>
+
+
+
+<a name="unreserved">unreserved </a>  = <a href="#ALPHA"> ALPHA </a>   / <a href="#DIGIT"> DIGIT </a>   / "-" / "." / "_" / "~"
+
+
+
+<br/>
+<a name="reserved">reserved </a>  = <a href="#gen-delims"> gen-delims </a>   / <a href="#sub-delims"> sub-delims </a>  
+
+
+
+<br/>
+<a name="gen-delims">gen-delims </a>  = ":" / "/" / "?" / "#" / "[" / "]" / "@"
+
+
+
+<br/>
+<a name="sub-delims">sub-delims </a>  = "!" / "$" / "&" / "'" / "(" / ")"
+ 
+  / "*" / "+" / "," / ";" / "="
+
+
+
+<br/>
+
+
+
+<a name="language-range">language-range </a>  = (1*8<a href="#ALPHA"> ALPHA </a>  *("-"1*8<a href="#alphanum"> alphanum </a>  )) / "*"
+
+
+
+<br/>
+<a name="alphanum">alphanum </a>  = <a href="#ALPHA"> ALPHA </a>   / <a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+<a name="Language-Tag">Language-Tag </a>  = <a href="#langtag"> langtag </a>     / <a href="#privateuse"> privateuse </a>     / <a href="#grandfathered"> grandfathered </a>  <br/>
+
+
+
+<a name="langtag">langtag </a>  = <a href="#language"> language </a>  
+ ["-"<a href="#script"> script </a>  ]
+ ["-"<a href="#region"> region </a>  ]
+ *("-"<a href="#variant"> variant </a>  )
+ *("-"<a href="#extension"> extension </a>  )
+ ["-"<a href="#privateuse"> privateuse </a>  ]
+
+
+
+<br/>
+
+
+
+<a name="language">language </a>  = 2*3<a href="#ALPHA"> ALPHA </a>   ["-"<a href="#extlang"> extlang </a>  ]     / 4<a href="#ALPHA"> ALPHA </a>     / 5*8<a href="#ALPHA"> ALPHA </a>  <br/>
+
+
+
+<a name="extlang">extlang </a>  = 3<a href="#ALPHA"> ALPHA </a>   *2("-"3<a href="#ALPHA"> ALPHA </a>  )<br/>
+
+
+
+<a name="script">script </a>  = 4<a href="#ALPHA"> ALPHA </a>  <br/>
+
+
+
+<a name="region">region </a>  = 2<a href="#ALPHA"> ALPHA </a>     / 3<a href="#DIGIT"> DIGIT </a>  <br/>
+
+
+
+<a name="variant">variant </a>  = 5*8<a href="#alphanum"> alphanum </a>     / (<a href="#DIGIT"> DIGIT </a>  3<a href="#alphanum"> alphanum </a>  )
+
+
+
+<br/>
+
+
+
+<a name="extension">extension </a>  = <a href="#singleton"> singleton </a>  1*("-"(2*8<a href="#alphanum"> alphanum </a>  ))
+
+
+
+<br/>
+
+  
+<a name="singleton">singleton </a>  = <a href="#DIGIT"> DIGIT </a>     / %x41-57   / %x59-5A   / %x61-77   / %x79-7A<br/>
+
+
+
+<a name="privateuse">privateuse </a>  = "x"1*("-"(1*8<a href="#alphanum"> alphanum </a>  ))
+
+
+
+<br/>
+
+
+
+<a name="grandfathered">grandfathered </a>  = <a href="#irregular"> irregular </a>     / <a href="#regular"> regular </a>  <br/>
+
+
+
+<a name="irregular">irregular </a>  = "en-GB-oed"   / "i-ami"   / "i-bnn"   / "i-default"   / "i-enochian"   / "i-hak"   / "i-klingon"   / "i-lux"   / "i-mingo"   / "i-navajo"
+ 
+  / "i-pwn"
+ 
+  / "i-tao"
+ 
+  / "i-tay"
+ 
+  / "i-tsu"
+ 
+  / "sgn-BE-FR"
+ 
+  / "sgn-BE-NL"
+ 
+  / "sgn-CH-DE"
+
+
+
+<br/>
+
+
+
+<a name="regular">regular </a>  = "art-lojban"   / "cel-gaulish"   / "no-bok"   / "no-nyn"   / "zh-guoyu"   / "zh-hakka"   / "zh-min"   / "zh-min-nan"   / "zh-xiang"
+
+
+
+<br/>
+<a name="BWS">BWS </a>  = <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+
+
+
+<a name="Connection">Connection </a>  = *(","<a href="#OWS"> OWS </a>  )<a href="#connection-option"> connection-option </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  
+ <a href="#connection-option"> connection-option </a>  ])
+
+
+
+<br/>
+
+
+
+<a name="Content-Length">Content-Length </a>  = 1*<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+
+
+
+<a name="HTTP-message">HTTP-message </a>  = <a href="#start-line"> start-line </a>  *(<a href="#header-field"> header-field </a>  <a href="#CRLF"> CRLF </a>  )<a href="#CRLF"> CRLF </a>  [<a href="#message-body"> message-body </a>  ]
+
+
+
+<br/>
+<a name="HTTP-name">HTTP-name </a>  = %x48.54.54.50<br/>
+<a name="HTTP-version">HTTP-version </a>  = <a href="#HTTP-name"> HTTP-name </a>  "/"<a href="#DIGIT"> DIGIT </a>  "."<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+<a name="Host">Host </a>  = <a href="#uri-host"> uri-host </a>  [":"<a href="#port"> port </a>  ]
+
+
+
+<br/>
+
+
+
+<a name="OWS">OWS </a>  = *(<a href="#SP"> SP </a>   / <a href="#HTAB"> HTAB </a>  )
+
+
+
+<br/>
+
+
+
+<a name="RWS">RWS </a>  = 1*(<a href="#SP"> SP </a>   / <a href="#HTAB"> HTAB </a>  )
+
+
+
+<br/>
+
+
+
+<a name="TE">TE </a>  = [("," / <a href="#t-codings"> t-codings </a>  )*(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#t-codings"> t-codings </a>  ])]
+
+
+
+<br/>
+<a name="Trailer">Trailer </a>  = *(","<a href="#OWS"> OWS </a>  )<a href="#field-name"> field-name </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#field-name"> field-name </a>  ])
+
+
+
+<br/>
+<a name="Transfer-Encoding">Transfer-Encoding </a>  = *(","<a href="#OWS"> OWS </a>  )<a href="#transfer-coding"> transfer-coding </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#transfer-coding"> transfer-coding </a>  ])
+
+
+
+<br/>
+
+
+
+<a name="Upgrade">Upgrade </a>  = *(","<a href="#OWS"> OWS </a>  )<a href="#protocol"> protocol </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#protocol"> protocol </a>  ])
+
+
+
+<br/>
+
+
+
+<a name="Via">Via </a>  = *(","<a href="#OWS"> OWS </a>  )(<a href="#received-protocol"> received-protocol </a>  <a href="#RWS"> RWS </a>  <a href="#received-by"> received-by </a>  [<a href="#RWS"> RWS </a>  <a href="#comment"> comment </a>  
+ 
+ 
+ ])*(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  (<a href="#received-protocol"> received-protocol </a>  <a href="#RWS"> RWS </a>  <a href="#received-by"> received-by </a>  [<a href="#RWS"> RWS </a>  
+ <a href="#comment"> comment </a>  ])])
+
+
+
+<br/>
+
+
+
+<a name="absolute-form">absolute-form </a>  = <a href="#absolute-URI"> absolute-URI </a>  
+
+
+
+<br/>
+<a name="absolute-path">absolute-path </a>  = 1*("/"<a href="#segment"> segment </a>  )
+
+
+
+<br/>
+<a name="asterisk-form">asterisk-form </a>  = "*"
+
+
+
+<br/>
+<a name="authority-form">authority-form </a>  = <a href="#authority"> authority </a>  
+
+
+
+<br/>
+<a name="chunk">chunk </a>  = <a href="#chunk-size"> chunk-size </a>  [<a href="#chunk-ext"> chunk-ext </a>  ]<a href="#CRLF"> CRLF </a>  <a href="#chunk-data"> chunk-data </a>  <a href="#CRLF"> CRLF </a>  
+
+
+
+<br/>
+<a name="chunk-data">chunk-data </a>  = 1*<a href="#OCTET"> OCTET </a>  
+
+
+
+<br/>
+<a name="chunk-ext">chunk-ext </a>  = *(";"<a href="#chunk-ext-name"> chunk-ext-name </a>  ["="<a href="#chunk-ext-val"> chunk-ext-val </a>  ])
+
+
+
+<br/>
+<a name="chunk-ext-name">chunk-ext-name </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+<a name="chunk-ext-val">chunk-ext-val </a>  = <a href="#token"> token </a>   / <a href="#quoted-string"> quoted-string </a>  
+
+
+
+<br/>
+<a name="chunk-size">chunk-size </a>  = 1*<a href="#HEXDIG"> HEXDIG </a>  
+
+
+
+<br/>
+<a name="chunked-body">chunked-body </a>  = *<a href="#chunk"> chunk </a>  <a href="#last-chunk"> last-chunk </a>  <a href="#trailer-part"> trailer-part </a>  <a href="#CRLF"> CRLF </a>  
+
+
+
+<br/>
+<a name="comment">comment </a>  = "("*(<a href="#ctext"> ctext </a>   / <a href="#quoted-pair"> quoted-pair </a>   / <a href="#comment"> comment </a>  )")"
+
+
+
+<br/>
+<a name="connection-option">connection-option </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+<a name="ctext">ctext </a>  = <a href="#HTAB"> HTAB </a>   / <a href="#SP"> SP </a>   / %x21-27   / %x2A-5B   / %x5D-7E   / <a href="#obs-text"> obs-text </a>  
+
+
+
+<br/>
+
+
+
+<a name="field-content">field-content </a>  = <a href="#field-vchar"> field-vchar </a>  [1*(<a href="#SP"> SP </a>   / <a href="#HTAB"> HTAB </a>  )<a href="#field-vchar"> field-vchar </a>  ]
+
+
+
+<br/>
+<a name="field-name">field-name </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+<a name="field-value">field-value </a>  = *(<a href="#field-content"> field-content </a>   / <a href="#obs-fold"> obs-fold </a>  )
+
+
+
+<br/>
+<a name="field-vchar">field-vchar </a>  = <a href="#VCHAR"> VCHAR </a>   / <a href="#obs-text"> obs-text </a>  
+
+
+
+<br/>
+
+
+
+
+
+
+
+
+
+
+
+<a name="http-URI">http-URI </a>  = "http://"<a href="#authority"> authority </a>  <a href="#path-abempty"> path-abempty </a>  ["?"<a href="#query"> query </a>  ]["#"
+ <a href="#fragment"> fragment </a>  ]
+
+
+
+<br/>
+<a name="https-URI">https-URI </a>  = "https://"<a href="#authority"> authority </a>  <a href="#path-abempty"> path-abempty </a>  ["?"<a href="#query"> query </a>  ]["#"
+ <a href="#fragment"> fragment </a>  ]
+
+
+
+<br/>
+
+
+
+<a name="last-chunk">last-chunk </a>  = 1*"0"[<a href="#chunk-ext"> chunk-ext </a>  ]<a href="#CRLF"> CRLF </a>  
+
+
+
+<br/>
+
+
+
+<a name="message-body">message-body </a>  = *<a href="#OCTET"> OCTET </a>  
+
+
+
+<br/>
+<a name="method">method </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+
+
+
+<a name="obs-fold">obs-fold </a>  = <a href="#CRLF"> CRLF </a>  1*(<a href="#SP"> SP </a>   / <a href="#HTAB"> HTAB </a>  )
+
+
+
+<br/>
+<a name="obs-text">obs-text </a>  = %x80-FF
+
+
+
+<br/>
+<a name="origin-form">origin-form </a>  = <a href="#absolute-path"> absolute-path </a>  ["?"<a href="#query"> query </a>  ]
+
+
+
+<br/>
+
+
+
+<a name="partial-URI">partial-URI </a>  = <a href="#relative-part"> relative-part </a>  ["?"<a href="#query"> query </a>  ]
+
+
+
+<br/>
+<a name="protocol">protocol </a>  = <a href="#protocol-name"> protocol-name </a>  ["/"<a href="#protocol-version"> protocol-version </a>  ]
+
+
+
+<br/>
+<a name="protocol-name">protocol-name </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+<a name="protocol-version">protocol-version </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+<a name="pseudonym">pseudonym </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+
+
+
+<a name="qdtext">qdtext </a>  = <a href="#HTAB"> HTAB </a>   / <a href="#SP"> SP </a>   / "!" / %x23-5B   / %x5D-7E   / <a href="#obs-text"> obs-text </a>  
+
+
+
+<br/>
+<a name="quoted-pair">quoted-pair </a>  = "\"(<a href="#HTAB"> HTAB </a>   / <a href="#SP"> SP </a>   / <a href="#VCHAR"> VCHAR </a>   / <a href="#obs-text"> obs-text </a>  )
+
+
+
+<br/>
+<a name="quoted-string">quoted-string </a>  = <a href="#DQUOTE"> DQUOTE </a>  *(<a href="#qdtext"> qdtext </a>   / <a href="#quoted-pair"> quoted-pair </a>  )<a href="#DQUOTE"> DQUOTE </a>  
+
+
+
+<br/>
+
+
+
+<a name="rank">rank </a>  = ("0"["."*3<a href="#DIGIT"> DIGIT </a>  ]) / ("1"["."*3"0"])
+
+
+
+<br/>
+<a name="reason-phrase">reason-phrase </a>  = *(<a href="#HTAB"> HTAB </a>   / <a href="#SP"> SP </a>   / <a href="#VCHAR"> VCHAR </a>   / <a href="#obs-text"> obs-text </a>  )
+
+
+
+<br/>
+<a name="received-by">received-by </a>  = (<a href="#uri-host"> uri-host </a>  [":"<a href="#port"> port </a>  ]) / <a href="#pseudonym"> pseudonym </a>  
+
+
+
+<br/>
+<a name="received-protocol">received-protocol </a>  = [<a href="#protocol-name"> protocol-name </a>  "/"]<a href="#protocol-version"> protocol-version </a>  
+
+
+
+<br/>
+<a name="request-line">request-line </a>  = <a href="#method"> method </a>  <a href="#SP"> SP </a>  <a href="#request-target"> request-target </a>  <a href="#SP"> SP </a>  <a href="#HTTP-version"> HTTP-version </a>  <a href="#CRLF"> CRLF </a>  
+
+
+
+<br/>
+<a name="request-target">request-target </a>  = <a href="#origin-form"> origin-form </a>   / <a href="#absolute-form"> absolute-form </a>   / <a href="#authority-form"> authority-form </a>   / 
+ <a href="#asterisk-form"> asterisk-form </a>  
+
+
+
+<br/>
+
+
+
+<a name="start-line">start-line </a>  = <a href="#request-line"> request-line </a>   / <a href="#status-line"> status-line </a>  
+
+
+
+<br/>
+<a name="status-code">status-code </a>  = 3<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+<a name="status-line">status-line </a>  = <a href="#HTTP-version"> HTTP-version </a>  <a href="#SP"> SP </a>  <a href="#status-code"> status-code </a>  <a href="#SP"> SP </a>  <a href="#reason-phrase"> reason-phrase </a>  <a href="#CRLF"> CRLF </a>  
+
+
+
+<br/>
+
+
+
+<a name="t-codings">t-codings </a>  = "trailers" / (<a href="#transfer-coding"> transfer-coding </a>  [<a href="#t-ranking"> t-ranking </a>  ])
+
+
+
+<br/>
+<a name="t-ranking">t-ranking </a>  = <a href="#OWS"> OWS </a>  ";"<a href="#OWS"> OWS </a>  "q="<a href="#rank"> rank </a>  
+
+
+
+<br/>
+<a name="tchar">tchar </a>  = "!" / "#" / "$" / "%" / "&" / "'" / "*" / "+" / "-" / "." / 
+ "^" / "_" / "`" / "|" / "~" / <a href="#DIGIT"> DIGIT </a>   / <a href="#ALPHA"> ALPHA </a>  
+
+
+
+<br/>
+<a name="token">token </a>  = 1*<a href="#tchar"> tchar </a>  
+
+
+
+<br/>
+<a name="trailer-part">trailer-part </a>  = *(<a href="#header-field"> header-field </a>  <a href="#CRLF"> CRLF </a>  )
+
+
+
+<br/>
+<a name="transfer-coding">transfer-coding </a>  = "chunked" / "compress" / "deflate" / "gzip" / 
+ <a href="#transfer-extension"> transfer-extension </a>  
+
+
+
+<br/>
+<a name="transfer-extension">transfer-extension </a>  = <a href="#token"> token </a>  *(<a href="#OWS"> OWS </a>  ";"<a href="#OWS"> OWS </a>  <a href="#transfer-parameter"> transfer-parameter </a>  )
+
+
+
+<br/>
+<a name="transfer-parameter">transfer-parameter </a>  = <a href="#token"> token </a>  <a href="#BWS"> BWS </a>  "="<a href="#BWS"> BWS </a>  (<a href="#token"> token </a>   / <a href="#quoted-string"> quoted-string </a>  )
+
+
+
+<br/>
+
+
+
+<a name="uri-host">uri-host </a>  = <a href="#host"> host </a>  
+
+
+
+<br/>
+
+
+
+<a name="Accept">Accept </a>  = [("," / (<a href="#media-range"> media-range </a>  [<a href="#accept-params"> accept-params </a>  ]))*(<a href="#OWS"> OWS </a>  ","[
+ <a href="#OWS"> OWS </a>  (<a href="#media-range"> media-range </a>  [<a href="#accept-params"> accept-params </a>  ])])]
+
+
+
+<br/>
+<a name="Accept-Charset">Accept-Charset </a>  = *(","<a href="#OWS"> OWS </a>  )((<a href="#charset"> charset </a>   / "*")[<a href="#weight"> weight </a>  ])*(<a href="#OWS"> OWS </a>  
+ ","[<a href="#OWS"> OWS </a>  ((<a href="#charset"> charset </a>   / "*")[<a href="#weight"> weight </a>  ])])
+
+
+
+<br/>
+<a name="Accept-Encoding">Accept-Encoding </a>  = [("," / (<a href="#codings"> codings </a>  [<a href="#weight"> weight </a>  ]))*(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  
+ (<a href="#codings"> codings </a>  [<a href="#weight"> weight </a>  ])])]
+
+
+
+<br/>
+<a name="Accept-Language">Accept-Language </a>  = *(","<a href="#OWS"> OWS </a>  )(<a href="#language-range"> language-range </a>  [<a href="#weight"> weight </a>  ])*(<a href="#OWS"> OWS </a>  
+ ","[<a href="#OWS"> OWS </a>  (<a href="#language-range"> language-range </a>  [<a href="#weight"> weight </a>  ])])
+
+
+
+<br/>
+<a name="Allow">Allow </a>  = [("," / <a href="#method"> method </a>  )*(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#method"> method </a>  ])]
+
+
+
+<br/>
+
+
+
+<a name="Content-Encoding">Content-Encoding </a>  = *(","<a href="#OWS"> OWS </a>  )<a href="#content-coding"> content-coding </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#content-coding"> content-coding </a>  ])
+
+
+
+<br/>
+<a name="Content-Language">Content-Language </a>  = *(","<a href="#OWS"> OWS </a>  )<a href="#Language-Tag"> Language-Tag </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#Language-Tag"> Language-Tag </a>  ])
+
+
+
+<br/>
+<a name="Content-Location">Content-Location </a>  = <a href="#absolute-URI"> absolute-URI </a>   / <a href="#partial-URI"> partial-URI </a>  
+
+
+
+<br/>
+<a name="Content-Type">Content-Type </a>  = <a href="#media-type"> media-type </a>  
+
+
+
+<br/>
+
+
+
+<a name="Date">Date </a>  = <a href="#HTTP-date"> HTTP-date </a>  
+
+
+
+<br/>
+
+
+
+<a name="Expect">Expect </a>  = "100-continue"
+
+
+
+<br/>
+
+
+
+
+
+
+
+<a name="GMT">GMT </a>  = %x47.4D.54<br/>
+
+
+
+<a name="HTTP-date">HTTP-date </a>  = <a href="#IMF-fixdate"> IMF-fixdate </a>   / <a href="#obs-date"> obs-date </a>  
+
+
+
+<br/>
+
+
+
+<a name="IMF-fixdate">IMF-fixdate </a>  = <a href="#day-name"> day-name </a>  ","<a href="#SP"> SP </a>  <a href="#date1"> date1 </a>  <a href="#SP"> SP </a>  <a href="#time-of-day"> time-of-day </a>  <a href="#SP"> SP </a>  <a href="#GMT"> GMT </a>  
+
+
+
+<br/>
+
+
+
+<a name="Location">Location </a>  = <a href="#URI-reference"> URI-reference </a>  
+
+
+
+<br/>
+
+
+
+<a name="Max-Forwards">Max-Forwards </a>  = 1*<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+
+
+
+<a name="Referer">Referer </a>  = <a href="#absolute-URI"> absolute-URI </a>   / <a href="#partial-URI"> partial-URI </a>  
+
+
+
+<br/>
+<a name="Retry-After">Retry-After </a>  = <a href="#HTTP-date"> HTTP-date </a>   / <a href="#delay-seconds"> delay-seconds </a>  
+
+
+
+<br/>
+
+
+
+<a name="Server">Server </a>  = <a href="#product"> product </a>  *(<a href="#RWS"> RWS </a>  (<a href="#product"> product </a>   / <a href="#comment"> comment </a>  ))
+
+
+
+<br/>
+
+
+
+<a name="User-Agent">User-Agent </a>  = <a href="#product"> product </a>  *(<a href="#RWS"> RWS </a>  (<a href="#product"> product </a>   / <a href="#comment"> comment </a>  ))
+
+
+
+<br/>
+
+
+
+<a name="Vary">Vary </a>  = "*" / (*(","<a href="#OWS"> OWS </a>  )<a href="#field-name"> field-name </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#field-name"> field-name </a>  ]))
+
+
+
+<br/>
+
+
+
+<a name="accept-ext">accept-ext </a>  = <a href="#OWS"> OWS </a>  ";"<a href="#OWS"> OWS </a>  <a href="#token"> token </a>  ["="(<a href="#token"> token </a>   / <a href="#quoted-string"> quoted-string </a>  )]
+
+
+
+<br/>
+<a name="accept-params">accept-params </a>  = <a href="#weight"> weight </a>  *<a href="#accept-ext"> accept-ext </a>  
+
+
+
+<br/>
+<a name="asctime-date">asctime-date </a>  = <a href="#day-name"> day-name </a>  <a href="#SP"> SP </a>  <a href="#date3"> date3 </a>  <a href="#SP"> SP </a>  <a href="#time-of-day"> time-of-day </a>  <a href="#SP"> SP </a>  <a href="#year"> year </a>  
+
+
+
+<br/>
+
+
+
+<a name="charset">charset </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+<a name="codings">codings </a>  = <a href="#content-coding"> content-coding </a>   / "identity" / "*"
+
+
+
+<br/>
+<a name="content-coding">content-coding </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+
+
+
+<a name="date1">date1 </a>  = <a href="#day"> day </a>  <a href="#SP"> SP </a>  <a href="#month"> month </a>  <a href="#SP"> SP </a>  <a href="#year"> year </a>  
+
+
+
+<br/>
+<a name="date2">date2 </a>  = <a href="#day"> day </a>  "-"<a href="#month"> month </a>  "-"2<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+<a name="date3">date3 </a>  = <a href="#month"> month </a>  <a href="#SP"> SP </a>  (2<a href="#DIGIT"> DIGIT </a>   / (<a href="#SP"> SP </a>  <a href="#DIGIT"> DIGIT </a>  ))
+
+
+
+<br/>
+<a name="day">day </a>  = 2<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+<a name="day-name">day-name </a>  = %x4D.6F.6E   / %x54.75.65   / %x57.65.64   / %x54.68.75   / %x46.72.69   / %x53.61.74   / %x53.75.6E<br/>
+<a name="day-name-l">day-name-l </a>  = %x4D.6F.6E.64.61.79   / %x54.75.65.73.64.61.79   / %x57.65.64.6E.65.73.64.61.79   / %x54.68.75.72.73.64.61.79   / %x46.72.69.64.61.79   / %x53.61.74.75.72.64.61.79   / %x53.75.6E.64.61.79<br/>
+<a name="delay-seconds">delay-seconds </a>  = 1*<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+
+
+
+<a name="hour">hour </a>  = 2<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+
+
+
+<a name="media-range">media-range </a>  = ("*/*" / (<a href="#type"> type </a>  "/*") / (<a href="#type"> type </a>  "/"<a href="#subtype"> subtype </a>  ))*(<a href="#OWS"> OWS </a>  
+ ";"<a href="#OWS"> OWS </a>  <a href="#parameter"> parameter </a>  )
+
+
+
+<br/>
+
+
+
+<a name="media-type">media-type </a>  = <a href="#type"> type </a>  "/"<a href="#subtype"> subtype </a>  *(<a href="#OWS"> OWS </a>  ";"<a href="#OWS"> OWS </a>  <a href="#parameter"> parameter </a>  )
+
+
+
+<br/>
+<a name="minute">minute </a>  = 2<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+<a name="month">month </a>  = %x4A.61.6E   / %x46.65.62   / %x4D.61.72   / %x41.70.72   / %x4D.61.79   / %x4A.75.6E   / %x4A.75.6C   / %x41.75.67   / %x53.65.70   / %x4F.63.74   / %x4E.6F.76   / %x44.65.63<br/>
+
+
+
+<a name="obs-date">obs-date </a>  = <a href="#rfc850-date"> rfc850-date </a>   / <a href="#asctime-date"> asctime-date </a>  
+
+
+
+<br/>
+
+
+
+<a name="parameter">parameter </a>  = <a href="#token"> token </a>  "="(<a href="#token"> token </a>   / <a href="#quoted-string"> quoted-string </a>  )
+
+
+
+<br/>
+<a name="product">product </a>  = <a href="#token"> token </a>  ["/"<a href="#product-version"> product-version </a>  ]
+
+
+
+<br/>
+<a name="product-version">product-version </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+<a name="qvalue">qvalue </a>  = ("0"["."*3<a href="#DIGIT"> DIGIT </a>  ]) / ("1"["."*3"0"])
+
+
+
+<br/>
+
+
+
+<a name="rfc850-date">rfc850-date </a>  = <a href="#day-name-l"> day-name-l </a>  ","<a href="#SP"> SP </a>  <a href="#date2"> date2 </a>  <a href="#SP"> SP </a>  <a href="#time-of-day"> time-of-day </a>  <a href="#SP"> SP </a>  <a href="#GMT"> GMT </a>  
+
+
+
+<br/>
+
+
+
+<a name="second">second </a>  = 2<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+<a name="subtype">subtype </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+
+
+
+<a name="time-of-day">time-of-day </a>  = <a href="#hour"> hour </a>  ":"<a href="#minute"> minute </a>  ":"<a href="#second"> second </a>  
+
+
+
+<br/>
+<a name="type">type </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+
+
+
+<a name="weight">weight </a>  = <a href="#OWS"> OWS </a>  ";"<a href="#OWS"> OWS </a>  "q="<a href="#qvalue"> qvalue </a>  
+
+
+
+<br/>
+
+
+
+<a name="year">year </a>  = 4<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a name="ETag">ETag </a>  = <a href="#entity-tag"> entity-tag </a>  
+
+
+
+<br/>
+
+
+
+<a name="If-Match">If-Match </a>  = "*" / (*(","<a href="#OWS"> OWS </a>  )<a href="#entity-tag"> entity-tag </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#entity-tag"> entity-tag </a>  ]))
+
+
+
+<br/>
+<a name="If-Modified-Since">If-Modified-Since </a>  = <a href="#HTTP-date"> HTTP-date </a>  
+
+
+
+<br/>
+<a name="If-None-Match">If-None-Match </a>  = "*" / (*(","<a href="#OWS"> OWS </a>  )<a href="#entity-tag"> entity-tag </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#entity-tag"> entity-tag </a>  ]))
+
+
+
+<br/>
+<a name="If-Unmodified-Since">If-Unmodified-Since </a>  = <a href="#HTTP-date"> HTTP-date </a>  
+
+
+
+<br/>
+
+
+
+<a name="Last-Modified">Last-Modified </a>  = <a href="#HTTP-date"> HTTP-date </a>  
+
+
+
+<br/>
+
+
+
+<a name="entity-tag">entity-tag </a>  = [<a href="#weak"> weak </a>  ]<a href="#opaque-tag"> opaque-tag </a>  
+
+
+
+<br/>
+<a name="etagc">etagc </a>  = "!" / %x23-7E<br/>
+
+
+
+<a name="opaque-tag">opaque-tag </a>  = <a href="#DQUOTE"> DQUOTE </a>  *<a href="#etagc"> etagc </a>  <a href="#DQUOTE"> DQUOTE </a>  
+
+
+
+<br/>
+
+
+
+<a name="weak">weak </a>  = %x57.2F<br/>
+<a name="Accept-Ranges">Accept-Ranges </a>  = <a href="#acceptable-ranges"> acceptable-ranges </a>  
+
+
+
+<br/>
+
+
+
+<a name="Content-Range">Content-Range </a>  = <a href="#byte-content-range"> byte-content-range </a>   / <a href="#other-content-range"> other-content-range </a>  
+
+
+
+<br/>
+
+
+
+<a name="If-Range">If-Range </a>  = <a href="#entity-tag"> entity-tag </a>   / <a href="#HTTP-date"> HTTP-date </a>  
+
+
+
+<br/>
+
+
+
+<a name="Range">Range </a>  = <a href="#byte-ranges-specifier"> byte-ranges-specifier </a>   / <a href="#other-ranges-specifier"> other-ranges-specifier </a>  
+
+
+
+<br/>
+
+
+
+<a name="acceptable-ranges">acceptable-ranges </a>  = (*(","<a href="#OWS"> OWS </a>  )<a href="#range-unit"> range-unit </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#range-unit"> range-unit </a>  ])) / "none"
+
+
+
+<br/>
+
+
+
+<a name="byte-content-range">byte-content-range </a>  = <a href="#bytes-unit"> bytes-unit </a>  <a href="#SP"> SP </a>  (<a href="#byte-range-resp"> byte-range-resp </a>   / <a href="#unsatisfied-range"> unsatisfied-range </a>  )
+
+
+
+<br/>
+<a name="byte-range">byte-range </a>  = <a href="#first-byte-pos"> first-byte-pos </a>  "-"<a href="#last-byte-pos"> last-byte-pos </a>  
+
+
+
+<br/>
+<a name="byte-range-resp">byte-range-resp </a>  = <a href="#byte-range"> byte-range </a>  "/"(<a href="#complete-length"> complete-length </a>   / "*")
+
+
+
+<br/>
+<a name="byte-range-set">byte-range-set </a>  = *(","<a href="#OWS"> OWS </a>  )(<a href="#byte-range-spec"> byte-range-spec </a>   / <a href="#suffix-byte-range-spec"> suffix-byte-range-spec </a>  )*(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  (<a href="#byte-range-spec"> byte-range-spec </a>   / <a href="#suffix-byte-range-spec"> suffix-byte-range-spec </a>  )])
+
+
+
+<br/>
+<a name="byte-range-spec">byte-range-spec </a>  = <a href="#first-byte-pos"> first-byte-pos </a>  "-"[<a href="#last-byte-pos"> last-byte-pos </a>  ]
+
+
+
+<br/>
+<a name="byte-ranges-specifier">byte-ranges-specifier </a>  = <a href="#bytes-unit"> bytes-unit </a>  "="<a href="#byte-range-set"> byte-range-set </a>  
+
+
+
+<br/>
+<a name="bytes-unit">bytes-unit </a>  = "bytes"
+
+
+
+<br/>
+
+
+
+<a name="complete-length">complete-length </a>  = 1*<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+
+
+
+<a name="first-byte-pos">first-byte-pos </a>  = 1*<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+
+
+
+<a name="last-byte-pos">last-byte-pos </a>  = 1*<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+
+
+
+<a name="other-content-range">other-content-range </a>  = <a href="#other-range-unit"> other-range-unit </a>  <a href="#SP"> SP </a>  <a href="#other-range-resp"> other-range-resp </a>  
+
+
+
+<br/>
+<a name="other-range-resp">other-range-resp </a>  = *<a href="#CHAR"> CHAR </a>  
+
+
+
+<br/>
+<a name="other-range-set">other-range-set </a>  = 1*<a href="#VCHAR"> VCHAR </a>  
+
+
+
+<br/>
+<a name="other-range-unit">other-range-unit </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+<a name="other-ranges-specifier">other-ranges-specifier </a>  = <a href="#other-range-unit"> other-range-unit </a>  "="<a href="#other-range-set"> other-range-set </a>  
+
+
+
+<br/>
+
+
+
+<a name="range-unit">range-unit </a>  = <a href="#bytes-unit"> bytes-unit </a>   / <a href="#other-range-unit"> other-range-unit </a>  
+
+
+
+<br/>
+
+
+
+<a name="suffix-byte-range-spec">suffix-byte-range-spec </a>  = "-"<a href="#suffix-length"> suffix-length </a>  
+
+
+
+<br/>
+
+
+
+<a name="suffix-length">suffix-length </a>  = 1*<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+
+
+
+<a name="unsatisfied-range">unsatisfied-range </a>  = "*/"<a href="#complete-length"> complete-length </a>  
+
+
+
+<br/>
+<a name="Age">Age </a>  = <a href="#delta-seconds"> delta-seconds </a>  
+
+
+
+<br/>
+
+
+
+<a name="Cache-Control">Cache-Control </a>  = *(","<a href="#OWS"> OWS </a>  )<a href="#cache-directive"> cache-directive </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#cache-directive"> cache-directive </a>  ])
+
+
+
+<br/>
+
+
+
+<a name="Expires">Expires </a>  = <a href="#HTTP-date"> HTTP-date </a>  
+
+
+
+<br/>
+
+
+
+<a name="Pragma">Pragma </a>  = *(","<a href="#OWS"> OWS </a>  )<a href="#pragma-directive"> pragma-directive </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#pragma-directive"> pragma-directive </a>  ])
+
+
+
+<br/>
+
+
+
+<a name="Warning">Warning </a>  = *(","<a href="#OWS"> OWS </a>  )<a href="#warning-value"> warning-value </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#warning-value"> warning-value </a>  ])
+
+
+
+<br/>
+
+
+
+<a name="cache-directive">cache-directive </a>  = <a href="#token"> token </a>  ["="(<a href="#token"> token </a>   / <a href="#quoted-string"> quoted-string </a>  )]
+
+
+
+<br/>
+
+
+
+<a name="delta-seconds">delta-seconds </a>  = 1*<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+
+
+
+<a name="extension-pragma">extension-pragma </a>  = <a href="#token"> token </a>  ["="(<a href="#token"> token </a>   / <a href="#quoted-string"> quoted-string </a>  )]
+
+
+
+<br/>
+
+
+
+<a name="pragma-directive">pragma-directive </a>  = "no-cache" / <a href="#extension-pragma"> extension-pragma </a>  
+
+
+
+<br/>
+
+
+
+<a name="warn-agent">warn-agent </a>  = (<a href="#uri-host"> uri-host </a>  [":"<a href="#port"> port </a>  ]) / <a href="#pseudonym"> pseudonym </a>  
+
+
+
+<br/>
+<a name="warn-code">warn-code </a>  = 3<a href="#DIGIT"> DIGIT </a>  
+
+
+
+<br/>
+<a name="warn-date">warn-date </a>  = <a href="#DQUOTE"> DQUOTE </a>  <a href="#HTTP-date"> HTTP-date </a>  <a href="#DQUOTE"> DQUOTE </a>  
+
+
+
+<br/>
+<a name="warn-text">warn-text </a>  = <a href="#quoted-string"> quoted-string </a>  
+
+
+
+<br/>
+<a name="warning-value">warning-value </a>  = <a href="#warn-code"> warn-code </a>  <a href="#SP"> SP </a>  <a href="#warn-agent"> warn-agent </a>  <a href="#SP"> SP </a>  <a href="#warn-text"> warn-text </a>  [<a href="#SP"> SP </a>  <a href="#warn-date"> warn-date </a>  ]
+
+
+
+<br/>
+<a name="Proxy-Authenticate">Proxy-Authenticate </a>  = *(","<a href="#OWS"> OWS </a>  )<a href="#challenge"> challenge </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#challenge"> challenge </a>  ])
+
+
+
+<br/>
+<a name="Proxy-Authorization">Proxy-Authorization </a>  = <a href="#credentials"> credentials </a>  
+
+
+
+<br/>
+
+
+
+<a name="WWW-Authenticate">WWW-Authenticate </a>  = *(","<a href="#OWS"> OWS </a>  )<a href="#challenge"> challenge </a>  *(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#challenge"> challenge </a>  ])
+
+
+
+<br/>
+
+
+
+<a name="auth-param">auth-param </a>  = <a href="#token"> token </a>  <a href="#BWS"> BWS </a>  "="<a href="#BWS"> BWS </a>  (<a href="#token"> token </a>   / <a href="#quoted-string"> quoted-string </a>  )
+
+
+
+<br/>
+<a name="auth-scheme">auth-scheme </a>  = <a href="#token"> token </a>  
+
+
+
+<br/>
+
+
+
+<a name="challenge">challenge </a>  = <a href="#auth-scheme"> auth-scheme </a>  [1*<a href="#SP"> SP </a>  (<a href="#token68"> token68 </a>   / [("," / <a href="#auth-param"> auth-param </a>  )*(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#auth-param"> auth-param </a>  ])])]
+
+
+
+<br/>
+<a name="credentials">credentials </a>  = <a href="#auth-scheme"> auth-scheme </a>  [1*<a href="#SP"> SP </a>  (<a href="#token68"> token68 </a>   / [("," / <a href="#auth-param"> auth-param </a>  )*(<a href="#OWS"> OWS </a>  ","[<a href="#OWS"> OWS </a>  <a href="#auth-param"> auth-param </a>  ])])]
+
+
+
+<br/>
+
+
+
+<a name="Authorization">Authorization </a>  = <a href="#credentials"> credentials </a>  
+
+
+
+<br/>
+
+
+
+<a name="token68">token68 </a>  = 1*(<a href="#ALPHA"> ALPHA </a>   / <a href="#DIGIT"> DIGIT </a>   / "-" / "." / "_" / "~" / "+" / "/")*"="
+
+
+
+<br/>
+<a name="Connection-header">Connection-header </a>  = "Connection"":"<a href="#OWS"> OWS </a>  <a href="#Connection"> Connection </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Content-Length-header">Content-Length-header </a>  = "Content-Length"":"<a href="#OWS"> OWS </a>  <a href="#Content-Length"> Content-Length </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Trailer-header">Trailer-header </a>  = "Trailer"":"<a href="#OWS"> OWS </a>  <a href="#Trailer"> Trailer </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Transfer-Encoding-header">Transfer-Encoding-header </a>  = "Transfer-Encoding"":"<a href="#OWS"> OWS </a>  <a href="#Transfer-Encoding"> Transfer-Encoding </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Upgrade-header">Upgrade-header </a>  = "Upgrade"":"<a href="#OWS"> OWS </a>  <a href="#Upgrade"> Upgrade </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Via-header">Via-header </a>  = "Via"":"<a href="#OWS"> OWS </a>  <a href="#Via"> Via </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Age-header">Age-header </a>  = "Age"":"<a href="#OWS"> OWS </a>  <a href="#Age"> Age </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Expires-header">Expires-header </a>  = "Expires"":"<a href="#OWS"> OWS </a>  <a href="#Expires"> Expires </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Date-header">Date-header </a>  = "Date"":"<a href="#OWS"> OWS </a>  <a href="#Date"> Date </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Location-header">Location-header </a>  = "Location"":"<a href="#OWS"> OWS </a>  <a href="#Location"> Location </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Retry-After-header">Retry-After-header </a>  = "Retry-After"":"<a href="#OWS"> OWS </a>  <a href="#Retry-After"> Retry-After </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Vary-header">Vary-header </a>  = "Vary"":"<a href="#OWS"> OWS </a>  <a href="#Vary"> Vary </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Warning-header">Warning-header </a>  = "Warning"":"<a href="#OWS"> OWS </a>  <a href="#Warning"> Warning </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Cache-Control-header">Cache-Control-header </a>  = "Cache-Control"":"<a href="#OWS"> OWS </a>  <a href="#Cache-Control"> Cache-Control </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Expect-header">Expect-header </a>  = "Expect"":"<a href="#OWS"> OWS </a>  <a href="#Expect"> Expect </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Host-header">Host-header </a>  = "Host"":"<a href="#OWS"> OWS </a>  <a href="#Host"> Host </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Max-Forwards-header">Max-Forwards-header </a>  = "Max-Forwards"":"<a href="#OWS"> OWS </a>  <a href="#Max-Forwards"> Max-Forwards </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Pragma-header">Pragma-header </a>  = "Pragma"":"<a href="#OWS"> OWS </a>  <a href="#Pragma"> Pragma </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Range-header">Range-header </a>  = "Range"":"<a href="#OWS"> OWS </a>  <a href="#Range"> Range </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="TE-header">TE-header </a>  = "TE"":"<a href="#OWS"> OWS </a>  <a href="#TE"> TE </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="If-Match-header">If-Match-header </a>  = "If-Match"":"<a href="#OWS"> OWS </a>  <a href="#If-Match"> If-Match </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="If-None-Match-header">If-None-Match-header </a>  = "If-None-Match"":"<a href="#OWS"> OWS </a>  <a href="#If-None-Match"> If-None-Match </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="If-Modified-Since-header">If-Modified-Since-header </a>  = "If-Modified-Since"":"<a href="#OWS"> OWS </a>  <a href="#If-Modified-Since"> If-Modified-Since </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="If-Unmodified-Since-header">If-Unmodified-Since-header </a>  = "If-Unmodified-Since"":"<a href="#OWS"> OWS </a>  <a href="#If-Unmodified-Since"> If-Unmodified-Since </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="If-Range-header">If-Range-header </a>  = "If-Range"":"<a href="#OWS"> OWS </a>  <a href="#If-Range"> If-Range </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Accept-header">Accept-header </a>  = "Accept"":"<a href="#OWS"> OWS </a>  <a href="#Accept"> Accept </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Accept-Charset-header">Accept-Charset-header </a>  = "Accept-Charset"":"<a href="#OWS"> OWS </a>  <a href="#Accept-Charset"> Accept-Charset </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Accept-Encoding-header">Accept-Encoding-header </a>  = "Accept-Encoding"":"<a href="#OWS"> OWS </a>  <a href="#Accept-Encoding"> Accept-Encoding </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Accept-Language-header">Accept-Language-header </a>  = "Accept-Language"":"<a href="#OWS"> OWS </a>  <a href="#Accept-Language"> Accept-Language </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Authorization-header">Authorization-header </a>  = "Authorization"":"<a href="#OWS"> OWS </a>  <a href="#Authorization"> Authorization </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="Proxy-Authorization-header">Proxy-Authorization-header </a>  = "Proxy-Authorization"":"<a href="#OWS"> OWS </a>  <a href="#Proxy-Authorization"> Proxy-Authorization </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+
+<a name="Referer-header">Referer-header </a>  = "Referer"":"<a href="#OWS"> OWS </a>  <a href="#Referer"> Referer </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+<a name="User-Agent-header">User-Agent-header </a>  = "User-Agent"":"<a href="#OWS"> OWS </a>  <a href="#User-Agent"> User-Agent </a>  <a href="#OWS"> OWS </a>  
+
+
+
+<br/>
+
+
+
+
+
+
+
+
+
+<a name="header-field">header-field </a>  = <a href="#Connection-header"> Connection-header </a>   / 
+ <a href="#Content-Length-header"> Content-Length-header </a>   / 
+ <a href="#Trailer-header"> Trailer-header </a>   / 
+ <a href="#Transfer-Encoding-header"> Transfer-Encoding-header </a>   / 
+ <a href="#Upgrade-header"> Upgrade-header </a>   / 
+ <a href="#Via-header"> Via-header </a>   / 
+ <a href="#Age-header"> Age-header </a>   / 
+ <a href="#Expires-header"> Expires-header </a>   / 
+ <a href="#Date-header"> Date-header </a>   / 
+ <a href="#Location-header"> Location-header </a>   / 
+ <a href="#Retry-After-header"> Retry-After-header </a>   / 
+ <a href="#Vary-header"> Vary-header </a>   / 
+ <a href="#Warning-header"> Warning-header </a>   / 
+ <a href="#Cache-Control-header"> Cache-Control-header </a>   / 
+ <a href="#Expect-header"> Expect-header </a>   / 
+ <a href="#Host-header"> Host-header </a>   / 
+ <a href="#Max-Forwards-header"> Max-Forwards-header </a>   / 
+ <a href="#Pragma-header"> Pragma-header </a>   / 
+ <a href="#Range-header"> Range-header </a>   / 
+ <a href="#TE-header"> TE-header </a>   / 
+ <a href="#If-Match-header"> If-Match-header </a>   / 
+ <a href="#If-None-Match-header"> If-None-Match-header </a>   / 
+ <a href="#If-Modified-Since-header"> If-Modified-Since-header </a>   / 
+ <a href="#If-Unmodified-Since-header"> If-Unmodified-Since-header </a>   / 
+ <a href="#If-Range-header"> If-Range-header </a>   / 
+ <a href="#Accept-header"> Accept-header </a>   / 
+ <a href="#Accept-Charset-header"> Accept-Charset-header </a>   / 
+ <a href="#Accept-Encoding-header"> Accept-Encoding-header </a>   / 
+ <a href="#Accept-Language-header"> Accept-Language-header </a>   / 
+ <a href="#Authorization-header"> Authorization-header </a>   / 
+ <a href="#Proxy-Authorization-header"> Proxy-Authorization-header </a>   / 
+ <a href="#Referer-header"> Referer-header </a>   / 
+ <a href="#User-Agent-header"> User-Agent-header </a>   / 
+ (<a href="#field-name"> field-name </a>  ":"<a href="#OWS"> OWS </a>  <a href="#field-value"> field-value </a>  <a href="#OWS"> OWS </a>  )
+
+
+
+<br/>
+
+
+
+</html></body>
