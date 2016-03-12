@@ -1,0 +1,151 @@
+digraph G {
+	graph [compound=true];
+	start;
+	subgraph cluster_http_message {
+		label = "HTTP-message";
+		color=blue;
+		subgraph cluster_start_line {
+			color=grey;
+			label = "start-line";
+			subgraph cluster_request_line {
+				label = "request-line";
+				subgraph cluster_method {
+					token [style=filled];
+					label = "method";
+				}
+				subgraph cluster_request_target {
+					label = "request-target";
+					subgraph cluster_origin_form {
+						label = "origin-form";
+						absolute_path [style=filled];
+						qery [style=filled];
+					}
+					subgraph cluster_absolute_form {
+						absolute_URI [style=filled];
+						label = "absolute-form";
+						subgraph cluster_absolute_URI {
+							label = "absolute-URI";
+						}
+					}
+					subgraph cluster_authority_form {
+						label = "authority-form";
+						authority [style="filled"];
+					}
+					subgraph cluster_asterisk_form {
+						label = "asterisk-form";
+					}
+				}
+				subgraph cluster_HTTP_version {
+					label = "HTTP-version";
+					HTTP_version[style=filled];						
+				}
+			}
+			subgraph cluster_status_line {
+				label = "status_line";
+				subgraph cluster_HTTP_version_ {
+					HTTP_version_[style=filled];
+					label = "HTTP-version";
+				}
+				subgraph cluster_status_code {
+					status_code [style=filled];
+					label = "status-code";
+				}
+				subgraph cluster_reason_phrase {
+					reason_phrase[style=filled];
+					label = "reason-phrase";
+				}
+			}
+		}
+		subgraph cluster_header_field {
+			color=grey;
+			header_field;
+			label = "header-field";
+			subgraph cluster_transfer_content_length_header {
+				label="content-length-header"
+				content_length_header [style=filled]
+			}
+			subgraph cluster_transfer_encoding_header {
+				label="transfer-encoding-header"
+				transfer_encoding_header [style=filled]
+			}
+			subgraph cluster_cookie_header {
+				label="cookie-header"
+				cookie_header [style=filled]
+			}
+			subgraph cluster_host_header {
+				label="host-header"
+				host_header [style=filled]
+			}
+			subgraph cluster_referer_header {
+				label="referer-header"
+				referer_header [style=filled]
+			}
+			subgraph cluster_user_agent_header {
+				label="user-agent-header"
+				user_agent_header [style=filled]
+			}
+			subgraph cluster_accept_header {
+				label="accept-header"
+				accept_header [style=filled]
+			}
+			subgraph cluster_accept_encoding_header {
+				label="accept-encoding-header"
+				accept_encoding_header [style=filled]
+			}
+			subgraph cluster_connection_header {
+				label="connection-header"
+				connection_header [style=filled]
+			}
+			subgraph cluster_field_name {
+				label="field-name"
+				field_name [style=filled]
+			}
+			subgraph cluster_field_value {
+				label="field-value"
+				field_value  [style=filled]
+			}
+		}
+		subgraph cluster_message_body {
+			color=grey;
+			message_body;
+			label = "message-body";
+		}
+	}
+	start -> token; 
+		token -> absolute_path [label="SP"];
+		absolute_path -> qery [label= "?"];
+		token -> absolute_URI [label="SP"];
+		token -> authority [label="SP"];
+		qery -> HTTP_version [label=SP];
+		absolute_path -> HTTP_version [label="SP"];
+		authority -> HTTP_version [label="SP"];
+		absolute_URI -> HTTP_version [label="SP"];
+		HTTP_version -> header_field [label="CRLF"]
+	start -> HTTP_version_;
+		HTTP_version_ -> status_code [label="SP"];
+		status_code -> reason_phrase [label="SP"];
+		reason_phrase -> header_field [label="CRLF"]
+	header_field -> content_length_header
+	header_field -> transfer_encoding_header
+	header_field -> cookie_header
+	header_field -> host_header
+	header_field -> referer_header
+	header_field -> user_agent_header
+	header_field -> accept_header
+	header_field -> accept_encoding_header
+	header_field -> connection_header
+	header_field -> field_name
+	field_name -> field_value [label="':' OWS"]
+	field_value -> header_field [label="OWS CRLF"]
+	content_length_header -> header_field [label="CRLF"]
+	transfer_encoding_header -> header_field [label="CRLF"]
+	cookie_header -> header_field [label="CRLF"]
+	host_header -> header_field [label="CRLF"]
+	referer_header -> header_field [label="CRLF"]
+	user_agent_header -> header_field [label="CRLF"]
+	accept_header -> header_field [label="CRLF"]
+	accept_encoding_header -> header_field [label="CRLF"]
+	connection_header -> header_field [label="CRLF"]
+
+	header_field -> message_body [label="CRLF"]
+}
