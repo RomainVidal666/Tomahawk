@@ -27,6 +27,15 @@
 *.i*86
 *.x86_64
 *.hex
+tomahawk
 
 # Debug files
 *.dSYM/
+
+#CMake
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Makefile
+cmake_install.cmake
+install_manifest.txt
