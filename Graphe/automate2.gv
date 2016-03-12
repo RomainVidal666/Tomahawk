@@ -1,0 +1,157 @@
+digraph G {
+	graph [compound=true];
+	subgraph cluster_http_message {
+		label = "HTTP-message";
+		color=black;
+		subgraph cluster_start_line {
+			color=grey;
+			label = "start-line";
+			subgraph cluster_request_line {
+				label = "request-line";
+				subgraph cluster_method {
+					label = "method";
+					method1 -> method2 [label="tchar"]
+					method2 -> method2 [label="tchar"]
+				}
+				subgraph cluster_request_target {
+					label = "request-target";
+					subgraph cluster_origin_form {
+						label = "origin-form";
+						subgraph cluster_absolute_path {
+							label = "absolute-path";
+							abs_path1 -> abs_path2 [label="\"/\""]
+							abs_path2 -> abs_path2 [label="pchar, \"/\""];
+						}
+						query -> query [label="pchar, \"/\", \"?\""]
+					}
+					subgraph cluster_absolute_form {
+						label = "absolute-form";
+						subgraph cluster_scheme {
+							label = "scheme";
+							scheme1 -> scheme2 [label="ALPHA"];
+							scheme2 -> scheme2 [label="ALPHA, DIGIT, \"+\", \"-\", \".\""];
+						}
+						subgraph cluster_hier_part {
+							label="hier-part"
+							hier_part
+							subgraph cluster_authority {
+								label="authority"
+								authority_1 -> user_info
+								user_info -> user_info [label="unreserved, pct-encoding, sub-delims, \":\""]
+								subgraph cluster_host {
+									label="host"
+									subgraph cluster_ipv4 {
+										label="IPV4"
+										IPV4_1 -> IPV4_2 [label="decoctet"]
+										IPV4_2 -> IPV4_3 [label="\".\""]
+										IPV4_3 -> IPV4_4 [label="decoctet"]
+										IPV4_4 -> IPV4_5 [label="\".\""]
+										IPV4_5 -> IPV4_6 [label="decoctet"]
+										IPV4_6 -> IPV4_7 [label="\".\""]
+										IPV4_7 -> IPV4_8 [label="decoctet"]
+									}
+									regname -> regname [label="unreserved, pct-encoded, sub-delims"]
+								}
+								port -> port [label="DIGIT"]
+								regname -> port [label="\":\""]
+								IPV4_8 -> port [label="\":\""]
+								user_info -> IPV4_1 [label="\"@\""]
+								user_info -> regname [label="\"@\""]
+								authority_1 -> IPV4_1
+								authority_1 -> regname
+							}
+							scheme2 ->hier_part [label="\":\""];
+							hier_part -> authority_1 [label="\"//\""]
+						}
+						query_ -> query_ [label="pchar,\"/\",\"?\""]
+						port -> query_ [label="\"?\""]
+						IPV4_8 -> query_ [label="\"?\""]
+						regname -> query_ [label="\"?\""]
+					}
+					subgraph cluster_authority_form {
+						label = "authority-form";
+						authority [style="filled"];
+					}
+					subgraph cluster_asterisk_form {
+						label = "asterisk-form";
+					}
+				}
+				subgraph cluster_HTTP_version {
+					label = "HTTP-version";
+					HTTP_version[style=filled];						
+				}
+			}
+			subgraph cluster_status_line {
+				label = "status_line";
+				subgraph cluster_HTTP_version_ {
+					HTTP_version_[style=filled];
+					label = "HTTP-version";
+				}
+				subgraph cluster_status_code {
+					status_code [style=filled];
+					label = "status-code";
+				}
+				subgraph cluster_reason_phrase {
+					reason_phrase[style=filled];
+					label = "reason-phrase";
+				}
+			}
+		}
+		subgraph cluster_header_field {
+			color=grey;
+			header_field;
+			label = "header-field";
+			subgraph cluster_field_name {
+				label="field-name"
+				field_name1 -> field_name2 [label="tchar"]
+				field_name2 -> field_name2 [label="tchar"]
+			}
+			subgraph cluster_field_value {
+				label="field-value"
+				field_value -> field_content1 [label="field-vchar"]
+				field_content1 -> field_content2 [label="SP, HTAB"]
+				field_content2 ->  field_content1 [label="field-vchar"]
+				field_content1 ->  field_content1 [label="field-vchar"]
+				field_content1 -> obs_fold1 [label="CRLF"]
+				field_value -> obs_fold1 [label="CRLF"]
+				obs_fold1 -> obs_fold2 [label="SP, HTAB"]
+				obs_fold2 -> obs_fold2 [label="SP, HTAB"]
+				obs_fold2 -> field_content1 [label="field-vchar"]
+				obs_fold2 -> obs_fold1 [label="CRLF"]
+			}
+		}
+		subgraph cluster_message_body {
+			message_body -> message_body [label="OCTET"];
+			label = "message-body";
+		}
+		obs_fold2 -> message_body [label="OWS CRLF"]
+		field_value -> message_body [label="OWS CRLF"]
+		field_content1 -> message_body [label="OWS CRLF"]
+	}
+	node [shape=doublecircle color=grey fontcolor=white style=filled]
+	start;
+	end
+	
+	start -> method1; 
+		method2 -> abs_path1 [label="SP"];
+		abs_path2 -> query [label= "\"?\""];
+		method2 -> scheme1 [label="SP"];
+		method2 -> authority [label="SP"];
+		query -> HTTP_version [label=SP];
+		abs_path2 -> HTTP_version [label="SP"];
+		authority -> HTTP_version [label="SP"];
+		query_ -> HTTP_version [label="SP"];
+		port -> HTTP_version [label="SP"];
+		IPV4_8 -> HTTP_version [label="SP"];
+		regname -> HTTP_version [label="SP"];
+		HTTP_version -> header_field [label="CRLF"]
+	start -> HTTP_version_;
+		HTTP_version_ -> status_code [label="SP"];
+		status_code -> reason_phrase [label="SP"];
+		reason_phrase -> header_field [label="CRLF"]
+	header_field -> field_name1
+	field_name2 -> field_value [label="':' OWS"]
+	field_value -> header_field [label="OWS CRLF"]
+	header_field -> message_body [label="CRLF"]
+	message_body -> end;
+}
