@@ -78,21 +78,24 @@ digraph G {
 				}
 				subgraph cluster_HTTP_version {
 					label = "HTTP-version";
-					HTTP_version[style=filled];						
+					HTTP_version [style=filled];		
 				}
 			}
 			subgraph cluster_status_line {
 				label = "status_line";
 				subgraph cluster_HTTP_version_ {
-					HTTP_version_[style=filled];
 					label = "HTTP-version";
+					HTTP_version_  -> HTTP_version2 [label="\"HTTP\/"]
+					HTTP_version2 -> HTTP_version3 [label="DIGIT"]
+					HTTP_version3 -> HTTP_version4 [label="\".\""]
+					HTTP_version4 -> HTTP_version5 [label="DIGIT"]	
 				}
 				subgraph cluster_status_code {
-					status_code [style=filled];
+					status_code -> status_code2 [label="3DIGIT"]
 					label = "status-code";
 				}
 				subgraph cluster_reason_phrase {
-					reason_phrase[style=filled];
+					reason_phrase -> reason_phrase [label="HTAB, SP, VCHAR, obs-text"]
 					label = "reason-phrase";
 				}
 			}
@@ -146,8 +149,8 @@ digraph G {
 		regname -> HTTP_version [label="SP"];
 		HTTP_version -> header_field [label="CRLF"]
 	start -> HTTP_version_;
-		HTTP_version_ -> status_code [label="SP"];
-		status_code -> reason_phrase [label="SP"];
+		HTTP_version5 -> status_code [label="SP"];
+		status_code2 -> reason_phrase [label="SP"];
 		reason_phrase -> header_field [label="CRLF"]
 	header_field -> field_name1
 	field_name2 -> field_value [label="':' OWS"]
