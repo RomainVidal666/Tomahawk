@@ -1,0 +1,162 @@
+\hypertarget{http__parser_8h}{}\section{Référence du fichier src/http\+\_\+parser.h}
+\label{http__parser_8h}\index{src/http\+\_\+parser.\+h@{src/http\+\_\+parser.\+h}}
+
+
+Parseur H\+T\+TP 1.\+0.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}http\+\_\+node.\+h\char`\"{}}\\*
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{http__parser_8h_aee8b0a4a4baa2c61dec7c57f45f31f98}{parse\+\_\+\+H\+T\+T\+P\+\_\+message} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a3ca395db6b3966e6ac79ef89bd8799e4}{parse\+\_\+start\+\_\+line} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a5e097a86384806ecddccba2533014af7}{parse\+\_\+status\+\_\+line} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a21deb380a12b788502d04e9e87584d8e}{parse\+\_\+header\+\_\+field} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_ac105f005e7a346c792d176b27f158493}{parse\+\_\+message\+\_\+body} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Parseur H\+T\+TP 1.\+0. 
+
+\begin{DoxyAuthor}{Auteur}
+R. Vidal / A. Lorber / T. Jacumin 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+
+
+\subsection{Documentation des fonctions}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+header\+\_\+field@{parse\+\_\+header\+\_\+field}}
+\index{parse\+\_\+header\+\_\+field@{parse\+\_\+header\+\_\+field}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+header\+\_\+field(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_header_field(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+header\+\_\+field (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_a21deb380a12b788502d04e9e87584d8e}{}\label{http__parser_8h_a21deb380a12b788502d04e9e87584d8e}
+
+
+Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+\+H\+T\+T\+P\+\_\+message@{parse\+\_\+\+H\+T\+T\+P\+\_\+message}}
+\index{parse\+\_\+\+H\+T\+T\+P\+\_\+message@{parse\+\_\+\+H\+T\+T\+P\+\_\+message}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+\+H\+T\+T\+P\+\_\+message(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_HTTP_message(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+\+H\+T\+T\+P\+\_\+message (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_aee8b0a4a4baa2c61dec7c57f45f31f98}{}\label{http__parser_8h_aee8b0a4a4baa2c61dec7c57f45f31f98}
+
+
+Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+message\+\_\+body@{parse\+\_\+message\+\_\+body}}
+\index{parse\+\_\+message\+\_\+body@{parse\+\_\+message\+\_\+body}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+message\+\_\+body(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_message_body(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+message\+\_\+body (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_ac105f005e7a346c792d176b27f158493}{}\label{http__parser_8h_ac105f005e7a346c792d176b27f158493}
+
+
+Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+start\+\_\+line@{parse\+\_\+start\+\_\+line}}
+\index{parse\+\_\+start\+\_\+line@{parse\+\_\+start\+\_\+line}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+start\+\_\+line(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_start_line(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+start\+\_\+line (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_a3ca395db6b3966e6ac79ef89bd8799e4}{}\label{http__parser_8h_a3ca395db6b3966e6ac79ef89bd8799e4}
+
+
+Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+status\+\_\+line@{parse\+\_\+status\+\_\+line}}
+\index{parse\+\_\+status\+\_\+line@{parse\+\_\+status\+\_\+line}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+status\+\_\+line(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_status_line(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+status\+\_\+line (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_a5e097a86384806ecddccba2533014af7}{}\label{http__parser_8h_a5e097a86384806ecddccba2533014af7}
+
+
+Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
