@@ -74,6 +74,8 @@ int parse_header_field ( char * request, int * cursor, HTTP_Node * node );
  */
 int parse_message_body ( char * request, int * cursor, HTTP_Node * node );
 
+int parse_request_target ( char * request, int * cursor, HTTP_Node * node );
+
 /**
  * \fn int parse_string ( char * str, int * dep, char * cmp_str )
  * \brief Fonction de création d'une nouvelle instance d'un objet HTTP_Node.

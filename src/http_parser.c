@@ -40,12 +40,15 @@ int parse_start_line ( char * request, int * cursor, HTTP_Node * node ) {
 	if ( parse_status_line ( request, cursor, node ) ) {
 		printf ( "- status-line valide\n" );
 		return 1;
+	} else if ( parse_request_target ( request, cursor, node ) ) {
+		printf("- request-target valide\n");
+		return 1;
 	}
 
 	return 0;
 }
 
-int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) {
+int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) { /* TO DO : annuler les déplacement du curseur si le mot n'est pas accépté */
 	int requestlength = strlen ( request );
 	int end_status_line = 0;
 	
@@ -75,6 +78,10 @@ int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) {
 	}
 
 	return 0;
+}
+
+int parse_request_target ( char * request, int * cursor, HTTP_Node * node ) {
+	return 1;
 }
 
 int parse_header_field ( char * request, int * cursor, HTTP_Node * node ) {
