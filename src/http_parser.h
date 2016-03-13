@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "http_node.h"
 
@@ -72,5 +73,19 @@ int parse_header_field ( char * request, int * cursor, HTTP_Node * node );
  * \return Retourne 1 si la requête est correcte, 0 sinon.
  */
 int parse_message_body ( char * request, int * cursor, HTTP_Node * node );
+
+/**
+ * \fn int parse_string ( char * str, int * dep, char * cmp_str )
+ * \brief Fonction de création d'une nouvelle instance d'un objet HTTP_Node.
+ *
+ * \param str Chaine contenant la requête.
+ * \param cursor Pointeur vers la position de la lecture de la requête.
+ * \param cmp_str Pointeur vers le noeud utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.
+ * 
+ * \return Retourne 1 si la requête est correcte, 0 sinon.
+ */
+int parse_string ( char * str, int * cursor, char * cmp_str );
+
+int isDIGIT ( char * request, int * cursor );
 
 #endif

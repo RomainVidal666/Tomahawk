@@ -8,7 +8,7 @@ int main ( int argc, char * argv [] ) {
 	int cursor = 0;
 	HTTP_Node * http_message = malloc ( sizeof ( HTTP_Node ) ); 
 
-	if ( parse_HTTP_message ( "Coucou !!!! :D", & cursor, http_message ) ) {
+	if ( parse_HTTP_message ( "HTTP/1.2 153 Coucou !!!! :\n\rD", & cursor, http_message ) ) {
 		printf ( "La requête est valide \n" );
 	}
 
