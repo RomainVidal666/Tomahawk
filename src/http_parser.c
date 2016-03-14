@@ -144,6 +144,89 @@ int parse_absolute_form ( char * request, int * cursor, HTTP_Node * node ) {
 }
 
 int parse_authority_form ( char * request, int * cursor, HTTP_Node * node ) {
+	int etat = 0;
+	int requestlength = strlen ( request );
+	int old_cursor = *cursor;
+
+	while ( ( *cursor < requestlength ) && ( request [*cursor] != SP ) ) {
+		if ( etat == 0 ) { /* authority_1 */
+			if ( parse_IPv4 ( request, cursor, node ) ) {
+				etat = 1;
+			} else {
+				return 0;
+			}
+
+		} else if ( etat == 1 ) { /* query */
+
+		}
+		(*cursor)++;
+	}
+
+	*cursor = old_cursor;
+	return 0;
+}
+
+int parse_IPv4 ( char * request, int * cursor, HTTP_Node * node ) {
+	int etat = 0;
+	int requestlength = strlen ( request );
+	int old_cursor = *cursor;
+	int nb_digit = 0;
+
+	while ( ( *cursor < requestlength ) && ( request [*cursor] != SP ) && ( request [*cursor] != ':' ) && ( request [*cursor] != '?' ) ) {
+		if ( etat == 0 ) { /* 1er groupe */ 
+			if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ) {
+				nb_digit ++;
+			} else if ( request [ (*cursor) ] == '.' ) {
+				if ( ( nb_digit > 0 ) && ( nb_digit <= 3 ) ) {
+					nb_digit = 0;
+					etat = 1;
+				} else { /* nombre incorrect de digits */
+					return 0;
+				}
+			} else {
+				return 0;
+			}
+		} else if ( etat == 1 ) { /* 2eme groupe */
+			if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ) {
+				nb_digit ++;
+			} else if ( request [ (*cursor) ] == '.' ) {
+				if ( ( nb_digit > 0 ) && ( nb_digit <= 3 ) ) {
+					nb_digit = 0;
+					etat = 2;
+				} else { /* nombre incorrect de digits */
+					return 0;
+				}
+			} else {
+				return 0;
+			}
+		} else if ( etat == 2 ) { /* 3eme groupe */
+			if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ) {
+				nb_digit ++;
+			} else if ( request [ (*cursor) ] == '.' ) {
+				if ( ( nb_digit > 0 ) && ( nb_digit <= 3 ) ) {
+					nb_digit = 0;
+					etat = 3;
+				} else { /* nombre incorrect de digits */
+					return 0;
+				}
+			} else {
+				return 0;
+			}
+		} else if ( etat == 3 ) { /* 4eme groupe */
+			if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ) {
+				nb_digit ++;
+			} else {
+				return 0;
+			}
+		}
+		(*cursor)++;
+	}
+
+	if ( ( nb_digit > 0 ) && ( nb_digit <= 3 ) && ( etat == 3 ) ) {
+		printf ( "--- IPv4 validée\n" );
+		return 1;
+	}
+	*cursor = old_cursor;
 	return 0;
 }
 

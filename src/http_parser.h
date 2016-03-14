@@ -86,6 +86,8 @@ int parse_absolute_form ( char * request, int * cursor, HTTP_Node * node );
 
 int parse_authority_form ( char * request, int * cursor, HTTP_Node * node );
 
+int parse_IPv4 ( char * request, int * cursor, HTTP_Node * node );
+
 /**
  * \fn int parse_string ( char * str, int * dep, char * cmp_str )
  * \brief Fonction de création d'une nouvelle instance d'un objet HTTP_Node.
