@@ -40,7 +40,7 @@ int parse_start_line ( char * request, int * cursor, HTTP_Node * node ) {
 	if ( parse_status_line ( request, cursor, node ) ) {
 		printf ( "- status-line valide\n" );
 		return 1;
-	} else if ( parse_request_target ( request, cursor, node ) ) {
+	} else if ( parse_request_line ( request, cursor, node ) ) {
 		printf("- request-target valide\n");
 		return 1;
 	}
@@ -75,6 +75,18 @@ int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) { /* TO
 				}
 			}
 		}
+	}
+
+	return 0;
+}
+
+int parse_request_line ( char * request, int * cursor, HTTP_Node * node ) {
+	isVCHAR ( request, cursor ); /* au moins 1 TCHAR */
+	while ( ( request [*cursor] != SP ) && ( isVCHAR ( request, cursor ) ) ); /* TCHAR ici est non pas VCHAR */
+
+	if ( request [*cursor] == SP ) { /* ok pour method */
+		printf("- method valide\n");
+		return parse_request_target ( request, cursor, node );
 	}
 
 	return 0;
@@ -117,5 +129,14 @@ int isDIGIT ( char * request, int * cursor ) {
 		return 1;
 	}
 
+	return 0;
+}
+
+int isVCHAR ( char * request, int * cursor ) {
+	if ( ( request [ (*cursor) ] >= 0x21 ) && ( request [ (*cursor) ] <= 0x7e ) ) {
+		(*cursor)++;
+		return 1;
+	}
+	
 	return 0;
 }
