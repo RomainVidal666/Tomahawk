@@ -48,7 +48,7 @@ int parse_start_line ( char * request, int * cursor, HTTP_Node * node ) {
 	return 0;
 }
 
-int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) { /* TO DO : annuler les déplacement du curseur si le mot n'est pas accépté */
+int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) { /* TO DO : annuler les déplacement du curseur si le mot n'est pas accepté */
 	int requestlength = strlen ( request );
 	int end_status_line = 0;
 	
@@ -86,14 +86,65 @@ int parse_request_line ( char * request, int * cursor, HTTP_Node * node ) {
 
 	if ( request [*cursor] == SP ) { /* ok pour method */
 		printf("- method valide\n");
-		return parse_request_target ( request, cursor, node );
+		(*cursor) ++;
+		if ( parse_request_target ( request, cursor, node ) ) {
+			if ( parse_string ( request, cursor, "HTTP/" ) && /* HTTP-version */
+				 isDIGIT ( request, cursor ) &&  
+				 parse_string ( request, cursor, "." ) &&
+				 isDIGIT ( request, cursor ) ) {
+				if ( parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+					printf ( "- HTTP-version valide\n" );
+
+					return 1;
+				}
+			}
+		}
 	}
 
 	return 0;
 }
 
 int parse_request_target ( char * request, int * cursor, HTTP_Node * node ) {
-	return 1;
+	if ( ( parse_origin_form ( request, cursor, node ) )
+	  || ( parse_absolute_form ( request, cursor, node ) )
+	  || ( parse_authority_form ( request, cursor, node ) ) ) {
+		return 1;
+	}
+	return 0;
+}
+
+int parse_origin_form ( char * request, int * cursor, HTTP_Node * node ) {
+	int etat = 0;
+	int requestlength = strlen ( request );
+	int old_cursor = *cursor;
+
+	if ( parse_string ( request, cursor, "/" ) ) {
+		while ( ( *cursor < requestlength ) && ( request [*cursor] != SP ) ) {
+			if ( etat == 0 ) { /* abs_path2 */
+				if ( request [*cursor] == '?' ) etat = 1;
+			} else if ( etat == 1 ) { /* query */
+
+			}
+			(*cursor)++;
+		}
+
+		if ( request [*cursor] == SP ) {/* mot accepté */
+			(*cursor)++;
+			printf ( "-- origin-form valide\n" );
+			return 1;
+		}
+	} 	
+
+	*cursor = old_cursor;
+	return 0; 
+}
+
+int parse_absolute_form ( char * request, int * cursor, HTTP_Node * node ) {
+	return 0;
+}
+
+int parse_authority_form ( char * request, int * cursor, HTTP_Node * node ) {
+	return 0;
 }
 
 int parse_header_field ( char * request, int * cursor, HTTP_Node * node ) {
