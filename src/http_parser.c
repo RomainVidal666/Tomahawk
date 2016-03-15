@@ -11,7 +11,7 @@ int parse_HTTP_message ( char * request, int * cursor, HTTP_Node * node ) {
 	start_line = malloc ( sizeof ( HTTP_Node ) );
 	addChild_HTTP_Node ( node, start_line );
 
-	if ( parse_start_line ( request, cursor, start_line ) ) { // On parse le start-line
+	if ( parse_start_line ( request, cursor, start_line ) ) { // On parse la start-line
 
 		printf ( "Le start-line est valide\n" );
 		header_field = malloc ( sizeof ( HTTP_Node ) );
@@ -86,7 +86,30 @@ int parse_request_target ( char * request, int * cursor, HTTP_Node * node ) {
 
 int parse_header_field ( char * request, int * cursor, HTTP_Node * node ) {
 	init_HTTP_Node ( "header-field", node );
-
+	
+	int cursor_sec;		/* curseur de secours, si il a pris le mauvais vhemin */
+	
+	while ( ! parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+		/*field_name*/
+		if ( isTchar ( request, cursor ) ) {	/*tchar*/			
+			while ( isTchar ( request, cursor ) );	/* *(tchar)*/
+			if( parse_string ( request, cursor, ":" ) ){
+				while( parse_string ( request, cursor, " ") || parse_string ( request, cursor, "	") );
+				/*field-value*/
+				if ( isObstext ( request, cursor ) || isVCHAR ( request, cursor ) ){	/* field-content */
+					if( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) ){	/* SP or HTAB */
+						if( isObstext ( request, cursor ) || isVCHAR ( request, cursor ) )	
+					}
+				}
+				else if ( parse_string ( request, cursor, "\n\r") ){		/* obs-fold */
+					
+				}
+				else return 0;
+			}
+			else return 0;
+		}
+		else return 0;
+	}
 	return 1;
 }
 
@@ -117,5 +140,32 @@ int isDIGIT ( char * request, int * cursor ) {
 		return 1;
 	}
 
+	return 0;
+}
+
+int isTchar ( char * request, int * cursor ) {
+	if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ||	/*DIGIT*/	/*tchar*/
+		 ( request [ (*cursor) ] >= 'a') && ( request [ (*cursor) ] <= 'z' ) ||	/*ALPHA*/
+		 ( request [ (*cursor) ] >= 'A') && ( request [ (*cursor) ] <= 'Z' ) ||
+		 ( strchr("!#$%&'*+-.^_`|~"))) {													
+		(*cursor)++;
+		return 1;
+	}
+	return 0;
+}
+
+int isVCHAR ( char * request, int * cursor ) {
+	if ( ( request [ (*cursor) ] >= 0x21 ) && ( request [ (*cursor) ] <= 0x7E ) ) {	/* visible printing caracteres */
+		(*cursor)++;
+		return 1;
+	}
+	return 0;
+}
+
+int isObstext ( char * request, int * cursor ) {
+	if ( ( request [ (*cursor) ] >= 0x80 ) && ( request [ (*cursor) ] <= 0xFF ) ) {
+		(*cursor)++;
+		return 1;
+	}
 	return 0;
 }
