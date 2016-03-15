@@ -274,3 +274,19 @@ int isVCHAR ( char * request, int * cursor ) {
 	
 	return 0;
 }
+
+int isUnreserved ( char * request, int * cursor ) {
+	if ( ( request [ (*cursor) ] >= 'a' ) && ( request [ (*cursor) ] <= 'z' )
+	  && ( request [ (*cursor) ] >= 'A' ) && ( request [ (*cursor) ] <= 'Z' )  ) { /* ALPHA */
+	  	(*cursor)++;
+		return 1;
+	} else if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ) { /* DIGIT */
+		(*cursor)++;
+		return 1;	
+	} else if ( ( request [ (*cursor) ] == ' ' ) || ( request [ (*cursor) ] == '.' || ( request [ (*cursor) ] == '_' ) || ( request [ (*cursor) ] == '~' ) ) ) {
+		(*cursor)++;
+		return 1;
+	}
+	
+	return 0;
+}

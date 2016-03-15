@@ -104,4 +104,6 @@ int isDIGIT ( char * request, int * cursor );
 
 int isVCHAR ( char * request, int * cursor );
 
+int isUnreserved ( char * request, int * cursor );
+
 #endif
