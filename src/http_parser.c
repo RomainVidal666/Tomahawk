@@ -157,7 +157,7 @@ int parse_authority_form ( char * request, int * cursor, HTTP_Node * node ) {
 			}
 
 		} else if ( etat == 1 ) { /* query */
-
+			return 1;
 		}
 		(*cursor)++;
 	}
