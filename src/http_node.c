@@ -23,7 +23,7 @@ void addChild_HTTP_Node ( HTTP_Node * node, HTTP_Node * child ) {
 		free ( node->childs );
 	}
 
-	node->childs = childs; // On installe le nouveau tableau sur le node
+	node->childs = childs; // On installe le nouveau tableau sur le node 
 	node->nb_childs ++; 
 }
 
