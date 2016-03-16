@@ -84,6 +84,35 @@ int parse_request_target ( char * request, int * cursor, HTTP_Node * node ) {
 	return 1;
 }
 
+// int parse_header_field ( char * request, int * cursor, HTTP_Node * node ) {
+	// init_HTTP_Node ( "header-field", node );
+	
+	// int cursor_sec;		/* curseur de secours, si il a pris le mauvais vhemin */
+	
+	// while ( ! parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+		// /*field_name*/
+		// if ( isTchar ( request, cursor ) ) {	/*tchar*/			
+			// while ( isTchar ( request, cursor ) );	/* *(tchar)*/
+			// if( parse_string ( request, cursor, ":" ) ) {
+				// while( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	") );
+				// /*field-value*/
+				// if ( isObstext ( request, cursor ) || isVCHAR ( request, cursor ) ) {	/* field-content */
+					// if( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) ) {	/* SP or HTAB */
+						// if( isObstext ( request, cursor ) || isVCHAR ( request, cursor ) )	
+					// }
+				// }
+				// else if ( parse_string ( request, cursor, "\n\r") ) {		/* obs-fold */
+					
+				// }
+				// else return 0;
+			// }
+			// else return 0;
+		// }
+		// else return 0;
+	// }
+	// return 1;
+// }
+
 int parse_header_field ( char * request, int * cursor, HTTP_Node * node ) {
 	init_HTTP_Node ( "header-field", node );
 	
@@ -91,26 +120,82 @@ int parse_header_field ( char * request, int * cursor, HTTP_Node * node ) {
 	
 	while ( ! parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
 		/*field_name*/
-		if ( isTchar ( request, cursor ) ) {	/*tchar*/			
-			while ( isTchar ( request, cursor ) );	/* *(tchar)*/
-			if( parse_string ( request, cursor, ":" ) ){
-				while( parse_string ( request, cursor, " ") || parse_string ( request, cursor, "	") );
-				/*field-value*/
-				if ( isObstext ( request, cursor ) || isVCHAR ( request, cursor ) ){	/* field-content */
-					if( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) ){	/* SP or HTAB */
-						if( isObstext ( request, cursor ) || isVCHAR ( request, cursor ) )	
-					}
-				}
-				else if ( parse_string ( request, cursor, "\n\r") ){		/* obs-fold */
-					
-				}
-				else return 0;
+		parse_field_name( request, cursor, node );
+				
 			}
 			else return 0;
 		}
 		else return 0;
 	}
 	return 1;
+}
+
+int parse_field_name ( char * request, int * cursor, HTTP_Node * node ) {
+	if ( isTchar ( request, cursor ) ) {	/*tchar*/			
+		while ( isTchar ( request, cursor ) );	/* *(tchar)*/
+		if( parse_string ( request, cursor, ":" ) ) {
+			while( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	") );
+			return( parse_field_value ( request, cursor, node ) );
+		}
+	}
+	return 0;
+}
+
+int parse_field_value ( char * request, int * cursor, HTTP_Node * node ) {
+	int curs_sec;
+	if ( isFieldvchar ( request, cursor ) ) {	/* field-content */
+		return ( parse_field_content ( request, cursor ) );
+	}
+	curs_sec = *cursor;							/* 2 possibilitees: retourner dans header field avec OWS CRLF, ou aller dans obs_fold avec CRLF */
+	if (parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+		if ( parse_obs_fold ( request, cursor, node ) )
+			return 1;
+	}
+	*cursor = curs_sec;
+	while ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) );	/* OWS */
+	if (parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+		return ( parse_header_field ( request, cursor, node ) );
+	}
+	return 0;
+}
+
+int parse_field_content ( char * request, int * cursor, HTTP_Node * node ) {
+	int curs_sec;
+	while ( isFieldvchar ( request, cursor ) );
+	if ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) ) {	/* SP or HTAB */
+			if( isFieldvchar( request, cursor ) )
+				return ( parse_field_content ( request, cursor, node ) );
+			else
+				return 0;
+	}
+	curs_sec = *cursor;							/* 2 possibilitees: retourner dans header field avec OWS CRLF, ou aller dans obs_fold avec CRLF */
+	if (parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+		if ( parse_obs_fold ( request, cursor, node ) )
+			return 1;
+	}
+	*cursor = curs_sec;
+	while ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) );	/* OWS */
+	if (parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+		return ( parse_header_field ( request, cursor, node ) );
+	}
+	return 0; 
+}
+
+int parse_obs_fold ( char * request, int * cursor, HTTP_Node * node ) {
+	int curs_sec;
+	if ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) ) {	/* SP or HTAB */
+		while ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) );	/* OWS */
+		if ( parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+			curs_sec = *cursor;								/* on enregistre le curseur, car on va tester une branche ( car automate non deterministe à cet endroit ) */
+			if ( parse_obs_fold ( request, cursor, node ) )	/* soit on retourne en obs_fold_1 */
+				return 1;
+			*cursor = curs_sec;								/* soit on retourne dans header field */
+			return ( parse_header_field ( request, cursor, node ) );
+		}
+		if ( isFieldvchar ( request, cursor ) )
+			return ( parse_field_content ( request, cursor, node) );
+	}
+	return 0;
 }
 
 int parse_message_body ( char * request, int * cursor, HTTP_Node * node ) {
@@ -147,7 +232,7 @@ int isTchar ( char * request, int * cursor ) {
 	if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ||	/*DIGIT*/	/*tchar*/
 		 ( request [ (*cursor) ] >= 'a') && ( request [ (*cursor) ] <= 'z' ) ||	/*ALPHA*/
 		 ( request [ (*cursor) ] >= 'A') && ( request [ (*cursor) ] <= 'Z' ) ||
-		 ( strchr("!#$%&'*+-.^_`|~"))) {													
+		 ( strchr("!#$%&'*+-.^_`|~", request[cursor]) != NULL )) {													
 		(*cursor)++;
 		return 1;
 	}
@@ -165,6 +250,13 @@ int isVCHAR ( char * request, int * cursor ) {
 int isObstext ( char * request, int * cursor ) {
 	if ( ( request [ (*cursor) ] >= 0x80 ) && ( request [ (*cursor) ] <= 0xFF ) ) {
 		(*cursor)++;
+		return 1;
+	}
+	return 0;
+}
+
+int isFieldvchar ( char * request, int * cursor ) {
+	if ( isObstext ( request, cursor ) || isVCHAR ( request, cursor ) ) {
 		return 1;
 	}
 	return 0;
