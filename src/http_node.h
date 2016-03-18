@@ -60,4 +60,27 @@ void free_HTTP_Node ( HTTP_Node * node );
  */
 void free_HTTP_Tree ( HTTP_Node * root );
 
+/**
+ * \fn HTTP_Node found_HTTP_Node ( HTTP_Node * root, char* string );
+ * \brief Fonction de recherche dans un arbre.
+ *
+ * \param root Pointeur vers le noeud racine de l'arbre à supprimer.
+ * \param string La chaine à rechercher.
+ *
+ * \return Le noeud qui à pour nom la chaine string.
+ */
+HTTP_Node* found_HTTP_Node ( HTTP_Node * root, char* string );
+
+/**
+ * \fn HTTP_Node* foundAll_HTTP_Node ( HTTP_Node * root, char* string, int* nbFound )
+ * \brief Fonction de recherche dans un arbre.
+ *
+ * \param root Pointeur vers le noeud racine de l'arbre à supprimer.
+ * \param string La chaine à rechercher.
+ * \param nbFound Le nombre de noeud trouvé.
+ *
+ * \return Un tableau des noeuds qui ont pour nom la chaine string (dans la limite de 10).
+ */
+void foundAll_HTTP_Node ( HTTP_Node * root, char* string, int* nbFound, HTTP_Node** result );
+
 #endif
