@@ -7,13 +7,13 @@ int parse_HTTP_message ( char * request, int * cursor, HTTP_Node * node ) {
 
 	init_HTTP_Node ( "http-message", node );
 	node->beg = *cursor;
-
+	
 	start_line = malloc ( sizeof ( HTTP_Node ) );
 	addChild_HTTP_Node ( node, start_line );
 
 	if ( parse_start_line ( request, cursor, start_line ) ) { // On parse la start-line
-
 		printf ( "Le start-line est valide\n" );
+		
 		header_field = malloc ( sizeof ( HTTP_Node ) );
 		addChild_HTTP_Node ( node, header_field );
 
@@ -84,56 +84,34 @@ int parse_request_target ( char * request, int * cursor, HTTP_Node * node ) {
 	return 1;
 }
 
-// int parse_header_field ( char * request, int * cursor, HTTP_Node * node ) {
-	// init_HTTP_Node ( "header-field", node );
-	
-	// int cursor_sec;		/* curseur de secours, si il a pris le mauvais vhemin */
-	
-	// while ( ! parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
-		// /*field_name*/
-		// if ( isTchar ( request, cursor ) ) {	/*tchar*/			
-			// while ( isTchar ( request, cursor ) );	/* *(tchar)*/
-			// if( parse_string ( request, cursor, ":" ) ) {
-				// while( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	") );
-				// /*field-value*/
-				// if ( isObstext ( request, cursor ) || isVCHAR ( request, cursor ) ) {	/* field-content */
-					// if( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) ) {	/* SP or HTAB */
-						// if( isObstext ( request, cursor ) || isVCHAR ( request, cursor ) )	
-					// }
-				// }
-				// else if ( parse_string ( request, cursor, "\n\r") ) {		/* obs-fold */
-					
-				// }
-				// else return 0;
-			// }
-			// else return 0;
-		// }
-		// else return 0;
-	// }
-	// return 1;
-// }
-
-int parse_header_field ( char * request, int * cursor, HTTP_Node * node ) {
-	init_HTTP_Node ( "header-field", node );
-	
-	int cursor_sec;		/* curseur de secours, si il a pris le mauvais vhemin */
-	
-	while ( ! parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
-		/*field_name*/
-		parse_field_name( request, cursor, node );
-				
-			}
-			else return 0;
-		}
-		else return 0;
+int parse_header_field ( char * request, int * cursor, HTTP_Node * header_field ) {
+	printf("header	%c\n",*cursor);
+	fflush(stdout);
+	getchar();
+	// header_field->name = "header-field";
+	// header_field -> beg = *cursor;
+	if ( parse_string ( request, cursor, "\n\r" ) ){ /* CRLF */
+		//header_field -> end = *cursor;
+		return 1;	/* Message-Body */
 	}
-	return 1;
+	return( parse_field_name ( request, cursor, header_field) );	/* field-name */
+	return 0;
 }
 
 int parse_field_name ( char * request, int * cursor, HTTP_Node * node ) {
-	if ( isTchar ( request, cursor ) ) {	/*tchar*/			
+	printf("field-name	%c\n",request[*cursor]);
+	// HTTP_Node * field = malloc( sizeof ( HTTP_Node ) );
+	// field->name = "field";
+	// field->beg = *cursor;
+	// addChild_HTTP_Node ( node, field );
+	// HTTP_Node * field_name = malloc( sizeof ( HTTP_Node ) );
+	// field_name->name = "name";
+	// field_name->beg = *cursor;
+	// addChild_HTTP_Node ( field, field_name );
+	if ( isTchar ( request, cursor ) ) {	/*tchar*/
 		while ( isTchar ( request, cursor ) );	/* *(tchar)*/
 		if( parse_string ( request, cursor, ":" ) ) {
+			//field_name->end = *cursor;
 			while( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	") );
 			return( parse_field_value ( request, cursor, node ) );
 		}
@@ -142,6 +120,7 @@ int parse_field_name ( char * request, int * cursor, HTTP_Node * node ) {
 }
 
 int parse_field_value ( char * request, int * cursor, HTTP_Node * node ) {
+	printf("field_value	%c\n",request[*cursor]);
 	int curs_sec;
 	if ( isFieldvchar ( request, cursor ) ) {	/* field-content */
 		return ( parse_field_content ( request, cursor ) );
@@ -160,6 +139,7 @@ int parse_field_value ( char * request, int * cursor, HTTP_Node * node ) {
 }
 
 int parse_field_content ( char * request, int * cursor, HTTP_Node * node ) {
+	printf("field_content	%d\n",*cursor);
 	int curs_sec;
 	while ( isFieldvchar ( request, cursor ) );
 	if ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) ) {	/* SP or HTAB */
@@ -182,6 +162,7 @@ int parse_field_content ( char * request, int * cursor, HTTP_Node * node ) {
 }
 
 int parse_obs_fold ( char * request, int * cursor, HTTP_Node * node ) {
+	printf("obs_fold	%c\n",request[*cursor]);
 	int curs_sec;
 	if ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) ) {	/* SP or HTAB */
 		while ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) );	/* OWS */
@@ -232,7 +213,7 @@ int isTchar ( char * request, int * cursor ) {
 	if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ||	/*DIGIT*/	/*tchar*/
 		 ( request [ (*cursor) ] >= 'a') && ( request [ (*cursor) ] <= 'z' ) ||	/*ALPHA*/
 		 ( request [ (*cursor) ] >= 'A') && ( request [ (*cursor) ] <= 'Z' ) ||
-		 ( strchr("!#$%&'*+-.^_`|~", request[cursor]) != NULL )) {													
+		 ( strchr("!#$%&'*+-.^_|`~", request[*cursor]) != NULL )) {													
 		(*cursor)++;
 		return 1;
 	}
