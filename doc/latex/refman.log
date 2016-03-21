@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.23)  21 MAR 2016 21:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.23)  21 MAR 2016 21:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1196,10 +1196,7 @@ LaTeX Font Info:    Font shape `TS1/phv/bc/n' will be
 (./index.tex
 LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
 (Font)              scaled to size 8.99994pt on input line 1.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 1.
- (/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd
-File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-)
+
 Underfull \hbox (badness 787) in paragraph at lines 1--2
 []\T1/phv/m/n/10 Le pro-jet To-ma-hawk est dé-ve-lopé et main-tenu comme un ser
 -veur H[]T[]TP open-source pour les sys-tèmes
@@ -1230,6 +1227,10 @@ Chapitre 4.
 (./struct_h_t_t_p___node.tex
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (Font)              scaled to size 6.29996pt on input line 1.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 10.
+ (/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 12.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
@@ -1881,7 +1882,7 @@ ts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helveti
 c/uhvb8ac.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvbo8ac.pfb></us
 r/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/f
 onts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (28 pages, 137607 bytes).
+Output written on refman.pdf (28 pages, 137576 bytes).
 PDF statistics:
  688 PDF objects out of 1000 (max. 8388607)
  641 compressed objects within 7 object streams
