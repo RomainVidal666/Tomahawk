@@ -8,7 +8,7 @@ int main ( int argc, char * argv [] ) {
 	int cursor = 0;
 	HTTP_Node * http_message = malloc ( sizeof ( HTTP_Node ) ); 
 
-	char request [] = "METHOD / HTTP/1.2 153 Coucou !!!! :\n\rParam1: 42\n\rParam2: 45addg\n\r\n\r";
+	char request [] = "METHOD /schnapp98efe5f6i/pouet/index.html?moi=thebest HTTP/1.2\n\rParam1: 42\n\rParam2: 45addg\n\r\n\r Bite";
 
 	if ( parse_HTTP_message ( request, &cursor, http_message ) ) { //param2:rien\n\r 	\n\r
 		printf ( "La requete est valide \n" );
