@@ -12,7 +12,7 @@ int parse_HTTP_message ( char * request, int * cursor, HTTP_Node * node ) {
 	addChild_HTTP_Node ( node, start_line );
 
 	if ( parse_start_line ( request, cursor, start_line ) ) { // On parse la start-line
-		printf ( "Le start-line est valide\n" );
+		DEBUG_PRINT ( "Le start-line est valide\n" );
 		header_field = malloc ( sizeof ( HTTP_Node ) );
 		init_HTTP_Node ( "header-field", header_field );
 		addChild_HTTP_Node ( node, header_field );
@@ -22,14 +22,14 @@ int parse_HTTP_message ( char * request, int * cursor, HTTP_Node * node ) {
 
 		if ( parse_header_field ( request, cursor, header_field ) ) { // On parse le header-field
 			
-			printf ( "Le header-field est valide\n" );
+			DEBUG_PRINT ( "Le header-field est valide\n" );
 			
 			message_body = malloc ( sizeof ( HTTP_Node ) );
 			addChild_HTTP_Node ( node, message_body );
 
 			if ( parse_message_body ( request, cursor, message_body ) ) { // On parse le message-body
 
-				printf ( "Le message-body est valide\n" );
+				DEBUG_PRINT ( "Le message-body est valide\n" );
 				node->end = *cursor;
 
 				return 1;
@@ -50,7 +50,7 @@ int parse_start_line ( char * request, int * cursor, HTTP_Node * node ) {
 
 	if ( parse_status_line ( request, cursor, status_line ) ) {
 
-		printf ( "- status-line valide\n" );
+		DEBUG_PRINT ( "- status-line valide\n" );
 		node->end = *cursor;
 		addChild_HTTP_Node ( node, status_line ); 
 
@@ -58,7 +58,7 @@ int parse_start_line ( char * request, int * cursor, HTTP_Node * node ) {
 
 	} else if ( parse_request_line ( request, cursor, request_line ) ) {
 
-		printf("- request-line valide\n");
+		DEBUG_PRINT ( "- request-line valide\n" );
 		node->end = *cursor;
 		addChild_HTTP_Node ( node, request_line ); 
 
@@ -97,12 +97,12 @@ int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) { /* TO
 
 		http_version->end = *cursor;
 
-		printf("-- HTTP-version valide\n");
+		DEBUG_PRINT("-- HTTP-version valide\n");
 		if ( parse_string ( request, cursor, " " ) ) { /* SP */
 			status_code->beg = *cursor;
 			if ( isDIGIT ( request, cursor ) && isDIGIT ( request, cursor ) && isDIGIT ( request, cursor ) ) { /* status-code */
 				status_code->end = *cursor;
-				printf("-- status-code valide\n");
+				DEBUG_PRINT("-- status-code valide\n");
 				if ( parse_string ( request, cursor, " " ) ) { /* SP */
 					reason_phrase->beg = *cursor;
 					while ( ( requestlength > *cursor ) && ( ! end_status_line ) ) { /* reason-phrase */
@@ -113,7 +113,7 @@ int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) { /* TO
 							reason_phrase->end = *cursor;
 						}
 					}
-					printf("-- reason-phrase valide\n");
+					DEBUG_PRINT ( "-- reason-phrase valide\n" );
 					node->end = *cursor;
 					return end_status_line; /* retourne 1 si on a trouvé le \n\r, 0 sinon */
 				}
@@ -146,7 +146,7 @@ int parse_request_line ( char * request, int * cursor, HTTP_Node * node ) {
 
 	if ( request [*cursor] == SP ) { /* ok pour method */
 
-		printf("- method valide\n");
+		DEBUG_PRINT("- method valide\n");
 		(*cursor) ++;
 
 		if ( parse_request_target ( request, cursor, request_target ) ) {
@@ -161,7 +161,7 @@ int parse_request_line ( char * request, int * cursor, HTTP_Node * node ) {
 				http_version->end = *cursor;
 
 				if ( parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
-					printf ( "- HTTP-version valide\n" );
+					DEBUG_PRINT ( "- HTTP-version valide\n" );
 					addChild_HTTP_Node ( node, request_target ); 
 					node->end = *cursor;
 					return 1;
@@ -248,7 +248,7 @@ int parse_origin_form ( char * request, int * cursor, HTTP_Node * node ) {
 
 		if ( request [*cursor] == SP ) {/* mot accepté */
 			(*cursor)++;
-			printf ( "-- origin-form valide\n" );
+			DEBUG_PRINT ( "-- origin-form valide\n" );
 			return 1;
 		}
 	} 	
@@ -280,7 +280,7 @@ int parse_absolute_form ( char * request, int * cursor, HTTP_Node * node ) {
 		if ( etat == 0 ) { /* scheme */
 			if ( request [*cursor] >= '0' && request [*cursor] <= '9' ) { /* ALPHA ICI */
 				etat = 1;
-				printf ( "-- scheme valide\n" );
+				DEBUG_PRINT ( "-- scheme valide\n" );
 			} else {
 				etat = -1;
 			}
@@ -297,12 +297,12 @@ int parse_absolute_form ( char * request, int * cursor, HTTP_Node * node ) {
 					query->beg = (*cursor) + 1;
 					addChild_HTTP_Node ( node, query );
 				} else {
-					printf("- absolute-forme valide\n");
+					DEBUG_PRINT("- absolute-forme valide\n");
 					(*cursor)++;
 					node->end = *cursor - 1; /* on enlève l'espace final */
 					return 1;
 				}
-				printf ( "- hier-part valide\n" );
+				DEBUG_PRINT ( "- hier-part valide\n" );
 			} else {
 				etat = -1;
 			}
@@ -317,7 +317,7 @@ int parse_absolute_form ( char * request, int * cursor, HTTP_Node * node ) {
 	}
 
 	if ( etat == 3 ) {
-		printf("- absolute-forme valide\n");
+		DEBUG_PRINT("- absolute-forme valide\n");
 		(*cursor)++;
 		node->end = *cursor - 1; /* on enlève l'espace final */
 		return 1;
@@ -375,13 +375,13 @@ int parse_authority_form ( char * request, int * cursor, HTTP_Node * node ) {
 			port->end = *cursor;
 
 			addChild_HTTP_Node ( node, port );
-			printf("--- port valide\n");
-			printf("-- authority-form valide\n");
+			DEBUG_PRINT("--- port valide\n");
+			DEBUG_PRINT("-- authority-form valide\n");
 			node->end = *cursor;
 			return 1;
 		} else if ( etat == 3 ) {
 			free_HTTP_Node ( port );
-			printf("-- authority-form valide\n");
+			DEBUG_PRINT("-- authority-form valide\n");
 			node->end = *cursor;
 			return 1;
 		}
@@ -406,7 +406,7 @@ int parse_user_info ( char * request, int * cursor, HTTP_Node * node ) {
 	node->end = *cursor;
 
 	if ( ( request [ *cursor ] != '\0' ) && ( request [ *cursor ] == '@' ) && ( taille > 0 ) ) {
-		printf("--- user-info valide\n");
+		DEBUG_PRINT("--- user-info valide\n");
 		return 1;
 	}
 
@@ -420,7 +420,7 @@ int parse_regname ( char * request, int * cursor, HTTP_Node * node ) {
 	node->beg = *cursor;
 	while ( ( request [ *cursor ] != '\0' ) && ( isUnreserved ( request, cursor ) ) );
 	node->end = *cursor;
-	printf("--- regname valide\n");
+	DEBUG_PRINT("--- regname valide\n");
 	return 1;
 }
 
@@ -483,7 +483,7 @@ int parse_IPv4 ( char * request, int * cursor, HTTP_Node * node ) {
 	}
 
 	if ( ( nb_digit > 0 ) && ( nb_digit <= 3 ) && ( etat == 3 ) ) {
-		printf ( "--- IPv4 validée\n" );
+		DEBUG_PRINT ( "--- IPv4 validée\n" );
 		node->end = *cursor;
 		return 1;
 	}

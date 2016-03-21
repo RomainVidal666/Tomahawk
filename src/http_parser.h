@@ -16,6 +16,14 @@
 
 #define SP ' '
 
+#define DEBUG
+ 
+#ifdef DEBUG
+	#define DEBUG_PRINT(x) printf(x)
+#else
+	#define DEBUG_PRINT(x) 
+#endif
+
 /**
  * \fn int parse_HTTP_message ( char * request, int * cursor, HTTP_Node * node )
  * \brief Fonction pour parser le HTTP-message.
