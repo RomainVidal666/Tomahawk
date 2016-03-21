@@ -15,7 +15,11 @@ int main ( int argc, char * argv [] ) {
 		printf ("%s: %d -> %d\n", http_message->childs[1]->childs[0]->childs[0]->name, 	http_message->childs[1]->childs[0]->childs[0]->beg, http_message->childs[1]->childs[0]->childs[0]->end);
 		printf ("%s: %d -> %d\n", http_message->childs[1]->childs[1]->name, 			http_message->childs[1]->childs[1]->beg, 			http_message->childs[1]->childs[1]->end);
 		printf ("%s: %d -> %d\n", http_message->childs[1]->childs[1]->childs[0]->name, 	http_message->childs[1]->childs[1]->childs[0]->beg, http_message->childs[1]->childs[1]->childs[0]->end);
+<<<<<<< HEAD
+
+=======
 		
+>>>>>>> refs/remotes/origin/master
 	}
 	
 	free_HTTP_Tree ( http_message );
