@@ -154,15 +154,7 @@ int isObstext ( char * request, int * cursor );
  * \return Retourne 1 si la caractere de la requête est un field-vchar, 0 sinon.
  */
 int isFieldvchar ( char * request, int * cursor );
-<<<<<<< HEAD
-
 
 int isUnreserved ( char * request, int * cursor );
 
-
-=======
-
-int isUnreserved ( char * request, int * cursor );
-
->>>>>>> refs/remotes/origin/master
 #endif
