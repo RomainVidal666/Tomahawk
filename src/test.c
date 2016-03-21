@@ -3,7 +3,7 @@
 
 #include "http_node.h"
 
-int main ( int argc, char * argv [] ) {
+char* test() {
 	int cursor = 0;
 	int nb;
 

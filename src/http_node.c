@@ -78,7 +78,7 @@ void foundAll_HTTP_Node ( HTTP_Node * root, char* string, int* nbFound, HTTP_Nod
 	// On parcourt ses fils
 	for(i = 0; i < root->nb_childs; i++ ) {
 		// On recherche à partir de chacun de ces fils.
-		foundAll_HTTP_Node_rec(root->childs[i], string, &result, nbFound);
+		foundAll_HTTP_Node_rec(root->childs[i], string, result, nbFound);
 	}
 }
 
@@ -88,7 +88,7 @@ void foundAll_HTTP_Node_rec ( HTTP_Node * root, char* string, HTTP_Node** result
 	// On regarde le nom
 	if (!strcmp(root->name, string)) {
 		// Si il concorde on l'ajoute au tableau
-		result[++(*nbFound)] = root;
+		result[(*nbFound)++] = root;
 	}
 	// On parcourt ses fils
 	for(i = 0; i < root->nb_childs; i++ ) {

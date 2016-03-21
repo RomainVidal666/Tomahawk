@@ -3,16 +3,17 @@
 
 #include "http_node.h"
 #include "http_parser.h"
+#include "api.h"
+
+void callback(char* chaine, int len);
 
 int main ( int argc, char * argv [] ) {
-	int cursor = 0;
-	HTTP_Node * http_message = malloc ( sizeof ( HTTP_Node ) ); 
 
-	if ( parse_HTTP_message ( "METHOD 122.168.055.5 HTTP/1.2\n\r 153 Coucoddu !!!! :\n\rD", & cursor, http_message ) ) {
-		printf ( "La requête est valide \n" );
-	}
-
-	free_HTTP_Tree ( http_message );
-
+    parser ("METHOD 122.168.055.5 HTTP/1.2\n\r 153 Coucoddu !!!! :\n\rD",
+            61, "http-message",callback);
 	return 0;
+}
+
+void callback(char* chaine, int len) {
+    printf("Chaine de longeur %d touvee : '%s'\n", len, chaine);
 }
