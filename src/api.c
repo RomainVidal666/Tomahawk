@@ -27,6 +27,7 @@ int parser (char *buf, unsigned int len, char *search ,void (*callback)()) {
                          (nodes[i]->beg), (nodes[i]->end)+1);
 		// Appel du callback
 		callback(string, (unsigned) (nodes[i]->end - nodes[i]->beg) );
+
 	}
 
     // Liberation de la memoire
