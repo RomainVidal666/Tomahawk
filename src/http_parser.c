@@ -493,8 +493,9 @@ int parse_IPv4 ( char * request, int * cursor, HTTP_Node * node ) {
 }
 
 int parse_header_field ( char * request, int * cursor, HTTP_Node * header_field ) {
-	printf("header	%d\n",*cursor);
-	fflush(stdout);
+	printf("header: %d\n",*cursor);
+	DEBUG_PRINT("header-field");
+	
 	if ( parse_string ( request, cursor, "\n\r" ) ){ /* CRLF */
 
 		header_field -> end = *cursor;
@@ -509,19 +510,11 @@ int parse_header_field ( char * request, int * cursor, HTTP_Node * header_field 
 	addChild_HTTP_Node ( field_name, field_value );
 	addChild_HTTP_Node ( header_field, field_name );
 
-	printf ("%s: nbr childs: %d \n", header_field->childs[0]->name, header_field->childs[0]->nb_childs);
-	printf ("%s: %d -> %d\n", header_field->childs[0]->name, header_field->childs[0]->beg,header_field->childs[0]->end);
-	printf ("%s: %d -> %d\n", header_field->childs[0]->childs[0]->name, header_field->childs[0]->childs[0]->beg,header_field->childs[0]->childs[0]->end);
-
-
 	return( parse_field_name ( request, cursor, header_field, field_name, field_value) );	/* field-name */
 }
 
 int parse_field_name ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value ) {
-	printf("field-name	%d\n",*cursor);
-	printf ("%s: nbr childs: %d \n", header_field->childs[0]->name, header_field->childs[0]->nb_childs);
-	printf ("%s: %d -> %d\n", header_field->childs[0]->name, header_field->childs[0]->beg,header_field->childs[0]->end);
-	printf ("%s: %d -> %d\n", header_field->childs[0]->childs[0]->name, header_field->childs[0]->childs[0]->beg,header_field->childs[0]->childs[0]->end);
+	printf("field-name: %d\n",*cursor);
 
 	field_name->beg = *cursor;
 	if ( isTchar ( request, cursor ) ) {	/*tchar*/
@@ -536,11 +529,10 @@ int parse_field_name ( char * request, int * cursor, HTTP_Node * header_field, H
 }
 
 int parse_field_value ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value ) {
-	field_value->beg = *cursor;
-	printf ("%s: nbr childs: %d \n", header_field->childs[0]->name, header_field->childs[0]->nb_childs);
-	printf ("%s: %d -> %d\n", header_field->childs[0]->name, header_field->childs[0]->beg,header_field->childs[0]->end);
-	printf ("%s: %d -> %d\n", header_field->childs[0]->childs[0]->name, header_field->childs[0]->childs[0]->beg,header_field->childs[0]->childs[0]->end);
+	printf("field-value: %d\n",*cursor);
 
+	field_value->beg = *cursor;
+	
 	int curs_sec;
 	if ( isFieldvchar ( request, cursor ) ) {	/* field-content */
 		return ( parse_field_content ( request, cursor, header_field, field_name, field_value ) );
@@ -560,11 +552,8 @@ int parse_field_value ( char * request, int * cursor, HTTP_Node * header_field, 
 }
 
 int parse_field_content ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value ) {
-	printf ("%s: nbr childs: %d \n", header_field->childs[0]->name, header_field->childs[0]->nb_childs);
-	printf ("%s: %d -> %d\n", header_field->childs[0]->name, header_field->childs[0]->beg,header_field->childs[0]->end);
-	printf ("%s: %d -> %d\n", header_field->childs[0]->childs[0]->name, header_field->childs[0]->childs[0]->beg,header_field->childs[0]->childs[0]->end);
-
-	printf("field_content	%d\n",*cursor);
+	printf("field_content: %d\n",*cursor);
+	
 	int curs_sec;
 	while ( isFieldvchar ( request, cursor ) );
 	if ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) ) {	/* SP or HTAB */
@@ -588,6 +577,8 @@ int parse_field_content ( char * request, int * cursor, HTTP_Node * header_field
 }
 
 int parse_obs_fold ( char * request, int * cursor, HTTP_Node * header_field , HTTP_Node * field_name, HTTP_Node * field_value ) {
+	printf("obs-fold: %d\n",*cursor);
+
 	int curs_sec;
 	if ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) ) {	/* SP or HTAB */
 		while ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) );	/* OWS */
