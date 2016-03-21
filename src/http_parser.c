@@ -605,9 +605,18 @@ int parse_obs_fold ( char * request, int * cursor, HTTP_Node * header_field , HT
 }
 
 int parse_message_body ( char * request, int * cursor, HTTP_Node * node ) {
-	init_HTTP_Node ( "message-body", node );
+	init_HTTP_Node ( "message-body", node );    // Initialisation de la node pour le resultat
 
-	return 1;
+	node->beg = *cursor;                        // Sauvegarde du debut du message body
+
+	while ( request[*cursor] != '\0'            // Caractère fin de text
+            && request[*cursor] != EOF) {       // Fin du flux ( rayer la mention inutile )
+        *cursor = *cursor + 1;
+    };
+
+	node->end = *cursor;                        // Sauvegarde de la fin du message body
+
+	return 1;                                   // Il ne peut pas y avoir d'erreur sur le retour
 }
 
 int parse_string ( char * str, int * cursor, char * cmp_str ) {
