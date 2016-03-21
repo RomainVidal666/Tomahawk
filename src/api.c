@@ -2,14 +2,9 @@
 #include "http_node.h"
 #include "http_parser.h"
 
-void callback (char *found,unsigned int len){
-	printf("Trouve:%s", found);
-}
-
 int parser (char *buf, unsigned int len, char *search ,void (*callback)()) {
 	int cursor = 0;
 	int i = 0;
-	HTTP_Node * res;
 	HTTP_Node * root = malloc ( sizeof ( HTTP_Node ) );
 	HTTP_Node * nodes[20];
 	int result = -1, nbResult;
@@ -31,7 +26,8 @@ int parser (char *buf, unsigned int len, char *search ,void (*callback)()) {
         copierChaine(buf, string,
                          (nodes[i]->beg), (nodes[i]->end)+1);
 		// Appel du callback
-		callback(string, (unsigned)(nodes[i]->end - nodes[i]->beg) );
+		callback(string, (unsigned) (nodes[i]->end - nodes[i]->beg) );
+
 	}
 
     // Liberation de la memoire
