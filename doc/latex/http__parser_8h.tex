@@ -1,4 +1,4 @@
-\hypertarget{http__parser_8h}{}\subsection{Référence du fichier src/http\+\_\+parser.h}
+\hypertarget{http__parser_8h}{}\section{Référence du fichier src/http\+\_\+parser.h}
 \label{http__parser_8h}\index{src/http\+\_\+parser.\+h@{src/http\+\_\+parser.\+h}}
 
 
@@ -9,7 +9,7 @@ Parseur H\+T\+TP 1.\+0.
 {\ttfamily \#include $<$stdlib.\+h$>$}\\*
 {\ttfamily \#include $<$string.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}http\+\_\+node.\+h\char`\"{}}\\*
-\subsubsection*{Macros}
+\subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \#define {\bfseries SP}~\textquotesingle{} \textquotesingle{}\hypertarget{http__parser_8h_aecd69d9a67487cc45c38eb184c50538a}{}\label{http__parser_8h_aecd69d9a67487cc45c38eb184c50538a}
@@ -21,7 +21,7 @@ Parseur H\+T\+TP 1.\+0.
 \#define {\bfseries D\+E\+B\+U\+G\+\_\+\+P\+R\+I\+NT}(x)~printf(x)\hypertarget{http__parser_8h_af6551f0b4c3964c3128f808e7bf987c7}{}\label{http__parser_8h_af6551f0b4c3964c3128f808e7bf987c7}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Fonctions}
+\subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
 int \hyperlink{http__parser_8h_aee8b0a4a4baa2c61dec7c57f45f31f98}{parse\+\_\+\+H\+T\+T\+P\+\_\+message} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
@@ -74,7 +74,7 @@ int \hyperlink{http__parser_8h_abfc102efdae7ecfa0127f2af59153eed}{is\+Unreserved
 \begin{DoxyCompactList}\small\item\em Fonction pour vérifier si on a bien un Unreserved. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsubsection{Description détaillée}
+\subsection{Description détaillée}
 Parseur H\+T\+TP 1.\+0. 
 
 \begin{DoxyAuthor}{Auteur}
@@ -85,10 +85,10 @@ R. Vidal / A. Lorber / T. Jacumin
 \end{DoxyVersion}
 
 
-\subsubsection{Documentation des fonctions}
+\subsection{Documentation des fonctions}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!is\+D\+I\+G\+IT@{is\+D\+I\+G\+IT}}
 \index{is\+D\+I\+G\+IT@{is\+D\+I\+G\+IT}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{is\+D\+I\+G\+I\+T(char $\ast$request, int $\ast$cursor)}{isDIGIT(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+D\+I\+G\+IT (
+\subsubsection[{\texorpdfstring{is\+D\+I\+G\+I\+T(char $\ast$request, int $\ast$cursor)}{isDIGIT(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+D\+I\+G\+IT (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor}
@@ -110,7 +110,7 @@ Retourne 1 si le prochain caractere est un D\+I\+G\+IT, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!is\+Fieldvchar@{is\+Fieldvchar}}
 \index{is\+Fieldvchar@{is\+Fieldvchar}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{is\+Fieldvchar(char $\ast$request, int $\ast$cursor)}{isFieldvchar(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Fieldvchar (
+\subsubsection[{\texorpdfstring{is\+Fieldvchar(char $\ast$request, int $\ast$cursor)}{isFieldvchar(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Fieldvchar (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor}
@@ -132,7 +132,7 @@ Retourne 1 si la caractere de la requête est un field-\/vchar, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!is\+Obstext@{is\+Obstext}}
 \index{is\+Obstext@{is\+Obstext}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{is\+Obstext(char $\ast$request, int $\ast$cursor)}{isObstext(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Obstext (
+\subsubsection[{\texorpdfstring{is\+Obstext(char $\ast$request, int $\ast$cursor)}{isObstext(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Obstext (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor}
@@ -154,7 +154,7 @@ Retourne 1 si le caractere de la requete est un Obs\+Text, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!is\+Tchar@{is\+Tchar}}
 \index{is\+Tchar@{is\+Tchar}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{is\+Tchar(char $\ast$request, int $\ast$cursor)}{isTchar(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Tchar (
+\subsubsection[{\texorpdfstring{is\+Tchar(char $\ast$request, int $\ast$cursor)}{isTchar(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Tchar (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor}
@@ -176,7 +176,7 @@ Retourne 1 si le caractere de la requete est un T\+C\+H\+AR, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!is\+Unreserved@{is\+Unreserved}}
 \index{is\+Unreserved@{is\+Unreserved}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{is\+Unreserved(char $\ast$request, int $\ast$cursor)}{isUnreserved(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Unreserved (
+\subsubsection[{\texorpdfstring{is\+Unreserved(char $\ast$request, int $\ast$cursor)}{isUnreserved(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Unreserved (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor}
@@ -198,7 +198,7 @@ Retourne 1 si la caractere de la requête est un Unreserved, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!is\+V\+C\+H\+AR@{is\+V\+C\+H\+AR}}
 \index{is\+V\+C\+H\+AR@{is\+V\+C\+H\+AR}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{is\+V\+C\+H\+A\+R(char $\ast$request, int $\ast$cursor)}{isVCHAR(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+V\+C\+H\+AR (
+\subsubsection[{\texorpdfstring{is\+V\+C\+H\+A\+R(char $\ast$request, int $\ast$cursor)}{isVCHAR(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+V\+C\+H\+AR (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor}
@@ -220,7 +220,7 @@ Retourne 1 si le caractere de la requete est un V\+C\+H\+AR, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+absolute\+\_\+form@{parse\+\_\+absolute\+\_\+form}}
 \index{parse\+\_\+absolute\+\_\+form@{parse\+\_\+absolute\+\_\+form}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+absolute\+\_\+form(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_absolute_form(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+absolute\+\_\+form (
+\subsubsection[{\texorpdfstring{parse\+\_\+absolute\+\_\+form(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_absolute_form(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+absolute\+\_\+form (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -245,7 +245,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+authority\+\_\+form@{parse\+\_\+authority\+\_\+form}}
 \index{parse\+\_\+authority\+\_\+form@{parse\+\_\+authority\+\_\+form}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+authority\+\_\+form(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_authority_form(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+authority\+\_\+form (
+\subsubsection[{\texorpdfstring{parse\+\_\+authority\+\_\+form(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_authority_form(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+authority\+\_\+form (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -270,7 +270,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+field\+\_\+content@{parse\+\_\+field\+\_\+content}}
 \index{parse\+\_\+field\+\_\+content@{parse\+\_\+field\+\_\+content}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+field\+\_\+content(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+name, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+value)}{parse_field_content(char *request, int *cursor, HTTP_Node *header_field, HTTP_Node *field_name, HTTP_Node *field_value)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+field\+\_\+content (
+\subsubsection[{\texorpdfstring{parse\+\_\+field\+\_\+content(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+name, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+value)}{parse_field_content(char *request, int *cursor, HTTP_Node *header_field, HTTP_Node *field_name, HTTP_Node *field_value)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+field\+\_\+content (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -301,7 +301,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+field\+\_\+name@{parse\+\_\+field\+\_\+name}}
 \index{parse\+\_\+field\+\_\+name@{parse\+\_\+field\+\_\+name}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+field\+\_\+name(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+name, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+value)}{parse_field_name(char *request, int *cursor, HTTP_Node *header_field, HTTP_Node *field_name, HTTP_Node *field_value)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+field\+\_\+name (
+\subsubsection[{\texorpdfstring{parse\+\_\+field\+\_\+name(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+name, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+value)}{parse_field_name(char *request, int *cursor, HTTP_Node *header_field, HTTP_Node *field_name, HTTP_Node *field_value)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+field\+\_\+name (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -332,7 +332,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+field\+\_\+value@{parse\+\_\+field\+\_\+value}}
 \index{parse\+\_\+field\+\_\+value@{parse\+\_\+field\+\_\+value}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+field\+\_\+value(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+name, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+value)}{parse_field_value(char *request, int *cursor, HTTP_Node *header_field, HTTP_Node *field_name, HTTP_Node *field_value)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+field\+\_\+value (
+\subsubsection[{\texorpdfstring{parse\+\_\+field\+\_\+value(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+name, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+value)}{parse_field_value(char *request, int *cursor, HTTP_Node *header_field, HTTP_Node *field_name, HTTP_Node *field_value)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+field\+\_\+value (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -363,7 +363,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+header\+\_\+field@{parse\+\_\+header\+\_\+field}}
 \index{parse\+\_\+header\+\_\+field@{parse\+\_\+header\+\_\+field}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+header\+\_\+field(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field)}{parse_header_field(char *request, int *cursor, HTTP_Node *header_field)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+header\+\_\+field (
+\subsubsection[{\texorpdfstring{parse\+\_\+header\+\_\+field(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field)}{parse_header_field(char *request, int *cursor, HTTP_Node *header_field)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+header\+\_\+field (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -388,7 +388,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+\+H\+T\+T\+P\+\_\+message@{parse\+\_\+\+H\+T\+T\+P\+\_\+message}}
 \index{parse\+\_\+\+H\+T\+T\+P\+\_\+message@{parse\+\_\+\+H\+T\+T\+P\+\_\+message}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+\+H\+T\+T\+P\+\_\+message(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_HTTP_message(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+\+H\+T\+T\+P\+\_\+message (
+\subsubsection[{\texorpdfstring{parse\+\_\+\+H\+T\+T\+P\+\_\+message(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_HTTP_message(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+\+H\+T\+T\+P\+\_\+message (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -413,7 +413,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+\+I\+Pv4@{parse\+\_\+\+I\+Pv4}}
 \index{parse\+\_\+\+I\+Pv4@{parse\+\_\+\+I\+Pv4}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+\+I\+Pv4(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_IPv4(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+\+I\+Pv4 (
+\subsubsection[{\texorpdfstring{parse\+\_\+\+I\+Pv4(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_IPv4(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+\+I\+Pv4 (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -438,7 +438,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+message\+\_\+body@{parse\+\_\+message\+\_\+body}}
 \index{parse\+\_\+message\+\_\+body@{parse\+\_\+message\+\_\+body}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+message\+\_\+body(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_message_body(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+message\+\_\+body (
+\subsubsection[{\texorpdfstring{parse\+\_\+message\+\_\+body(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_message_body(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+message\+\_\+body (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -463,7 +463,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+obs\+\_\+fold@{parse\+\_\+obs\+\_\+fold}}
 \index{parse\+\_\+obs\+\_\+fold@{parse\+\_\+obs\+\_\+fold}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+obs\+\_\+fold(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+name, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+value)}{parse_obs_fold(char *request, int *cursor, HTTP_Node *header_field, HTTP_Node *field_name, HTTP_Node *field_value)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+obs\+\_\+fold (
+\subsubsection[{\texorpdfstring{parse\+\_\+obs\+\_\+fold(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+name, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+value)}{parse_obs_fold(char *request, int *cursor, HTTP_Node *header_field, HTTP_Node *field_name, HTTP_Node *field_value)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+obs\+\_\+fold (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -494,7 +494,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+origin\+\_\+form@{parse\+\_\+origin\+\_\+form}}
 \index{parse\+\_\+origin\+\_\+form@{parse\+\_\+origin\+\_\+form}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+origin\+\_\+form(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_origin_form(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+origin\+\_\+form (
+\subsubsection[{\texorpdfstring{parse\+\_\+origin\+\_\+form(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_origin_form(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+origin\+\_\+form (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -519,7 +519,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+regname@{parse\+\_\+regname}}
 \index{parse\+\_\+regname@{parse\+\_\+regname}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+regname(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_regname(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+regname (
+\subsubsection[{\texorpdfstring{parse\+\_\+regname(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_regname(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+regname (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -544,7 +544,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+request\+\_\+line@{parse\+\_\+request\+\_\+line}}
 \index{parse\+\_\+request\+\_\+line@{parse\+\_\+request\+\_\+line}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+request\+\_\+line(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_request_line(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+request\+\_\+line (
+\subsubsection[{\texorpdfstring{parse\+\_\+request\+\_\+line(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_request_line(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+request\+\_\+line (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -569,7 +569,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+request\+\_\+target@{parse\+\_\+request\+\_\+target}}
 \index{parse\+\_\+request\+\_\+target@{parse\+\_\+request\+\_\+target}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+request\+\_\+target(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_request_target(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+request\+\_\+target (
+\subsubsection[{\texorpdfstring{parse\+\_\+request\+\_\+target(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_request_target(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+request\+\_\+target (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -594,7 +594,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+start\+\_\+line@{parse\+\_\+start\+\_\+line}}
 \index{parse\+\_\+start\+\_\+line@{parse\+\_\+start\+\_\+line}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+start\+\_\+line(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_start_line(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+start\+\_\+line (
+\subsubsection[{\texorpdfstring{parse\+\_\+start\+\_\+line(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_start_line(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+start\+\_\+line (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -619,7 +619,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+status\+\_\+line@{parse\+\_\+status\+\_\+line}}
 \index{parse\+\_\+status\+\_\+line@{parse\+\_\+status\+\_\+line}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+status\+\_\+line(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_status_line(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+status\+\_\+line (
+\subsubsection[{\texorpdfstring{parse\+\_\+status\+\_\+line(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_status_line(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+status\+\_\+line (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
@@ -644,7 +644,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+string@{parse\+\_\+string}}
 \index{parse\+\_\+string@{parse\+\_\+string}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+string(char $\ast$str, int $\ast$cursor, char $\ast$cmp\+\_\+str)}{parse_string(char *str, int *cursor, char *cmp_str)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+string (
+\subsubsection[{\texorpdfstring{parse\+\_\+string(char $\ast$str, int $\ast$cursor, char $\ast$cmp\+\_\+str)}{parse_string(char *str, int *cursor, char *cmp_str)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+string (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{str, }
 \item[{int $\ast$}]{cursor, }
@@ -669,7 +669,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 \end{DoxyReturn}
 \index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+user\+\_\+info@{parse\+\_\+user\+\_\+info}}
 \index{parse\+\_\+user\+\_\+info@{parse\+\_\+user\+\_\+info}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\paragraph[{\texorpdfstring{parse\+\_\+user\+\_\+info(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_user_info(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+user\+\_\+info (
+\subsubsection[{\texorpdfstring{parse\+\_\+user\+\_\+info(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_user_info(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+user\+\_\+info (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
