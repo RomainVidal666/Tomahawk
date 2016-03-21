@@ -355,14 +355,13 @@ int parse_authority_form ( char * request, int * cursor, HTTP_Node * node ) {
 				} else if ( request [ *cursor ] == ' ' ) {
 					etat = 3;
 				}
-			} else if ( parse_regname ( request, cursor, ipv4 ) ) {
-				
+			} else if ( parse_regname ( request, cursor, regname ) ) {
 				addChild_HTTP_Node ( node, regname );
 				if ( request [ *cursor ] == ':' ) { /* vers port */
 					etat = 2;
 				} else if ( request [ *cursor ] == ' ' ) {
 					etat = 3;
-				}
+				} 
 			} else {
 				*cursor = old_cursor;
 				return 0;
@@ -676,13 +675,13 @@ int isFieldvchar ( char * request, int * cursor ) {
 
 int isUnreserved ( char * request, int * cursor ) {
 	if ( ( request [ (*cursor) ] >= 'a' ) && ( request [ (*cursor) ] <= 'z' )
-	  && ( request [ (*cursor) ] >= 'A' ) && ( request [ (*cursor) ] <= 'Z' )  ) { /* ALPHA */
+	  || ( request [ (*cursor) ] >= 'A' ) && ( request [ (*cursor) ] <= 'Z' )  ) { /* ALPHA */
 	  	(*cursor)++;
 		return 1;
 	} else if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ) { /* DIGIT */
 		(*cursor)++;
 		return 1;	
-	} else if ( ( request [ (*cursor) ] == ' ' ) || ( request [ (*cursor) ] == '.' || ( request [ (*cursor) ] == '_' ) || ( request [ (*cursor) ] == '~' ) ) ) {
+	} else if ( ( request [ (*cursor) ] == '.' ) || ( request [ (*cursor) ] == '_' ) || ( request [ (*cursor) ] == '~' ) ) {
 		(*cursor)++;
 		return 1;
 	}
