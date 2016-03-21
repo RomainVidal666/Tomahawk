@@ -22,8 +22,8 @@
  * \param Callback fonction de callback.
  *
  * \return -1 si le message est valide syntaxiquement, sinon un entier
- * 		correspondant à l'indice dans la chaine buf ou le parsuer à
- * 		détecter une erreur syntaxique.
+ * 		correspondant à l'indice dans la chaine buf ou le parseur a
+ * 		détecté une erreur syntaxique.
  */
 int parser (char *buf,unsigned int len,char *search, void (*callback)());
 
