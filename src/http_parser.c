@@ -274,19 +274,17 @@ int parse_absolute_form ( char * request, int * cursor, HTTP_Node * node ) {
 	node->beg = *cursor;
 	scheme->beg = *cursor;
 	while ( ( request [*cursor] != '\0' ) && ( request [*cursor] != SP ) ) {
+		printf("%c\n", request[*cursor] );
 		if ( etat == 0 ) { /* scheme */
-			if ( request [*cursor] >= '0' && request [*cursor] <= '9' ) { /* ALPHA ICI */
-				etat = 1;
+			if ( ( request [*cursor] >= 'a' && request [*cursor] <= 'z' ) || ( request [*cursor] >= 'A' && request [*cursor] <= 'Z' ) ) {
+				etat = 0;
+				scheme->end = (*cursor);
+			} else if ( request [*cursor] == ':' ) {
+				etat = 2;
 				printf ( "-- scheme valide\n" );
 			} else {
 				etat = -1;
 			}
-		} else if ( etat == 1 ) { /* scheme 2 */
-			if ( request [*cursor] == ':' ) {
-				scheme->end = (*cursor);
-				etat = 2;
-			}
-
 		} else if ( etat == 2 ) {
 			if ( ( parse_string ( request, cursor ,"//" ) ) && ( parse_authority_form ( request, cursor, authority_form ) ) ) {
 				if ( request [*cursor] == '?' ) {
