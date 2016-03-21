@@ -12,7 +12,7 @@ void callback(char* string, int len) {
 int main ( int argc, char * argv [] ) {
 	int cursor = 0;
 	HTTP_Node * http_message = malloc ( sizeof ( HTTP_Node ) );
-	
+
 	//Request 1->6 OK
 	//Request 7->9 FAUX car SP après le field-content en fin de ligne
 	//Request 10 FAUX car version A.1
@@ -33,7 +33,7 @@ int main ( int argc, char * argv [] ) {
 
 	}
 
-	int nb = parser (request, (unsigned)100, "header-field" ,callback);
+	//int nb = parser (request, (unsigned)100, "header-field" ,callback);
 
 	free_HTTP_Tree ( http_message );
 

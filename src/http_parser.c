@@ -278,7 +278,8 @@ int parse_absolute_form ( char * request, int * cursor, HTTP_Node * node ) {
 	scheme->beg = *cursor;
 	while ( ( request [*cursor] != '\0' ) && ( request [*cursor] != SP ) ) {
 		if ( etat == 0 ) { /* scheme */
-			if ( request [*cursor] >= '0' && request [*cursor] <= '9' ) { /* ALPHA ICI */
+			if ( ( request [*cursor] >= 'a' ) && ( request [*cursor] <= 'z' ) 
+			  || ( request [*cursor] >= 'A' ) && ( request [*cursor] <= 'Z' )  ) {
 				etat = 1;
 				DEBUG_PRINT ( "-- scheme valide\n" );
 			} else {

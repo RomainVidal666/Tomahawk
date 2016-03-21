@@ -1,4 +1,4 @@
-\hypertarget{api_8h}{}\section{Référence du fichier src/api.h}
+\hypertarget{api_8h}{}\subsection{Référence du fichier src/api.h}
 \label{api_8h}\index{src/api.\+h@{src/api.\+h}}
 
 
@@ -8,7 +8,7 @@ A\+PI du Parseur H\+T\+TP 1.\+0.
 {\ttfamily \#include $<$stdio.\+h$>$}\\*
 {\ttfamily \#include $<$stdlib.\+h$>$}\\*
 {\ttfamily \#include $<$string.\+h$>$}\\*
-\subsection*{Fonctions}
+\subsubsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
 int \hyperlink{api_8h_a0341935e4ae6a949146e265351fb52bb}{parser} (char $\ast$buf, unsigned int len, char $\ast$search, void($\ast$callback)())
@@ -17,7 +17,7 @@ char $\ast$ \hyperlink{api_8h_adcb8c89cc801d761e903dafa20454b30}{copier\+Chaine}
 \begin{DoxyCompactList}\small\item\em Fonction permettant de recopier une sous-\/chaine. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Description détaillée}
+\subsubsection{Description détaillée}
 A\+PI du Parseur H\+T\+TP 1.\+0. 
 
 \begin{DoxyAuthor}{Auteur}
@@ -28,10 +28,10 @@ R. Vidal / A. Lorber / T. Jacumin
 \end{DoxyVersion}
 
 
-\subsection{Documentation des fonctions}
+\subsubsection{Documentation des fonctions}
 \index{api.\+h@{api.\+h}!copier\+Chaine@{copier\+Chaine}}
 \index{copier\+Chaine@{copier\+Chaine}!api.\+h@{api.\+h}}
-\subsubsection[{\texorpdfstring{copier\+Chaine(char $\ast$buf, char $\ast$res, int beg, int end)}{copierChaine(char *buf, char *res, int beg, int end)}}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ copier\+Chaine (
+\paragraph[{\texorpdfstring{copier\+Chaine(char $\ast$buf, char $\ast$res, int beg, int end)}{copierChaine(char *buf, char *res, int beg, int end)}}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ copier\+Chaine (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{buf, }
 \item[{char $\ast$}]{res, }
@@ -59,7 +59,7 @@ Un pointeur vers res.
 \end{DoxyReturn}
 \index{api.\+h@{api.\+h}!parser@{parser}}
 \index{parser@{parser}!api.\+h@{api.\+h}}
-\subsubsection[{\texorpdfstring{parser(char $\ast$buf, unsigned int len, char $\ast$search, void($\ast$callback)())}{parser(char *buf, unsigned int len, char *search, void(*callback)())}}]{\setlength{\rightskip}{0pt plus 5cm}int parser (
+\paragraph[{\texorpdfstring{parser(char $\ast$buf, unsigned int len, char $\ast$search, void($\ast$callback)())}{parser(char *buf, unsigned int len, char *search, void(*callback)())}}]{\setlength{\rightskip}{0pt plus 5cm}int parser (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{buf, }
 \item[{unsigned int}]{len, }
@@ -83,5 +83,5 @@ Fonction demande par l\textquotesingle{}A\+PI de test.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Renvoie}
--\/1 si le message est valide syntaxiquement, sinon un entier correspondant à l\textquotesingle{}indice dans la chaine buf ou le parseur a détecté une erreur syntaxique. 
+-\/1 si le message est valide syntaxiquement, sinon un entier correspondant à l\textquotesingle{}indice dans la chaine buf ou le parsuer à détecter une erreur syntaxique. 
 \end{DoxyReturn}
