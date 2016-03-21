@@ -83,4 +83,8 @@ HTTP_Node* found_HTTP_Node ( HTTP_Node * root, char* string );
  */
 void foundAll_HTTP_Node ( HTTP_Node * root, char* string, int* nbFound, HTTP_Node** result );
 
+void print_HTTP_Node ( char * request, HTTP_Node * node );
+
+void print_HTTP_Tree ( char * request, HTTP_Node * root, int level );
+
 #endif

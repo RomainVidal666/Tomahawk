@@ -96,3 +96,41 @@ void foundAll_HTTP_Node_rec ( HTTP_Node * root, char* string, HTTP_Node** result
 		foundAll_HTTP_Node_rec(root->childs[i], string, result, nbFound);
 	}
 }
+
+
+void print_HTTP_Node ( char * request, HTTP_Node * node ) {
+	if ( node ) {
+		int i;
+		printf ( "\"" );
+		for ( i = node->beg; i < node->end; i++ )
+			printf ( "%c", request [i] );
+
+		printf ( "\"\n" );
+	} else {
+		printf ( "ERREUR : Node non initialisé\n" );
+	}
+
+}
+
+void print_HTTP_Tree ( char * request, HTTP_Node * root, int level ) {
+	int i;
+	int j;
+	if ( root ) {
+
+		/* Mise en forme et affichage */
+		for ( j = 0; j < level * 2; j++ )
+			printf ( " " );
+
+		if ( level == 0 ) {
+			printf ( " %s : ", root->name );
+		} else {
+			printf ( "`--> %s : ", root->name );
+		}
+		print_HTTP_Node ( request, root );
+
+		/* Tratement des fils */
+		for ( i = 0; i < root->nb_childs; i++ ) {
+			print_HTTP_Tree ( request, root->childs [i], level + 1 );
+		}
+	}
+}
