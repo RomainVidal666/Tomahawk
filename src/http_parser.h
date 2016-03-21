@@ -155,6 +155,10 @@ int isObstext ( char * request, int * cursor );
  */
 int isFieldvchar ( char * request, int * cursor );
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/header_field
 
 int isUnreserved ( char * request, int * cursor );
 
@@ -163,6 +167,10 @@ int isUnreserved ( char * request, int * cursor );
 
 int isUnreserved ( char * request, int * cursor );
 
+<<<<<<< HEAD
 
+>>>>>>> refs/remotes/origin/header_field
+=======
+>>>>>>> refs/remotes/origin/master
 >>>>>>> refs/remotes/origin/header_field
 #endif
