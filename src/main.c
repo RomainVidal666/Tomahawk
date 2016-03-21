@@ -12,7 +12,9 @@ int main ( int argc, char * argv [] ) {
 
 	if ( parse_HTTP_message ( request, &cursor, http_message ) ) { //param2:rien\n\r 	\n\r
 		printf ( "La requete est valide \n" );
+
 		print_HTTP_Tree ( request, http_message, 0 );
+
 	}
 	
 	free_HTTP_Tree ( http_message );

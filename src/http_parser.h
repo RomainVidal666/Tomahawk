@@ -155,8 +155,13 @@ int isObstext ( char * request, int * cursor );
  */
 int isFieldvchar ( char * request, int * cursor );
 
+<<<<<<< HEAD
+int isUnreserved ( char * request, int * cursor );
+
+=======
 
 int isUnreserved ( char * request, int * cursor );
 
 
+>>>>>>> refs/remotes/origin/master
 #endif
