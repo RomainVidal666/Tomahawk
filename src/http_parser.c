@@ -18,6 +18,8 @@ int parse_HTTP_message ( char * request, int * cursor, HTTP_Node * node ) {
 		addChild_HTTP_Node ( node, header_field );
 		header_field -> beg = *cursor;
 
+
+
 		if ( parse_header_field ( request, cursor, header_field ) ) { // On parse le header-field
 			
 			printf ( "Le header-field est valide\n" );
@@ -192,6 +194,7 @@ int parse_request_target ( char * request, int * cursor, HTTP_Node * node ) {
 		addChild_HTTP_Node ( node, absolute_form );
 		free_HTTP_Node ( origin_form );
 		free_HTTP_Node ( authority_form );
+		(*cursor) --;
 		return 1;
 	} else if ( parse_authority_form ( request, cursor, authority_form ) ) {
 		node->end = *cursor;
