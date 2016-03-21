@@ -45,7 +45,7 @@ int parse_start_line ( char * request, int * cursor, HTTP_Node * node ) {
 	if ( parse_status_line ( request, cursor, node ) ) {
 		printf ( "- status-line valide\n" );
 		return 1;
-	} else if ( parse_request_target ( request, cursor, node ) ) {
+	} else if ( parse_request_line ( request, cursor, node ) ) {
 		printf("- request-target valide\n");
 		return 1;
 	}
@@ -53,7 +53,7 @@ int parse_start_line ( char * request, int * cursor, HTTP_Node * node ) {
 	return 0;
 }
 
-int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) { /* TO DO : annuler les déplacement du curseur si le mot n'est pas accépté */
+int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) { /* TO DO : annuler les déplacement du curseur si le mot n'est pas accepté */
 	int requestlength = strlen ( request );
 	int end_status_line = 0;
 	
@@ -85,8 +85,154 @@ int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) { /* TO
 	return 0;
 }
 
+int parse_request_line ( char * request, int * cursor, HTTP_Node * node ) {
+	isVCHAR ( request, cursor ); /* au moins 1 TCHAR */
+	while ( ( request [*cursor] != SP ) && ( isVCHAR ( request, cursor ) ) ); /* TCHAR ici est non pas VCHAR */
+
+	if ( request [*cursor] == SP ) { /* ok pour method */
+		printf("- method valide\n");
+		(*cursor) ++;
+		if ( parse_request_target ( request, cursor, node ) ) {
+			if ( parse_string ( request, cursor, "HTTP/" ) && /* HTTP-version */
+				 isDIGIT ( request, cursor ) &&  
+				 parse_string ( request, cursor, "." ) &&
+				 isDIGIT ( request, cursor ) ) {
+				if ( parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+					printf ( "- HTTP-version valide\n" );
+
+					return 1;
+				}
+			}
+		}
+	}
+
+	return 0;
+}
+
 int parse_request_target ( char * request, int * cursor, HTTP_Node * node ) {
-	return 1;
+	if ( ( parse_origin_form ( request, cursor, node ) )
+	  || ( parse_absolute_form ( request, cursor, node ) )
+	  || ( parse_authority_form ( request, cursor, node ) ) ) {
+		return 1;
+	}
+	return 0;
+}
+
+int parse_origin_form ( char * request, int * cursor, HTTP_Node * node ) {
+	int etat = 0;
+	int requestlength = strlen ( request );
+	int old_cursor = *cursor;
+
+	if ( parse_string ( request, cursor, "/" ) ) {
+		while ( ( *cursor < requestlength ) && ( request [*cursor] != SP ) ) {
+			if ( etat == 0 ) { /* abs_path2 */
+				if ( request [*cursor] == '?' ) etat = 1;
+			} else if ( etat == 1 ) { /* query */
+
+			}
+			(*cursor)++;
+		}
+
+		if ( request [*cursor] == SP ) {/* mot accepté */
+			(*cursor)++;
+			printf ( "-- origin-form valide\n" );
+			return 1;
+		}
+	} 	
+
+	*cursor = old_cursor;
+	return 0; 
+}
+
+int parse_absolute_form ( char * request, int * cursor, HTTP_Node * node ) {
+	return 0;
+}
+
+int parse_authority_form ( char * request, int * cursor, HTTP_Node * node ) {
+	int etat = 0;
+	int requestlength = strlen ( request );
+	int old_cursor = *cursor;
+
+	while ( ( *cursor < requestlength ) && ( request [*cursor] != SP ) ) {
+		if ( etat == 0 ) { /* authority_1 */
+			if ( parse_IPv4 ( request, cursor, node ) ) {
+				etat = 1;
+			} else {
+				return 0;
+			}
+
+		} else if ( etat == 1 ) { /* query */
+			return 1;
+		}
+		(*cursor)++;
+	}
+
+	*cursor = old_cursor;
+	return 0;
+}
+
+int parse_IPv4 ( char * request, int * cursor, HTTP_Node * node ) {
+	int etat = 0;
+	int requestlength = strlen ( request );
+	int old_cursor = *cursor;
+	int nb_digit = 0;
+
+	while ( ( *cursor < requestlength ) && ( request [*cursor] != SP ) && ( request [*cursor] != ':' ) && ( request [*cursor] != '?' ) ) {
+		if ( etat == 0 ) { /* 1er groupe */ 
+			if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ) {
+				nb_digit ++;
+			} else if ( request [ (*cursor) ] == '.' ) {
+				if ( ( nb_digit > 0 ) && ( nb_digit <= 3 ) ) {
+					nb_digit = 0;
+					etat = 1;
+				} else { /* nombre incorrect de digits */
+					return 0;
+				}
+			} else {
+				return 0;
+			}
+		} else if ( etat == 1 ) { /* 2eme groupe */
+			if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ) {
+				nb_digit ++;
+			} else if ( request [ (*cursor) ] == '.' ) {
+				if ( ( nb_digit > 0 ) && ( nb_digit <= 3 ) ) {
+					nb_digit = 0;
+					etat = 2;
+				} else { /* nombre incorrect de digits */
+					return 0;
+				}
+			} else {
+				return 0;
+			}
+		} else if ( etat == 2 ) { /* 3eme groupe */
+			if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ) {
+				nb_digit ++;
+			} else if ( request [ (*cursor) ] == '.' ) {
+				if ( ( nb_digit > 0 ) && ( nb_digit <= 3 ) ) {
+					nb_digit = 0;
+					etat = 3;
+				} else { /* nombre incorrect de digits */
+					return 0;
+				}
+			} else {
+				return 0;
+			}
+		} else if ( etat == 3 ) { /* 4eme groupe */
+			if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ) {
+				nb_digit ++;
+			} else {
+				return 0;
+			}
+		}
+		(*cursor)++;
+	}
+
+	if ( ( nb_digit > 0 ) && ( nb_digit <= 3 ) && ( etat == 3 ) ) {
+		printf ( "--- IPv4 validée\n" );
+		return 1;
+	}
+	*cursor = old_cursor;
+	return 0;
 }
 
 int parse_header_field ( char * request, int * cursor, HTTP_Node * header_field ) {
@@ -232,6 +378,7 @@ int isDIGIT ( char * request, int * cursor ) {
 	return 0;
 }
 
+<<<<<<< HEAD
 int isTchar ( char * request, int * cursor ) {
 	if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ||	/*DIGIT*/	/*tchar*/
 		 ( request [ (*cursor) ] >= 'a') && ( request [ (*cursor) ] <= 'z' ) ||	/*ALPHA*/
@@ -263,5 +410,29 @@ int isFieldvchar ( char * request, int * cursor ) {
 	if ( isObstext ( request, cursor ) || isVCHAR ( request, cursor ) ) {
 		return 1;
 	}
+=======
+int isVCHAR ( char * request, int * cursor ) {
+	if ( ( request [ (*cursor) ] >= 0x21 ) && ( request [ (*cursor) ] <= 0x7e ) ) {
+		(*cursor)++;
+		return 1;
+	}
+	
+	return 0;
+}
+
+int isUnreserved ( char * request, int * cursor ) {
+	if ( ( request [ (*cursor) ] >= 'a' ) && ( request [ (*cursor) ] <= 'z' )
+	  && ( request [ (*cursor) ] >= 'A' ) && ( request [ (*cursor) ] <= 'Z' )  ) { /* ALPHA */
+	  	(*cursor)++;
+		return 1;
+	} else if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ) { /* DIGIT */
+		(*cursor)++;
+		return 1;	
+	} else if ( ( request [ (*cursor) ] == ' ' ) || ( request [ (*cursor) ] == '.' || ( request [ (*cursor) ] == '_' ) || ( request [ (*cursor) ] == '~' ) ) ) {
+		(*cursor)++;
+		return 1;
+	}
+	
+>>>>>>> refs/remotes/origin/master
 	return 0;
 }

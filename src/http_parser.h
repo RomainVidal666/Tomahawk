@@ -14,6 +14,8 @@
 
 #include "http_node.h"
 
+ #define SP ' '
+
 /**
  * \fn int parse_HTTP_message ( char * request, int * cursor, HTTP_Node * node )
  * \brief Fonction de création d'une nouvelle instance d'un objet HTTP_Node.
@@ -76,6 +78,16 @@ int parse_message_body ( char * request, int * cursor, HTTP_Node * node );
 
 int parse_request_target ( char * request, int * cursor, HTTP_Node * node );
 
+int parse_request_line ( char * request, int * cursor, HTTP_Node * node );
+
+int parse_origin_form ( char * request, int * cursor, HTTP_Node * node );
+
+int parse_absolute_form ( char * request, int * cursor, HTTP_Node * node );
+
+int parse_authority_form ( char * request, int * cursor, HTTP_Node * node );
+
+int parse_IPv4 ( char * request, int * cursor, HTTP_Node * node );
+
 /**
  * \fn int parse_string ( char * str, int * dep, char * cmp_str )
  * \brief Fonction de création d'une nouvelle instance d'un objet HTTP_Node.
@@ -99,6 +111,7 @@ int parse_string ( char * str, int * cursor, char * cmp_str );
  */
 int isDIGIT ( char * request, int * cursor );
 
+<<<<<<< HEAD
 /**
  * \fn int parse_string ( char * str, int * dep, char * cmp_str )
  * \brief Fonction de création d'une nouvelle instance d'un objet HTTP_Node.
@@ -142,4 +155,10 @@ int isObstext ( char * request, int * cursor );
  * \return Retourne 1 si la caractere de la requête est un field-vchar, 0 sinon.
  */
 int isFieldvchar ( char * request, int * cursor );
+=======
+int isVCHAR ( char * request, int * cursor );
+
+int isUnreserved ( char * request, int * cursor );
+
+>>>>>>> refs/remotes/origin/master
 #endif

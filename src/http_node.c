@@ -24,7 +24,7 @@ void addChild_HTTP_Node ( HTTP_Node * node, HTTP_Node * child ) {
 	}
 
 	node->childs = childs; // On installe le nouveau tableau sur le node
-	node->nb_childs ++; 
+	node->nb_childs ++;
 }
 
 void free_HTTP_Node ( HTTP_Node * node ) {
@@ -42,4 +42,57 @@ void free_HTTP_Tree ( HTTP_Node * root ) {
 	}
 
 	free_HTTP_Node ( root );
+}
+
+HTTP_Node* found_HTTP_Node ( HTTP_Node * root, char* string ) {
+	HTTP_Node* result;
+	int i = 0;
+	// On regarde le nom
+	if (!strcmp(root->name, string)){
+		return root;
+	}
+	// Si ce n'est pas lui on parcourt ses fils
+	for(i = 0; i < root->nb_childs; i++ ) {
+		// pour chaque fils on recherche à partir de lui
+		result = found_HTTP_Node(root->childs[i], string);
+
+		// si trouvé on arrete
+		if (result != NULL) {
+			return result;
+		}
+	}
+	// Pas trouvé donc on retourne NULL;
+	return NULL;
+}
+
+void foundAll_HTTP_Node ( HTTP_Node * root, char* string, int* nbFound, HTTP_Node** result ) {
+	*nbFound = 0;
+	int i = 0;
+
+	// On regarde le nom et on l'ajoute au besoin
+	if (!strcmp(root->name, string)) {
+		 result[0] = root;
+		 *nbFound = 1;
+	}
+
+	// On parcourt ses fils
+	for(i = 0; i < root->nb_childs; i++ ) {
+		// On recherche à partir de chacun de ces fils.
+		foundAll_HTTP_Node_rec(root->childs[i], string, &result, nbFound);
+	}
+}
+
+void foundAll_HTTP_Node_rec ( HTTP_Node * root, char* string, HTTP_Node** result, int* nbFound ) {
+    int i = 0;
+
+	// On regarde le nom
+	if (!strcmp(root->name, string)) {
+		// Si il concorde on l'ajoute au tableau
+		result[++(*nbFound)] = root;
+	}
+	// On parcourt ses fils
+	for(i = 0; i < root->nb_childs; i++ ) {
+		// On recherche à partir de chacun de ces fils.
+		foundAll_HTTP_Node_rec(root->childs[i], string, result, nbFound);
+	}
 }
