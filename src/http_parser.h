@@ -62,7 +62,61 @@ int parse_status_line ( char * request, int * cursor, HTTP_Node * node );
  * 
  * \return Retourne 1 si la requête est correcte, 0 sinon.
  */
-int parse_header_field ( char * request, int * cursor, HTTP_Node * node );
+int parse_header_field ( char * request, int * cursor, HTTP_Node * header_field );
+
+/**
+ * \fn int parse_field_name ( char * request, int * cursor, HTTP_Node * node )
+ * \brief Fonction de création d'une nouvelle instance d'un objet HTTP_Node.
+ *
+ * \param request Chaine contenant la requête.
+ * \param cursor Pointeur vers la position de la lecture de la requête.
+ * \param node Pointeur vers le noeud header-field utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.
+ * 
+ * \return Retourne 1 si la requête est correcte, 0 sinon.
+ */
+int parse_field_name ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value );
+
+/**
+ * \fn int parse_field_value ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value )
+ * \brief Fonction de création d'une nouvelle instance d'un objet HTTP_Node.
+ *
+ * \param request Chaine contenant la requête.
+ * \param cursor Pointeur vers la position de la lecture de la requête.
+ * \param node Pointeur vers le noeud header-field utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.
+ * \param node Pointeur vers le noeud field-name utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.
+ * \param node Pointeur vers le noeud field-value utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.
+ * 
+ * \return Retourne 1 si la requête est correcte, 0 sinon.
+ */
+int parse_field_value ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value );
+
+/**
+ * \fn int parse_field_content ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value )
+ * \brief Fonction de création d'une nouvelle instance d'un objet HTTP_Node.
+ *
+ * \param request Chaine contenant la requête.
+ * \param cursor Pointeur vers la position de la lecture de la requête.
+ * \param node Pointeur vers le noeud header-field utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.
+ * \param node Pointeur vers le noeud field-name utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.
+ * \param node Pointeur vers le noeud field-value utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.
+ * 
+ * \return Retourne 1 si la requête est correcte, 0 sinon.
+ */
+int parse_field_content ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value );
+
+/**
+ * \fn int parse_obs_fold ( char * request, int * cursor, HTTP_Node * header_field , HTTP_Node * field_name, HTTP_Node * field_value )
+ * \brief Fonction de création d'une nouvelle instance d'un objet HTTP_Node.
+ *
+ * \param request Chaine contenant la requête.
+ * \param cursor Pointeur vers la position de la lecture de la requête.
+ * \param node Pointeur vers le noeud header-field utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.
+ * \param node Pointeur vers le noeud field-name utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.
+ * \param node Pointeur vers le noeud field-value utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.
+ * 
+ * \return Retourne 1 si la requête est correcte, 0 sinon.
+ */
+int parse_obs_fold ( char * request, int * cursor, HTTP_Node * header_field , HTTP_Node * field_name, HTTP_Node * field_value );
 
 /**
  * \fn int parse_message_body ( char * request, int * cursor, HTTP_Node * node )
@@ -94,15 +148,7 @@ int parse_authority_form ( char * request, int * cursor, HTTP_Node * node );
 
 int parse_regname ( char * request, int * cursor, HTTP_Node * node );
 
-int parse_header_field ( char * request, int * cursor, HTTP_Node * header_field );
 
-int parse_field_name ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value );
-
-int parse_field_value ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value );
-
-int parse_field_content ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value );
-
-int parse_obs_fold ( char * request, int * cursor, HTTP_Node * header_field , HTTP_Node * field_name, HTTP_Node * field_value );
 
 /**
  * \fn int parse_string ( char * str, int * dep, char * cmp_str )
