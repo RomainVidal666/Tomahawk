@@ -7,6 +7,7 @@ Gestion de l\textquotesingle{}arbre n-\/aire utiliser par le parseur H\+T\+TP.
 
 {\ttfamily \#include $<$stdio.\+h$>$}\\*
 {\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
 \subsection*{Structures de données}
 \begin{DoxyCompactItemize}
 \item 
@@ -21,14 +22,25 @@ typedef struct \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} {\bfser
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{http__node_8h_a9303e8e110897357738f19b88bee2ac5}{init\+\_\+\+H\+T\+T\+P\+\_\+\+Node} (const char $\ast$name, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+void \hyperlink{http__node_8h_a39970aa0bb76ad973174bc8918ad9eb6}{init\+\_\+\+H\+T\+T\+P\+\_\+\+Node} (char $\ast$name, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
 \begin{DoxyCompactList}\small\item\em Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. \end{DoxyCompactList}\item 
 void \hyperlink{http__node_8h_a749490919bbf65d0092ce0cd72d25899}{add\+Child\+\_\+\+H\+T\+T\+P\+\_\+\+Node} (\hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$child)
 \begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}ajout d\textquotesingle{}un fils à un noeud. \end{DoxyCompactList}\item 
 void \hyperlink{http__node_8h_a9e30384896a2e89d4a9ad758f575e512}{free\+\_\+\+H\+T\+T\+P\+\_\+\+Node} (\hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
 \begin{DoxyCompactList}\small\item\em Fonction de suppression d\textquotesingle{}un noeud. \end{DoxyCompactList}\item 
 void \hyperlink{http__node_8h_ad20b9bbf21990a03a15d900f7282edda}{free\+\_\+\+H\+T\+T\+P\+\_\+\+Tree} (\hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$root)
-\begin{DoxyCompactList}\small\item\em Fonction de suppression d\textquotesingle{}un arbre. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Fonction de suppression d\textquotesingle{}un arbre. \end{DoxyCompactList}\item 
+\hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$ \hyperlink{http__node_8h_a08f479514031c0c747f2359b3de0a09f}{found\+\_\+\+H\+T\+T\+P\+\_\+\+Node} (\hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$root, char $\ast$string)
+\begin{DoxyCompactList}\small\item\em Fonction de recherche dans un arbre. \end{DoxyCompactList}\item 
+void {\bfseries found\+All\+\_\+\+H\+T\+T\+P\+\_\+\+Node} (\hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$root, char $\ast$string, int $\ast$nb\+Found, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$$\ast$result)\hypertarget{http__node_8h_a7848e7a8ffc970dcc2b505976450ad25}{}\label{http__node_8h_a7848e7a8ffc970dcc2b505976450ad25}
+
+\item 
+void \hyperlink{http__node_8h_afff1a0b95a939d2c2f0a514a81bb4b29}{found\+All\+\_\+\+H\+T\+T\+P\+\_\+\+Node\+\_\+rec} (\hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$root, char $\ast$string, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$$\ast$result, int $\ast$nb\+Found)
+\begin{DoxyCompactList}\small\item\em Fonction de recherche dans un arbre. \end{DoxyCompactList}\item 
+void \hyperlink{http__node_8h_a02425c1a80cc73294432b6ae4108d745}{print\+\_\+\+H\+T\+T\+P\+\_\+\+Node} (char $\ast$request, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction pour afficher le contenu d\textquotesingle{}un \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. \end{DoxyCompactList}\item 
+void \hyperlink{http__node_8h_a783545319534979c2f75dc54a002037b}{print\+\_\+\+H\+T\+T\+P\+\_\+\+Tree} (char $\ast$request, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$root, int level)
+\begin{DoxyCompactList}\small\item\em Fonction pour afficher le contenu d\textquotesingle{}un arbre de \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
@@ -60,6 +72,53 @@ Fonction d\textquotesingle{}ajout d\textquotesingle{}un fils à un noeud.
 {\em node} & Pointeur vers le noeud parent. \\
 \hline
 {\em child} & Pointeur vers le noeud fils. \\
+\hline
+\end{DoxyParams}
+\index{http\+\_\+node.\+h@{http\+\_\+node.\+h}!found\+\_\+\+H\+T\+T\+P\+\_\+\+Node@{found\+\_\+\+H\+T\+T\+P\+\_\+\+Node}}
+\index{found\+\_\+\+H\+T\+T\+P\+\_\+\+Node@{found\+\_\+\+H\+T\+T\+P\+\_\+\+Node}!http\+\_\+node.\+h@{http\+\_\+node.\+h}}
+\subsubsection[{\texorpdfstring{found\+\_\+\+H\+T\+T\+P\+\_\+\+Node(\+H\+T\+T\+P\+\_\+\+Node $\ast$root, char $\ast$string)}{found_HTTP_Node(HTTP_Node *root, char *string)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf H\+T\+T\+P\+\_\+\+Node}$\ast$ found\+\_\+\+H\+T\+T\+P\+\_\+\+Node (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{root, }
+\item[{char $\ast$}]{string}
+\end{DoxyParamCaption}
+)}\hypertarget{http__node_8h_a08f479514031c0c747f2359b3de0a09f}{}\label{http__node_8h_a08f479514031c0c747f2359b3de0a09f}
+
+
+Fonction de recherche dans un arbre. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em root} & Pointeur vers le noeud racine de l\textquotesingle{}arbre à supprimer. \\
+\hline
+{\em string} & La chaine à rechercher.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Le noeud qui à pour nom la chaine string. 
+\end{DoxyReturn}
+\index{http\+\_\+node.\+h@{http\+\_\+node.\+h}!found\+All\+\_\+\+H\+T\+T\+P\+\_\+\+Node\+\_\+rec@{found\+All\+\_\+\+H\+T\+T\+P\+\_\+\+Node\+\_\+rec}}
+\index{found\+All\+\_\+\+H\+T\+T\+P\+\_\+\+Node\+\_\+rec@{found\+All\+\_\+\+H\+T\+T\+P\+\_\+\+Node\+\_\+rec}!http\+\_\+node.\+h@{http\+\_\+node.\+h}}
+\subsubsection[{\texorpdfstring{found\+All\+\_\+\+H\+T\+T\+P\+\_\+\+Node\+\_\+rec(\+H\+T\+T\+P\+\_\+\+Node $\ast$root, char $\ast$string, H\+T\+T\+P\+\_\+\+Node $\ast$$\ast$result, int $\ast$nb\+Found)}{foundAll_HTTP_Node_rec(HTTP_Node *root, char *string, HTTP_Node **result, int *nbFound)}}]{\setlength{\rightskip}{0pt plus 5cm}void found\+All\+\_\+\+H\+T\+T\+P\+\_\+\+Node\+\_\+rec (
+\begin{DoxyParamCaption}
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{root, }
+\item[{char $\ast$}]{string, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$$\ast$}]{result, }
+\item[{int $\ast$}]{nb\+Found}
+\end{DoxyParamCaption}
+)}\hypertarget{http__node_8h_afff1a0b95a939d2c2f0a514a81bb4b29}{}\label{http__node_8h_afff1a0b95a939d2c2f0a514a81bb4b29}
+
+
+Fonction de recherche dans un arbre. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em root} & Pointeur vers le noeud racine de l\textquotesingle{}arbre à supprimer. \\
+\hline
+{\em string} & La chaine à rechercher. \\
+\hline
+{\em result} & Tableau des noeuds correspondant à la recherche. \\
+\hline
+{\em nb\+Found} & Le nombre de noeud trouvé. \\
 \hline
 \end{DoxyParams}
 \index{http\+\_\+node.\+h@{http\+\_\+node.\+h}!free\+\_\+\+H\+T\+T\+P\+\_\+\+Node@{free\+\_\+\+H\+T\+T\+P\+\_\+\+Node}}
@@ -96,12 +155,12 @@ Fonction de suppression d\textquotesingle{}un arbre.
 \end{DoxyParams}
 \index{http\+\_\+node.\+h@{http\+\_\+node.\+h}!init\+\_\+\+H\+T\+T\+P\+\_\+\+Node@{init\+\_\+\+H\+T\+T\+P\+\_\+\+Node}}
 \index{init\+\_\+\+H\+T\+T\+P\+\_\+\+Node@{init\+\_\+\+H\+T\+T\+P\+\_\+\+Node}!http\+\_\+node.\+h@{http\+\_\+node.\+h}}
-\subsubsection[{\texorpdfstring{init\+\_\+\+H\+T\+T\+P\+\_\+\+Node(const char $\ast$name, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{init_HTTP_Node(const char *name, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}void init\+\_\+\+H\+T\+T\+P\+\_\+\+Node (
+\subsubsection[{\texorpdfstring{init\+\_\+\+H\+T\+T\+P\+\_\+\+Node(char $\ast$name, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{init_HTTP_Node(char *name, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}void init\+\_\+\+H\+T\+T\+P\+\_\+\+Node (
 \begin{DoxyParamCaption}
-\item[{const char $\ast$}]{name, }
+\item[{char $\ast$}]{name, }
 \item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
 \end{DoxyParamCaption}
-)}\hypertarget{http__node_8h_a9303e8e110897357738f19b88bee2ac5}{}\label{http__node_8h_a9303e8e110897357738f19b88bee2ac5}
+)}\hypertarget{http__node_8h_a39970aa0bb76ad973174bc8918ad9eb6}{}\label{http__node_8h_a39970aa0bb76ad973174bc8918ad9eb6}
 
 
 Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. 
@@ -111,5 +170,46 @@ Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle
 {\em name} & Nom du noeud. \\
 \hline
 {\em node} & Pointeur vers le noeud à initialiser. \\
+\hline
+\end{DoxyParams}
+\index{http\+\_\+node.\+h@{http\+\_\+node.\+h}!print\+\_\+\+H\+T\+T\+P\+\_\+\+Node@{print\+\_\+\+H\+T\+T\+P\+\_\+\+Node}}
+\index{print\+\_\+\+H\+T\+T\+P\+\_\+\+Node@{print\+\_\+\+H\+T\+T\+P\+\_\+\+Node}!http\+\_\+node.\+h@{http\+\_\+node.\+h}}
+\subsubsection[{\texorpdfstring{print\+\_\+\+H\+T\+T\+P\+\_\+\+Node(char $\ast$request, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{print_HTTP_Node(char *request, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+\+H\+T\+T\+P\+\_\+\+Node (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{http__node_8h_a02425c1a80cc73294432b6ae4108d745}{}\label{http__node_8h_a02425c1a80cc73294432b6ae4108d745}
+
+
+Fonction pour afficher le contenu d\textquotesingle{}un \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant le requête. \\
+\hline
+{\em node} & Noeud à afficher. \\
+\hline
+\end{DoxyParams}
+\index{http\+\_\+node.\+h@{http\+\_\+node.\+h}!print\+\_\+\+H\+T\+T\+P\+\_\+\+Tree@{print\+\_\+\+H\+T\+T\+P\+\_\+\+Tree}}
+\index{print\+\_\+\+H\+T\+T\+P\+\_\+\+Tree@{print\+\_\+\+H\+T\+T\+P\+\_\+\+Tree}!http\+\_\+node.\+h@{http\+\_\+node.\+h}}
+\subsubsection[{\texorpdfstring{print\+\_\+\+H\+T\+T\+P\+\_\+\+Tree(char $\ast$request, H\+T\+T\+P\+\_\+\+Node $\ast$root, int level)}{print_HTTP_Tree(char *request, HTTP_Node *root, int level)}}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+\+H\+T\+T\+P\+\_\+\+Tree (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{root, }
+\item[{int}]{level}
+\end{DoxyParamCaption}
+)}\hypertarget{http__node_8h_a783545319534979c2f75dc54a002037b}{}\label{http__node_8h_a783545319534979c2f75dc54a002037b}
+
+
+Fonction pour afficher le contenu d\textquotesingle{}un arbre de \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant le requête. \\
+\hline
+{\em node} & Noeud racine. \\
+\hline
+{\em level} & Pour l\textquotesingle{}indentation (laisser à 0). \\
 \hline
 \end{DoxyParams}

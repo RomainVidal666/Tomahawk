@@ -7,20 +7,65 @@ Parseur H\+T\+TP 1.\+0.
 
 {\ttfamily \#include $<$stdio.\+h$>$}\\*
 {\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}http\+\_\+node.\+h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries SP}~\textquotesingle{} \textquotesingle{}\hypertarget{http__parser_8h_aecd69d9a67487cc45c38eb184c50538a}{}\label{http__parser_8h_aecd69d9a67487cc45c38eb184c50538a}
+
+\end{DoxyCompactItemize}
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
 int \hyperlink{http__parser_8h_aee8b0a4a4baa2c61dec7c57f45f31f98}{parse\+\_\+\+H\+T\+T\+P\+\_\+message} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
-\begin{DoxyCompactList}\small\item\em Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le H\+T\+T\+P-\/message. \end{DoxyCompactList}\item 
 int \hyperlink{http__parser_8h_a3ca395db6b3966e6ac79ef89bd8799e4}{parse\+\_\+start\+\_\+line} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
-\begin{DoxyCompactList}\small\item\em Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le start-\/line. \end{DoxyCompactList}\item 
 int \hyperlink{http__parser_8h_a5e097a86384806ecddccba2533014af7}{parse\+\_\+status\+\_\+line} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
-\begin{DoxyCompactList}\small\item\em Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. \end{DoxyCompactList}\item 
-int \hyperlink{http__parser_8h_a21deb380a12b788502d04e9e87584d8e}{parse\+\_\+header\+\_\+field} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
-\begin{DoxyCompactList}\small\item\em Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le status-\/line. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a5c703eb865ac9be5e6e5707e8d83b503}{parse\+\_\+header\+\_\+field} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$header\+\_\+field)
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le header-\/field. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_abffccf125d845ec29df1b08088bc9e3d}{parse\+\_\+field\+\_\+name} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$header\+\_\+field, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$field\+\_\+name, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$field\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le field-\/name. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_ad5ad7b1778ac59d9357fd4ccaefb29ff}{parse\+\_\+field\+\_\+value} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$header\+\_\+field, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$field\+\_\+name, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$field\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le field-\/content (utilisée par header-\/field). \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_ab47203919d00d1f07c1f7b317c6636ca}{parse\+\_\+field\+\_\+content} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$header\+\_\+field, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$field\+\_\+name, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$field\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le field-\/content (utilisée par header-\/field). \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a734d58261d5c74152f5622024a2b5114}{parse\+\_\+obs\+\_\+fold} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$header\+\_\+field, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$field\+\_\+name, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$field\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le obs-\/fold (utilisée par header-\/field). \end{DoxyCompactList}\item 
 int \hyperlink{http__parser_8h_ac105f005e7a346c792d176b27f158493}{parse\+\_\+message\+\_\+body} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
-\begin{DoxyCompactList}\small\item\em Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le message-\/body. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a257a8a2cddb8ecb8b5ba6e473e3d28aa}{parse\+\_\+request\+\_\+target} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le request-\/target. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a07ec089658dff4bc2a8006959610d09c}{parse\+\_\+request\+\_\+line} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le request-\/line. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a13ae5419e9f8d0be36d854b7bb5f2b15}{parse\+\_\+origin\+\_\+form} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le origin-\/form. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a852889cd8005196dc62bd1c48b7f419a}{parse\+\_\+absolute\+\_\+form} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le absolute-\/form. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_abbfad6e696c0ad74cad0d8381f5a9045}{parse\+\_\+authority\+\_\+form} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le authority-\/form. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a2e5664b36d17c4bd8688b60ccf4090ad}{parse\+\_\+\+I\+Pv4} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le I\+Pv4. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a16e8d99b3300d4dca1b433ac67fedad3}{parse\+\_\+user\+\_\+info} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le user-\/info. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a39d11873f126902e29267a535459f9dc}{parse\+\_\+regname} (char $\ast$request, int $\ast$cursor, \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node} $\ast$node)
+\begin{DoxyCompactList}\small\item\em Fonction pour parser le regname. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_ae2f206515eea286c2a1518f4c55233c9}{parse\+\_\+string} (char $\ast$str, int $\ast$cursor, char $\ast$cmp\+\_\+str)
+\begin{DoxyCompactList}\small\item\em Fonction pour vérifier l\textquotesingle{}égalité d\textquotesingle{}une chaine et d\textquotesingle{}une sous-\/chaine. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a5c3e17b63eba193e2d120a8581abb52b}{is\+D\+I\+G\+IT} (char $\ast$request, int $\ast$cursor)
+\begin{DoxyCompactList}\small\item\em Fonction pour vérifier si on a bien un D\+I\+G\+IT. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_ad8a251dc9ff236cd8a6ea9a1126ee3de}{is\+Tchar} (char $\ast$request, int $\ast$cursor)
+\begin{DoxyCompactList}\small\item\em Fonction pour vérifier si on a bien un T\+C\+H\+AR. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_ae6ab41f52f7d26911df0d96ee90c7d50}{is\+V\+C\+H\+AR} (char $\ast$request, int $\ast$cursor)
+\begin{DoxyCompactList}\small\item\em Fonction pour vérifier si on a bien un V\+C\+H\+AR. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_a3a7bd06003eacabe81babb18d688ad6e}{is\+Obstext} (char $\ast$request, int $\ast$cursor)
+\begin{DoxyCompactList}\small\item\em Fonction pour vérifier si on a bien un Obs\+Text. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_afaa3a52b7b5d5bbc4fb753a8a2719b9a}{is\+Fieldvchar} (char $\ast$request, int $\ast$cursor)
+\begin{DoxyCompactList}\small\item\em Fonction pour vérifier si on a bien un Field-\/\+V\+C\+H\+AR. \end{DoxyCompactList}\item 
+int \hyperlink{http__parser_8h_abfc102efdae7ecfa0127f2af59153eed}{is\+Unreserved} (char $\ast$request, int $\ast$cursor)
+\begin{DoxyCompactList}\small\item\em Fonction pour vérifier si on a bien un Unreserved. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
@@ -35,18 +80,293 @@ R. Vidal / A. Lorber / T. Jacumin
 
 
 \subsection{Documentation des fonctions}
-\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+header\+\_\+field@{parse\+\_\+header\+\_\+field}}
-\index{parse\+\_\+header\+\_\+field@{parse\+\_\+header\+\_\+field}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
-\subsubsection[{\texorpdfstring{parse\+\_\+header\+\_\+field(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_header_field(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+header\+\_\+field (
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!is\+D\+I\+G\+IT@{is\+D\+I\+G\+IT}}
+\index{is\+D\+I\+G\+IT@{is\+D\+I\+G\+IT}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{is\+D\+I\+G\+I\+T(char $\ast$request, int $\ast$cursor)}{isDIGIT(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+D\+I\+G\+IT (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_a5c3e17b63eba193e2d120a8581abb52b}{}\label{http__parser_8h_a5c3e17b63eba193e2d120a8581abb52b}
+
+
+Fonction pour vérifier si on a bien un D\+I\+G\+IT. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si le prochain caractere est un D\+I\+G\+IT, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!is\+Fieldvchar@{is\+Fieldvchar}}
+\index{is\+Fieldvchar@{is\+Fieldvchar}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{is\+Fieldvchar(char $\ast$request, int $\ast$cursor)}{isFieldvchar(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Fieldvchar (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_afaa3a52b7b5d5bbc4fb753a8a2719b9a}{}\label{http__parser_8h_afaa3a52b7b5d5bbc4fb753a8a2719b9a}
+
+
+Fonction pour vérifier si on a bien un Field-\/\+V\+C\+H\+AR. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em str} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la caractere de la requête est un field-\/vchar, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!is\+Obstext@{is\+Obstext}}
+\index{is\+Obstext@{is\+Obstext}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{is\+Obstext(char $\ast$request, int $\ast$cursor)}{isObstext(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Obstext (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_a3a7bd06003eacabe81babb18d688ad6e}{}\label{http__parser_8h_a3a7bd06003eacabe81babb18d688ad6e}
+
+
+Fonction pour vérifier si on a bien un Obs\+Text. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em str} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si le caractere de la requete est un Obs\+Text, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!is\+Tchar@{is\+Tchar}}
+\index{is\+Tchar@{is\+Tchar}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{is\+Tchar(char $\ast$request, int $\ast$cursor)}{isTchar(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Tchar (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_ad8a251dc9ff236cd8a6ea9a1126ee3de}{}\label{http__parser_8h_ad8a251dc9ff236cd8a6ea9a1126ee3de}
+
+
+Fonction pour vérifier si on a bien un T\+C\+H\+AR. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em str} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si le caractere de la requete est un T\+C\+H\+AR, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!is\+Unreserved@{is\+Unreserved}}
+\index{is\+Unreserved@{is\+Unreserved}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{is\+Unreserved(char $\ast$request, int $\ast$cursor)}{isUnreserved(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+Unreserved (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_abfc102efdae7ecfa0127f2af59153eed}{}\label{http__parser_8h_abfc102efdae7ecfa0127f2af59153eed}
+
+
+Fonction pour vérifier si on a bien un Unreserved. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em str} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la caractere de la requête est un Unreserved, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!is\+V\+C\+H\+AR@{is\+V\+C\+H\+AR}}
+\index{is\+V\+C\+H\+AR@{is\+V\+C\+H\+AR}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{is\+V\+C\+H\+A\+R(char $\ast$request, int $\ast$cursor)}{isVCHAR(char *request, int *cursor)}}]{\setlength{\rightskip}{0pt plus 5cm}int is\+V\+C\+H\+AR (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_ae6ab41f52f7d26911df0d96ee90c7d50}{}\label{http__parser_8h_ae6ab41f52f7d26911df0d96ee90c7d50}
+
+
+Fonction pour vérifier si on a bien un V\+C\+H\+AR. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em str} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si le caractere de la requete est un V\+C\+H\+AR, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+absolute\+\_\+form@{parse\+\_\+absolute\+\_\+form}}
+\index{parse\+\_\+absolute\+\_\+form@{parse\+\_\+absolute\+\_\+form}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+absolute\+\_\+form(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_absolute_form(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+absolute\+\_\+form (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{request, }
 \item[{int $\ast$}]{cursor, }
 \item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
 \end{DoxyParamCaption}
-)}\hypertarget{http__parser_8h_a21deb380a12b788502d04e9e87584d8e}{}\label{http__parser_8h_a21deb380a12b788502d04e9e87584d8e}
+)}\hypertarget{http__parser_8h_a852889cd8005196dc62bd1c48b7f419a}{}\label{http__parser_8h_a852889cd8005196dc62bd1c48b7f419a}
 
 
-Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. 
+Fonction pour parser le absolute-\/form. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+authority\+\_\+form@{parse\+\_\+authority\+\_\+form}}
+\index{parse\+\_\+authority\+\_\+form@{parse\+\_\+authority\+\_\+form}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+authority\+\_\+form(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_authority_form(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+authority\+\_\+form (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_abbfad6e696c0ad74cad0d8381f5a9045}{}\label{http__parser_8h_abbfad6e696c0ad74cad0d8381f5a9045}
+
+
+Fonction pour parser le authority-\/form. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+field\+\_\+content@{parse\+\_\+field\+\_\+content}}
+\index{parse\+\_\+field\+\_\+content@{parse\+\_\+field\+\_\+content}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+field\+\_\+content(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+name, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+value)}{parse_field_content(char *request, int *cursor, HTTP_Node *header_field, HTTP_Node *field_name, HTTP_Node *field_value)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+field\+\_\+content (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{header\+\_\+field, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{field\+\_\+name, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{field\+\_\+value}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_ab47203919d00d1f07c1f7b317c6636ca}{}\label{http__parser_8h_ab47203919d00d1f07c1f7b317c6636ca}
+
+
+Fonction pour parser le field-\/content (utilisée par header-\/field). 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud header-\/field utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud. \\
+\hline
+{\em node} & Pointeur vers le noeud field-\/name utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud. \\
+\hline
+{\em node} & Pointeur vers le noeud field-\/value utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+field\+\_\+name@{parse\+\_\+field\+\_\+name}}
+\index{parse\+\_\+field\+\_\+name@{parse\+\_\+field\+\_\+name}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+field\+\_\+name(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+name, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+value)}{parse_field_name(char *request, int *cursor, HTTP_Node *header_field, HTTP_Node *field_name, HTTP_Node *field_value)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+field\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{header\+\_\+field, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{field\+\_\+name, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{field\+\_\+value}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_abffccf125d845ec29df1b08088bc9e3d}{}\label{http__parser_8h_abffccf125d845ec29df1b08088bc9e3d}
+
+
+Fonction pour parser le field-\/name. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud header-\/field utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud. \\
+\hline
+{\em node} & Pointeur vers le noeud field-\/name utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud. \\
+\hline
+{\em node} & Pointeur vers le noeud field-\/value utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+field\+\_\+value@{parse\+\_\+field\+\_\+value}}
+\index{parse\+\_\+field\+\_\+value@{parse\+\_\+field\+\_\+value}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+field\+\_\+value(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+name, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+value)}{parse_field_value(char *request, int *cursor, HTTP_Node *header_field, HTTP_Node *field_name, HTTP_Node *field_value)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+field\+\_\+value (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{header\+\_\+field, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{field\+\_\+name, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{field\+\_\+value}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_ad5ad7b1778ac59d9357fd4ccaefb29ff}{}\label{http__parser_8h_ad5ad7b1778ac59d9357fd4ccaefb29ff}
+
+
+Fonction pour parser le field-\/content (utilisée par header-\/field). 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud header-\/field utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud. \\
+\hline
+{\em node} & Pointeur vers le noeud field-\/name utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud. \\
+\hline
+{\em node} & Pointeur vers le noeud field-\/value utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+header\+\_\+field@{parse\+\_\+header\+\_\+field}}
+\index{parse\+\_\+header\+\_\+field@{parse\+\_\+header\+\_\+field}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+header\+\_\+field(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field)}{parse_header_field(char *request, int *cursor, HTTP_Node *header_field)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+header\+\_\+field (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{header\+\_\+field}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_a5c703eb865ac9be5e6e5707e8d83b503}{}\label{http__parser_8h_a5c703eb865ac9be5e6e5707e8d83b503}
+
+
+Fonction pour parser le header-\/field. 
 
 
 \begin{DoxyParams}{Paramètres}
@@ -71,7 +391,32 @@ Retourne 1 si la requête est correcte, 0 sinon.
 )}\hypertarget{http__parser_8h_aee8b0a4a4baa2c61dec7c57f45f31f98}{}\label{http__parser_8h_aee8b0a4a4baa2c61dec7c57f45f31f98}
 
 
-Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. 
+Fonction pour parser le H\+T\+T\+P-\/message. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+\+I\+Pv4@{parse\+\_\+\+I\+Pv4}}
+\index{parse\+\_\+\+I\+Pv4@{parse\+\_\+\+I\+Pv4}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+\+I\+Pv4(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_IPv4(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+\+I\+Pv4 (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_a2e5664b36d17c4bd8688b60ccf4090ad}{}\label{http__parser_8h_a2e5664b36d17c4bd8688b60ccf4090ad}
+
+
+Fonction pour parser le I\+Pv4. 
 
 
 \begin{DoxyParams}{Paramètres}
@@ -96,7 +441,138 @@ Retourne 1 si la requête est correcte, 0 sinon.
 )}\hypertarget{http__parser_8h_ac105f005e7a346c792d176b27f158493}{}\label{http__parser_8h_ac105f005e7a346c792d176b27f158493}
 
 
-Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. 
+Fonction pour parser le message-\/body. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+obs\+\_\+fold@{parse\+\_\+obs\+\_\+fold}}
+\index{parse\+\_\+obs\+\_\+fold@{parse\+\_\+obs\+\_\+fold}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+obs\+\_\+fold(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$header\+\_\+field, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+name, H\+T\+T\+P\+\_\+\+Node $\ast$field\+\_\+value)}{parse_obs_fold(char *request, int *cursor, HTTP_Node *header_field, HTTP_Node *field_name, HTTP_Node *field_value)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+obs\+\_\+fold (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{header\+\_\+field, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{field\+\_\+name, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{field\+\_\+value}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_a734d58261d5c74152f5622024a2b5114}{}\label{http__parser_8h_a734d58261d5c74152f5622024a2b5114}
+
+
+Fonction pour parser le obs-\/fold (utilisée par header-\/field). 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud header-\/field utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud. \\
+\hline
+{\em node} & Pointeur vers le noeud field-\/name utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud. \\
+\hline
+{\em node} & Pointeur vers le noeud field-\/value utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+origin\+\_\+form@{parse\+\_\+origin\+\_\+form}}
+\index{parse\+\_\+origin\+\_\+form@{parse\+\_\+origin\+\_\+form}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+origin\+\_\+form(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_origin_form(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+origin\+\_\+form (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_a13ae5419e9f8d0be36d854b7bb5f2b15}{}\label{http__parser_8h_a13ae5419e9f8d0be36d854b7bb5f2b15}
+
+
+Fonction pour parser le origin-\/form. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+regname@{parse\+\_\+regname}}
+\index{parse\+\_\+regname@{parse\+\_\+regname}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+regname(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_regname(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+regname (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_a39d11873f126902e29267a535459f9dc}{}\label{http__parser_8h_a39d11873f126902e29267a535459f9dc}
+
+
+Fonction pour parser le regname. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+request\+\_\+line@{parse\+\_\+request\+\_\+line}}
+\index{parse\+\_\+request\+\_\+line@{parse\+\_\+request\+\_\+line}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+request\+\_\+line(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_request_line(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+request\+\_\+line (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_a07ec089658dff4bc2a8006959610d09c}{}\label{http__parser_8h_a07ec089658dff4bc2a8006959610d09c}
+
+
+Fonction pour parser le request-\/line. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+request\+\_\+target@{parse\+\_\+request\+\_\+target}}
+\index{parse\+\_\+request\+\_\+target@{parse\+\_\+request\+\_\+target}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+request\+\_\+target(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_request_target(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+request\+\_\+target (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_a257a8a2cddb8ecb8b5ba6e473e3d28aa}{}\label{http__parser_8h_a257a8a2cddb8ecb8b5ba6e473e3d28aa}
+
+
+Fonction pour parser le request-\/target. 
 
 
 \begin{DoxyParams}{Paramètres}
@@ -121,7 +597,7 @@ Retourne 1 si la requête est correcte, 0 sinon.
 )}\hypertarget{http__parser_8h_a3ca395db6b3966e6ac79ef89bd8799e4}{}\label{http__parser_8h_a3ca395db6b3966e6ac79ef89bd8799e4}
 
 
-Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. 
+Fonction pour parser le start-\/line. 
 
 
 \begin{DoxyParams}{Paramètres}
@@ -146,7 +622,57 @@ Retourne 1 si la requête est correcte, 0 sinon.
 )}\hypertarget{http__parser_8h_a5e097a86384806ecddccba2533014af7}{}\label{http__parser_8h_a5e097a86384806ecddccba2533014af7}
 
 
-Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{struct_h_t_t_p___node}{H\+T\+T\+P\+\_\+\+Node}. 
+Fonction pour parser le status-\/line. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em request} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em node} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+string@{parse\+\_\+string}}
+\index{parse\+\_\+string@{parse\+\_\+string}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+string(char $\ast$str, int $\ast$cursor, char $\ast$cmp\+\_\+str)}{parse_string(char *str, int *cursor, char *cmp_str)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{str, }
+\item[{int $\ast$}]{cursor, }
+\item[{char $\ast$}]{cmp\+\_\+str}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_ae2f206515eea286c2a1518f4c55233c9}{}\label{http__parser_8h_ae2f206515eea286c2a1518f4c55233c9}
+
+
+Fonction pour vérifier l\textquotesingle{}égalité d\textquotesingle{}une chaine et d\textquotesingle{}une sous-\/chaine. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em str} & Chaine contenant la requête. \\
+\hline
+{\em cursor} & Pointeur vers la position de la lecture de la requête. \\
+\hline
+{\em cmp\+\_\+str} & Pointeur vers le noeud utilisé pour sauvegarder la valeur de l\textquotesingle{}élément correspondant au noeud.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+Retourne 1 si la requête est correcte, 0 sinon. 
+\end{DoxyReturn}
+\index{http\+\_\+parser.\+h@{http\+\_\+parser.\+h}!parse\+\_\+user\+\_\+info@{parse\+\_\+user\+\_\+info}}
+\index{parse\+\_\+user\+\_\+info@{parse\+\_\+user\+\_\+info}!http\+\_\+parser.\+h@{http\+\_\+parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+\_\+user\+\_\+info(char $\ast$request, int $\ast$cursor, H\+T\+T\+P\+\_\+\+Node $\ast$node)}{parse_user_info(char *request, int *cursor, HTTP_Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+\_\+user\+\_\+info (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{request, }
+\item[{int $\ast$}]{cursor, }
+\item[{{\bf H\+T\+T\+P\+\_\+\+Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{http__parser_8h_a16e8d99b3300d4dca1b433ac67fedad3}{}\label{http__parser_8h_a16e8d99b3300d4dca1b433ac67fedad3}
+
+
+Fonction pour parser le user-\/info. 
 
 
 \begin{DoxyParams}{Paramètres}

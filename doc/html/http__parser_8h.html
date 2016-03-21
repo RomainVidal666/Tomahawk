@@ -24,8 +24,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Tomahawk
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">alpha</span>
    </div>
+   <div id="projectbrief">Projet de projet de serveur HTTP visant à détrôner Apache.</div>
   </td>
  </tr>
  </tbody>
@@ -86,6 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
 <div class="title">Référence du fichier http_parser.h</div>  </div>
@@ -96,39 +98,319 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="http__node_8h_source.html">http_node.h</a>&quot;</code><br />
 </div>
 <p><a href="http__parser_8h_source.html">Aller au code source de ce fichier.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aecd69d9a67487cc45c38eb184c50538a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aecd69d9a67487cc45c38eb184c50538a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SP</b>&#160;&#160;&#160;' '</td></tr>
+<tr class="separator:aecd69d9a67487cc45c38eb184c50538a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
 <tr class="memitem:aee8b0a4a4baa2c61dec7c57f45f31f98"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#aee8b0a4a4baa2c61dec7c57f45f31f98">parse_HTTP_message</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
-<tr class="memdesc:aee8b0a4a4baa2c61dec7c57f45f31f98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de création d'une nouvelle instance d'un objet <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>.  <a href="#aee8b0a4a4baa2c61dec7c57f45f31f98">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:aee8b0a4a4baa2c61dec7c57f45f31f98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le HTTP-message.  <a href="#aee8b0a4a4baa2c61dec7c57f45f31f98">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aee8b0a4a4baa2c61dec7c57f45f31f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ca395db6b3966e6ac79ef89bd8799e4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a3ca395db6b3966e6ac79ef89bd8799e4">parse_start_line</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
-<tr class="memdesc:a3ca395db6b3966e6ac79ef89bd8799e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de création d'une nouvelle instance d'un objet <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>.  <a href="#a3ca395db6b3966e6ac79ef89bd8799e4">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a3ca395db6b3966e6ac79ef89bd8799e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le start-line.  <a href="#a3ca395db6b3966e6ac79ef89bd8799e4">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a3ca395db6b3966e6ac79ef89bd8799e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e097a86384806ecddccba2533014af7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a5e097a86384806ecddccba2533014af7">parse_status_line</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
-<tr class="memdesc:a5e097a86384806ecddccba2533014af7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de création d'une nouvelle instance d'un objet <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>.  <a href="#a5e097a86384806ecddccba2533014af7">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a5e097a86384806ecddccba2533014af7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le status-line.  <a href="#a5e097a86384806ecddccba2533014af7">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a5e097a86384806ecddccba2533014af7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21deb380a12b788502d04e9e87584d8e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a21deb380a12b788502d04e9e87584d8e">parse_header_field</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
-<tr class="memdesc:a21deb380a12b788502d04e9e87584d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de création d'une nouvelle instance d'un objet <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>.  <a href="#a21deb380a12b788502d04e9e87584d8e">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a21deb380a12b788502d04e9e87584d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c703eb865ac9be5e6e5707e8d83b503"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a5c703eb865ac9be5e6e5707e8d83b503">parse_header_field</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *header_field)</td></tr>
+<tr class="memdesc:a5c703eb865ac9be5e6e5707e8d83b503"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le header-field.  <a href="#a5c703eb865ac9be5e6e5707e8d83b503">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5c703eb865ac9be5e6e5707e8d83b503"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abffccf125d845ec29df1b08088bc9e3d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#abffccf125d845ec29df1b08088bc9e3d">parse_field_name</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *header_field, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *field_name, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *field_value)</td></tr>
+<tr class="memdesc:abffccf125d845ec29df1b08088bc9e3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le field-name.  <a href="#abffccf125d845ec29df1b08088bc9e3d">Plus de détails...</a><br /></td></tr>
+<tr class="separator:abffccf125d845ec29df1b08088bc9e3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5ad7b1778ac59d9357fd4ccaefb29ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#ad5ad7b1778ac59d9357fd4ccaefb29ff">parse_field_value</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *header_field, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *field_name, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *field_value)</td></tr>
+<tr class="memdesc:ad5ad7b1778ac59d9357fd4ccaefb29ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le field-content (utilisée par header-field).  <a href="#ad5ad7b1778ac59d9357fd4ccaefb29ff">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad5ad7b1778ac59d9357fd4ccaefb29ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab47203919d00d1f07c1f7b317c6636ca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#ab47203919d00d1f07c1f7b317c6636ca">parse_field_content</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *header_field, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *field_name, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *field_value)</td></tr>
+<tr class="memdesc:ab47203919d00d1f07c1f7b317c6636ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le field-content (utilisée par header-field).  <a href="#ab47203919d00d1f07c1f7b317c6636ca">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab47203919d00d1f07c1f7b317c6636ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a734d58261d5c74152f5622024a2b5114"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a734d58261d5c74152f5622024a2b5114">parse_obs_fold</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *header_field, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *field_name, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *field_value)</td></tr>
+<tr class="memdesc:a734d58261d5c74152f5622024a2b5114"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le obs-fold (utilisée par header-field).  <a href="#a734d58261d5c74152f5622024a2b5114">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a734d58261d5c74152f5622024a2b5114"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac105f005e7a346c792d176b27f158493"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#ac105f005e7a346c792d176b27f158493">parse_message_body</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
-<tr class="memdesc:ac105f005e7a346c792d176b27f158493"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de création d'une nouvelle instance d'un objet <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>.  <a href="#ac105f005e7a346c792d176b27f158493">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:ac105f005e7a346c792d176b27f158493"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le message-body.  <a href="#ac105f005e7a346c792d176b27f158493">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ac105f005e7a346c792d176b27f158493"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a257a8a2cddb8ecb8b5ba6e473e3d28aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a257a8a2cddb8ecb8b5ba6e473e3d28aa">parse_request_target</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
+<tr class="memdesc:a257a8a2cddb8ecb8b5ba6e473e3d28aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le request-target.  <a href="#a257a8a2cddb8ecb8b5ba6e473e3d28aa">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a257a8a2cddb8ecb8b5ba6e473e3d28aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07ec089658dff4bc2a8006959610d09c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a07ec089658dff4bc2a8006959610d09c">parse_request_line</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
+<tr class="memdesc:a07ec089658dff4bc2a8006959610d09c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le request-line.  <a href="#a07ec089658dff4bc2a8006959610d09c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a07ec089658dff4bc2a8006959610d09c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13ae5419e9f8d0be36d854b7bb5f2b15"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a13ae5419e9f8d0be36d854b7bb5f2b15">parse_origin_form</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
+<tr class="memdesc:a13ae5419e9f8d0be36d854b7bb5f2b15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le origin-form.  <a href="#a13ae5419e9f8d0be36d854b7bb5f2b15">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a13ae5419e9f8d0be36d854b7bb5f2b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a852889cd8005196dc62bd1c48b7f419a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a852889cd8005196dc62bd1c48b7f419a">parse_absolute_form</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
+<tr class="memdesc:a852889cd8005196dc62bd1c48b7f419a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le absolute-form.  <a href="#a852889cd8005196dc62bd1c48b7f419a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a852889cd8005196dc62bd1c48b7f419a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbfad6e696c0ad74cad0d8381f5a9045"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#abbfad6e696c0ad74cad0d8381f5a9045">parse_authority_form</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
+<tr class="memdesc:abbfad6e696c0ad74cad0d8381f5a9045"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le authority-form.  <a href="#abbfad6e696c0ad74cad0d8381f5a9045">Plus de détails...</a><br /></td></tr>
+<tr class="separator:abbfad6e696c0ad74cad0d8381f5a9045"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e5664b36d17c4bd8688b60ccf4090ad"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a2e5664b36d17c4bd8688b60ccf4090ad">parse_IPv4</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
+<tr class="memdesc:a2e5664b36d17c4bd8688b60ccf4090ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le IPv4.  <a href="#a2e5664b36d17c4bd8688b60ccf4090ad">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a2e5664b36d17c4bd8688b60ccf4090ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16e8d99b3300d4dca1b433ac67fedad3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a16e8d99b3300d4dca1b433ac67fedad3">parse_user_info</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
+<tr class="memdesc:a16e8d99b3300d4dca1b433ac67fedad3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le user-info.  <a href="#a16e8d99b3300d4dca1b433ac67fedad3">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a16e8d99b3300d4dca1b433ac67fedad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39d11873f126902e29267a535459f9dc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a39d11873f126902e29267a535459f9dc">parse_regname</a> (char *request, int *cursor, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
+<tr class="memdesc:a39d11873f126902e29267a535459f9dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour parser le regname.  <a href="#a39d11873f126902e29267a535459f9dc">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a39d11873f126902e29267a535459f9dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2f206515eea286c2a1518f4c55233c9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#ae2f206515eea286c2a1518f4c55233c9">parse_string</a> (char *str, int *cursor, char *cmp_str)</td></tr>
+<tr class="memdesc:ae2f206515eea286c2a1518f4c55233c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour vérifier l'égalité d'une chaine et d'une sous-chaine.  <a href="#ae2f206515eea286c2a1518f4c55233c9">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae2f206515eea286c2a1518f4c55233c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c3e17b63eba193e2d120a8581abb52b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a5c3e17b63eba193e2d120a8581abb52b">isDIGIT</a> (char *request, int *cursor)</td></tr>
+<tr class="memdesc:a5c3e17b63eba193e2d120a8581abb52b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour vérifier si on a bien un DIGIT.  <a href="#a5c3e17b63eba193e2d120a8581abb52b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5c3e17b63eba193e2d120a8581abb52b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8a251dc9ff236cd8a6ea9a1126ee3de"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#ad8a251dc9ff236cd8a6ea9a1126ee3de">isTchar</a> (char *request, int *cursor)</td></tr>
+<tr class="memdesc:ad8a251dc9ff236cd8a6ea9a1126ee3de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour vérifier si on a bien un TCHAR.  <a href="#ad8a251dc9ff236cd8a6ea9a1126ee3de">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad8a251dc9ff236cd8a6ea9a1126ee3de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6ab41f52f7d26911df0d96ee90c7d50"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#ae6ab41f52f7d26911df0d96ee90c7d50">isVCHAR</a> (char *request, int *cursor)</td></tr>
+<tr class="memdesc:ae6ab41f52f7d26911df0d96ee90c7d50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour vérifier si on a bien un VCHAR.  <a href="#ae6ab41f52f7d26911df0d96ee90c7d50">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae6ab41f52f7d26911df0d96ee90c7d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a7bd06003eacabe81babb18d688ad6e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#a3a7bd06003eacabe81babb18d688ad6e">isObstext</a> (char *request, int *cursor)</td></tr>
+<tr class="memdesc:a3a7bd06003eacabe81babb18d688ad6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour vérifier si on a bien un ObsText.  <a href="#a3a7bd06003eacabe81babb18d688ad6e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3a7bd06003eacabe81babb18d688ad6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaa3a52b7b5d5bbc4fb753a8a2719b9a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#afaa3a52b7b5d5bbc4fb753a8a2719b9a">isFieldvchar</a> (char *request, int *cursor)</td></tr>
+<tr class="memdesc:afaa3a52b7b5d5bbc4fb753a8a2719b9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour vérifier si on a bien un Field-VCHAR.  <a href="#afaa3a52b7b5d5bbc4fb753a8a2719b9a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:afaa3a52b7b5d5bbc4fb753a8a2719b9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfc102efdae7ecfa0127f2af59153eed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__parser_8h.html#abfc102efdae7ecfa0127f2af59153eed">isUnreserved</a> (char *request, int *cursor)</td></tr>
+<tr class="memdesc:abfc102efdae7ecfa0127f2af59153eed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour vérifier si on a bien un Unreserved.  <a href="#abfc102efdae7ecfa0127f2af59153eed">Plus de détails...</a><br /></td></tr>
+<tr class="separator:abfc102efdae7ecfa0127f2af59153eed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Parseur HTTP 1.0. </p>
 <dl class="section author"><dt>Auteur</dt><dd>R. Vidal / A. Lorber / T. Jacumin </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
-<a class="anchor" id="a21deb380a12b788502d04e9e87584d8e"></a>
+<a class="anchor" id="a5c3e17b63eba193e2d120a8581abb52b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int parse_header_field </td>
+          <td class="memname">int isDIGIT </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour vérifier si on a bien un DIGIT. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si le prochain caractere est un DIGIT, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="afaa3a52b7b5d5bbc4fb753a8a2719b9a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int isFieldvchar </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour vérifier si on a bien un Field-VCHAR. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la caractere de la requête est un field-vchar, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3a7bd06003eacabe81babb18d688ad6e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int isObstext </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour vérifier si on a bien un ObsText. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si le caractere de la requete est un ObsText, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad8a251dc9ff236cd8a6ea9a1126ee3de"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int isTchar </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour vérifier si on a bien un TCHAR. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si le caractere de la requete est un TCHAR, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abfc102efdae7ecfa0127f2af59153eed"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int isUnreserved </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour vérifier si on a bien un Unreserved. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la caractere de la requête est un Unreserved, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae6ab41f52f7d26911df0d96ee90c7d50"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int isVCHAR </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour vérifier si on a bien un VCHAR. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si le caractere de la requete est un VCHAR, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a852889cd8005196dc62bd1c48b7f419a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_absolute_form </td>
           <td>(</td>
           <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>request</em>, </td>
@@ -153,7 +435,264 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fonction de création d'une nouvelle instance d'un objet <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>. </p>
+<p>Fonction pour parser le absolute-form. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la requête est correcte, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abbfad6e696c0ad74cad0d8381f5a9045"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_authority_form </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour parser le authority-form. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la requête est correcte, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ab47203919d00d1f07c1f7b317c6636ca"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_field_content </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>header_field</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>field_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>field_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour parser le field-content (utilisée par header-field). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud header-field utilisé pour sauvegarder la valeur de l'élément correspondant au noeud. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud field-name utilisé pour sauvegarder la valeur de l'élément correspondant au noeud. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud field-value utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la requête est correcte, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="abffccf125d845ec29df1b08088bc9e3d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_field_name </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>header_field</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>field_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>field_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour parser le field-name. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud header-field utilisé pour sauvegarder la valeur de l'élément correspondant au noeud. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud field-name utilisé pour sauvegarder la valeur de l'élément correspondant au noeud. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud field-value utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la requête est correcte, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad5ad7b1778ac59d9357fd4ccaefb29ff"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_field_value </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>header_field</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>field_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>field_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour parser le field-content (utilisée par header-field). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud header-field utilisé pour sauvegarder la valeur de l'élément correspondant au noeud. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud field-name utilisé pour sauvegarder la valeur de l'élément correspondant au noeud. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud field-value utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la requête est correcte, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a5c703eb865ac9be5e6e5707e8d83b503"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_header_field </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>header_field</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour parser le header-field. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
@@ -196,7 +735,50 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fonction de création d'une nouvelle instance d'un objet <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>. </p>
+<p>Fonction pour parser le HTTP-message. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la requête est correcte, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a2e5664b36d17c4bd8688b60ccf4090ad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_IPv4 </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour parser le IPv4. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
@@ -239,7 +821,236 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fonction de création d'une nouvelle instance d'un objet <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>. </p>
+<p>Fonction pour parser le message-body. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la requête est correcte, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a734d58261d5c74152f5622024a2b5114"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_obs_fold </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>header_field</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>field_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>field_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour parser le obs-fold (utilisée par header-field). </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud header-field utilisé pour sauvegarder la valeur de l'élément correspondant au noeud. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud field-name utilisé pour sauvegarder la valeur de l'élément correspondant au noeud. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud field-value utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la requête est correcte, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a13ae5419e9f8d0be36d854b7bb5f2b15"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_origin_form </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour parser le origin-form. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la requête est correcte, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a39d11873f126902e29267a535459f9dc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_regname </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour parser le regname. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la requête est correcte, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a07ec089658dff4bc2a8006959610d09c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_request_line </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour parser le request-line. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la requête est correcte, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a257a8a2cddb8ecb8b5ba6e473e3d28aa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_request_target </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour parser le request-target. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
@@ -282,7 +1093,7 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fonction de création d'une nouvelle instance d'un objet <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>. </p>
+<p>Fonction pour parser le start-line. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
@@ -325,7 +1136,93 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Fonction de création d'une nouvelle instance d'un objet <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>. </p>
+<p>Fonction pour parser le status-line. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la requête est correcte, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae2f206515eea286c2a1518f4c55233c9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_string </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>cmp_str</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour vérifier l'égalité d'une chaine et d'une sous-chaine. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Chaine contenant la requête. </td></tr>
+    <tr><td class="paramname">cursor</td><td>Pointeur vers la position de la lecture de la requête. </td></tr>
+    <tr><td class="paramname">cmp_str</td><td>Pointeur vers le noeud utilisé pour sauvegarder la valeur de l'élément correspondant au noeud.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 1 si la requête est correcte, 0 sinon. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a16e8d99b3300d4dca1b433ac67fedad3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_user_info </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>cursor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour parser le user-info. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">request</td><td>Chaine contenant la requête. </td></tr>

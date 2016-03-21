@@ -1,6 +1,6 @@
 #include "http_node.h"
 
-void init_HTTP_Node ( const char * name, HTTP_Node * node ) {
+void init_HTTP_Node ( char * name, HTTP_Node * node ) {
 	node->name = name;
 	node->beg = 0;
 	node->end = 0;
