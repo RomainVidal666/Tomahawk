@@ -14,12 +14,17 @@ int parse_HTTP_message ( char * request, int * cursor, HTTP_Node * node ) {
 	if ( parse_start_line ( request, cursor, start_line ) ) { // On parse la start-line
 		printf ( "Le start-line est valide\n" );
 		
+		*cursor=38;
+		
 		header_field = malloc ( sizeof ( HTTP_Node ) );
+		init_HTTP_Node ( "header-field", header_field );
 		addChild_HTTP_Node ( node, header_field );
+		header_field -> beg = *cursor;
 
 		if ( parse_header_field ( request, cursor, header_field ) ) { // On parse le header-field
-
+			
 			printf ( "Le header-field est valide\n" );
+			
 			message_body = malloc ( sizeof ( HTTP_Node ) );
 			addChild_HTTP_Node ( node, message_body );
 
@@ -85,96 +90,114 @@ int parse_request_target ( char * request, int * cursor, HTTP_Node * node ) {
 }
 
 int parse_header_field ( char * request, int * cursor, HTTP_Node * header_field ) {
-	printf("header	%c\n",*cursor);
+	printf("header	%d\n",*cursor);
 	fflush(stdout);
-	getchar();
-	// header_field->name = "header-field";
-	// header_field -> beg = *cursor;
 	if ( parse_string ( request, cursor, "\n\r" ) ){ /* CRLF */
-		//header_field -> end = *cursor;
+
+		header_field -> end = *cursor;
 		return 1;	/* Message-Body */
 	}
-	return( parse_field_name ( request, cursor, header_field) );	/* field-name */
-	return 0;
+	
+
+	HTTP_Node * field_name = malloc ( sizeof ( HTTP_Node ) );		/* Creation des noeuds pour field-name et field-value */
+	HTTP_Node * field_value = malloc ( sizeof ( HTTP_Node ) );
+	init_HTTP_Node ("field-value", field_value);
+	init_HTTP_Node ("field-name", field_name);
+	addChild_HTTP_Node ( field_name, field_value );
+	addChild_HTTP_Node ( header_field, field_name );
+
+	printf ("%s: nbr childs: %d \n", header_field->childs[0]->name, header_field->childs[0]->nb_childs);
+	printf ("%s: %d -> %d\n", header_field->childs[0]->name, header_field->childs[0]->beg,header_field->childs[0]->end);
+	printf ("%s: %d -> %d\n", header_field->childs[0]->childs[0]->name, header_field->childs[0]->childs[0]->beg,header_field->childs[0]->childs[0]->end);
+
+
+	return( parse_field_name ( request, cursor, header_field, field_name, field_value) );	/* field-name */
 }
 
-int parse_field_name ( char * request, int * cursor, HTTP_Node * node ) {
-	printf("field-name	%c\n",request[*cursor]);
-	// HTTP_Node * field = malloc( sizeof ( HTTP_Node ) );
-	// field->name = "field";
-	// field->beg = *cursor;
-	// addChild_HTTP_Node ( node, field );
-	// HTTP_Node * field_name = malloc( sizeof ( HTTP_Node ) );
-	// field_name->name = "name";
-	// field_name->beg = *cursor;
-	// addChild_HTTP_Node ( field, field_name );
+int parse_field_name ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value ) {
+	printf("field-name	%d\n",*cursor);
+	printf ("%s: nbr childs: %d \n", header_field->childs[0]->name, header_field->childs[0]->nb_childs);
+	printf ("%s: %d -> %d\n", header_field->childs[0]->name, header_field->childs[0]->beg,header_field->childs[0]->end);
+	printf ("%s: %d -> %d\n", header_field->childs[0]->childs[0]->name, header_field->childs[0]->childs[0]->beg,header_field->childs[0]->childs[0]->end);
+
+	field_name->beg = *cursor;
 	if ( isTchar ( request, cursor ) ) {	/*tchar*/
 		while ( isTchar ( request, cursor ) );	/* *(tchar)*/
 		if( parse_string ( request, cursor, ":" ) ) {
-			//field_name->end = *cursor;
+			field_name -> end = *cursor-1;
 			while( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	") );
-			return( parse_field_value ( request, cursor, node ) );
+			return( parse_field_value ( request, cursor, header_field, field_name, field_value ) );	/* field-value */
 		}
 	}
 	return 0;
 }
 
-int parse_field_value ( char * request, int * cursor, HTTP_Node * node ) {
-	printf("field_value	%c\n",request[*cursor]);
+int parse_field_value ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value ) {
+	field_value->beg = *cursor;
+	printf ("%s: nbr childs: %d \n", header_field->childs[0]->name, header_field->childs[0]->nb_childs);
+	printf ("%s: %d -> %d\n", header_field->childs[0]->name, header_field->childs[0]->beg,header_field->childs[0]->end);
+	printf ("%s: %d -> %d\n", header_field->childs[0]->childs[0]->name, header_field->childs[0]->childs[0]->beg,header_field->childs[0]->childs[0]->end);
+
 	int curs_sec;
 	if ( isFieldvchar ( request, cursor ) ) {	/* field-content */
-		return ( parse_field_content ( request, cursor ) );
+		return ( parse_field_content ( request, cursor, header_field, field_name, field_value ) );
 	}
 	curs_sec = *cursor;							/* 2 possibilitees: retourner dans header field avec OWS CRLF, ou aller dans obs_fold avec CRLF */
 	if (parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
-		if ( parse_obs_fold ( request, cursor, node ) )
+		if ( parse_obs_fold ( request, cursor, header_field, field_name, field_value ) )
 			return 1;
 	}
 	*cursor = curs_sec;
+	field_value -> end = *cursor;
 	while ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) );	/* OWS */
 	if (parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
-		return ( parse_header_field ( request, cursor, node ) );
+		return ( parse_header_field ( request, cursor, header_field ) );
 	}
 	return 0;
 }
 
-int parse_field_content ( char * request, int * cursor, HTTP_Node * node ) {
+int parse_field_content ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value ) {
+	printf ("%s: nbr childs: %d \n", header_field->childs[0]->name, header_field->childs[0]->nb_childs);
+	printf ("%s: %d -> %d\n", header_field->childs[0]->name, header_field->childs[0]->beg,header_field->childs[0]->end);
+	printf ("%s: %d -> %d\n", header_field->childs[0]->childs[0]->name, header_field->childs[0]->childs[0]->beg,header_field->childs[0]->childs[0]->end);
+
 	printf("field_content	%d\n",*cursor);
 	int curs_sec;
 	while ( isFieldvchar ( request, cursor ) );
 	if ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) ) {	/* SP or HTAB */
 			if( isFieldvchar( request, cursor ) )
-				return ( parse_field_content ( request, cursor, node ) );
+				return ( parse_field_content ( request, cursor, header_field, field_name, field_value ) );
 			else
 				return 0;
 	}
 	curs_sec = *cursor;							/* 2 possibilitees: retourner dans header field avec OWS CRLF, ou aller dans obs_fold avec CRLF */
 	if (parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
-		if ( parse_obs_fold ( request, cursor, node ) )
+		if ( parse_obs_fold ( request, cursor, header_field, field_name, field_value ) )
 			return 1;
 	}
 	*cursor = curs_sec;
+	field_value -> end = *cursor;
 	while ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) );	/* OWS */
 	if (parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
-		return ( parse_header_field ( request, cursor, node ) );
+		return ( parse_header_field ( request, cursor, header_field ) );
 	}
 	return 0; 
 }
 
-int parse_obs_fold ( char * request, int * cursor, HTTP_Node * node ) {
-	printf("obs_fold	%c\n",request[*cursor]);
+int parse_obs_fold ( char * request, int * cursor, HTTP_Node * header_field , HTTP_Node * field_name, HTTP_Node * field_value ) {
 	int curs_sec;
 	if ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) ) {	/* SP or HTAB */
 		while ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) );	/* OWS */
+		field_value -> end = *cursor;
 		if ( parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
 			curs_sec = *cursor;								/* on enregistre le curseur, car on va tester une branche ( car automate non deterministe à cet endroit ) */
-			if ( parse_obs_fold ( request, cursor, node ) )	/* soit on retourne en obs_fold_1 */
+			if ( parse_obs_fold ( request, cursor, header_field, field_name, field_value ) )	/* soit on retourne en obs_fold_1 */
 				return 1;
 			*cursor = curs_sec;								/* soit on retourne dans header field */
-			return ( parse_header_field ( request, cursor, node ) );
+			return ( parse_header_field ( request, cursor, header_field ) );
 		}
 		if ( isFieldvchar ( request, cursor ) )
-			return ( parse_field_content ( request, cursor, node) );
+			return ( parse_field_content ( request, cursor, header_field, field_name, field_value ) );
 	}
 	return 0;
 }
