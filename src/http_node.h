@@ -89,7 +89,7 @@ void foundAll_HTTP_Node ( HTTP_Node * root, char* string, int* nbFound, HTTP_Nod
  * \brief Fonction de recherche dans un arbre.
  *
  * \param root Pointeur vers le noeud racine de l'arbre à supprimer.
- * \param string La chaine à rechercher.
+ * \param string La chaîne à rechercher.
  * \param result Tableau des noeuds correspondant à la recherche.
  * \param nbFound Le nombre de noeud trouvé.
  *
@@ -100,7 +100,7 @@ void foundAll_HTTP_Node_rec ( HTTP_Node * root, char* string, HTTP_Node** result
  * \fn void print_HTTP_Node ( char * request, HTTP_Node * node )
  * \brief Fonction pour afficher le contenu d'un HTTP_Node
  *
- * \param request Chaine contenant le requête.
+ * \param request Chaîne contenant la requête.
  * \param node Noeud à afficher.
  *
  */
@@ -110,7 +110,7 @@ void print_HTTP_Node ( char * request, HTTP_Node * node );
  * \fn void print_HTTP_Tree ( char * request, HTTP_Node * root, int level )
  * \brief Fonction pour afficher le contenu d'un arbre de HTTP_Node
  *
- * \param request Chaine contenant le requête.
+ * \param request Chaîne contenant la requête.
  * \param node Noeud racine.
  * \param level Pour l'indentation (laisser à 0).
  *
