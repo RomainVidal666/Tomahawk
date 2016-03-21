@@ -378,7 +378,6 @@ int isDIGIT ( char * request, int * cursor ) {
 	return 0;
 }
 
-<<<<<<< HEAD
 int isTchar ( char * request, int * cursor ) {
 	if ( ( request [ (*cursor) ] >= '0') && ( request [ (*cursor) ] <= '9' ) ||	/*DIGIT*/	/*tchar*/
 		 ( request [ (*cursor) ] >= 'a') && ( request [ (*cursor) ] <= 'z' ) ||	/*ALPHA*/
@@ -410,14 +409,6 @@ int isFieldvchar ( char * request, int * cursor ) {
 	if ( isObstext ( request, cursor ) || isVCHAR ( request, cursor ) ) {
 		return 1;
 	}
-=======
-int isVCHAR ( char * request, int * cursor ) {
-	if ( ( request [ (*cursor) ] >= 0x21 ) && ( request [ (*cursor) ] <= 0x7e ) ) {
-		(*cursor)++;
-		return 1;
-	}
-	
-	return 0;
 }
 
 int isUnreserved ( char * request, int * cursor ) {
@@ -432,7 +423,5 @@ int isUnreserved ( char * request, int * cursor ) {
 		(*cursor)++;
 		return 1;
 	}
-	
->>>>>>> refs/remotes/origin/master
 	return 0;
 }
