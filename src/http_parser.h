@@ -111,7 +111,6 @@ int parse_string ( char * str, int * cursor, char * cmp_str );
  */
 int isDIGIT ( char * request, int * cursor );
 
-<<<<<<< HEAD
 /**
  * \fn int parse_string ( char * str, int * dep, char * cmp_str )
  * \brief Fonction de création d'une nouvelle instance d'un objet HTTP_Node.
@@ -155,10 +154,9 @@ int isObstext ( char * request, int * cursor );
  * \return Retourne 1 si la caractere de la requête est un field-vchar, 0 sinon.
  */
 int isFieldvchar ( char * request, int * cursor );
-=======
-int isVCHAR ( char * request, int * cursor );
+
 
 int isUnreserved ( char * request, int * cursor );
 
->>>>>>> refs/remotes/origin/master
+
 #endif
