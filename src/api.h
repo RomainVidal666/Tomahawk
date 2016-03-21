@@ -39,4 +39,7 @@ int parser (char *buf,unsigned int len,char *search, void (*callback)());
  * \return Un pointeur vers res.
  */
 char* copierChaine(char *buf, char* res, int beg, int end);
+
+
+
 #endif

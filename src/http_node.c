@@ -38,7 +38,8 @@ void free_HTTP_Tree ( HTTP_Node * root ) {
 	int i;
 
 	for ( i = 0; i < root->nb_childs; i++ ) {
-		free_HTTP_Tree ( root->childs [i] );
+		if ( root->childs [i] )
+			free_HTTP_Tree ( root->childs [i] );
 	}
 
 	free_HTTP_Node ( root );

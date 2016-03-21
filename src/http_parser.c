@@ -63,8 +63,6 @@ int parse_start_line ( char * request, int * cursor, HTTP_Node * node ) {
 		return 1;
 
 	}
-
-	free_HTTP_Node ( node );
 	return 0;
 }
 
