@@ -88,6 +88,22 @@ int parse_authority_form ( char * request, int * cursor, HTTP_Node * node );
 
 int parse_IPv4 ( char * request, int * cursor, HTTP_Node * node );
 
+int parse_user_info ( char * request, int * cursor, HTTP_Node * node );
+
+int parse_authority_form ( char * request, int * cursor, HTTP_Node * node );
+
+int parse_regname ( char * request, int * cursor, HTTP_Node * node );
+
+int parse_header_field ( char * request, int * cursor, HTTP_Node * header_field );
+
+int parse_field_name ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value );
+
+int parse_field_value ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value );
+
+int parse_field_content ( char * request, int * cursor, HTTP_Node * header_field, HTTP_Node * field_name, HTTP_Node * field_value );
+
+int parse_obs_fold ( char * request, int * cursor, HTTP_Node * header_field , HTTP_Node * field_name, HTTP_Node * field_value );
+
 /**
  * \fn int parse_string ( char * str, int * dep, char * cmp_str )
  * \brief Fonction de création d'une nouvelle instance d'un objet HTTP_Node.
