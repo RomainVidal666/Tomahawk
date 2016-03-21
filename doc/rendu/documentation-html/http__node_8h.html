@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Tomahawk: Référence du fichier src/http_node.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Logo Tomahawk - petit mais grand.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Tomahawk
+   &#160;<span id="projectnumber">v.alpha</span>
+   </div>
+   <div id="projectbrief">Projet de serveur HTTP visant à détrôner Apache.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Page&#160;principale</span></a></li>
+      <li><a href="annotated.html"><span>Structures&#160;de&#160;données</span></a></li>
+      <li class="current"><a href="files.html"><span>Fichiers</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Liste&#160;des&#160;fichiers</span></a></li>
+      <li><a href="globals.html"><span>Variables&#160;globale</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Structures de données</a> &#124;
+<a href="#typedef-members">Définitions de type</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier http_node.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Gestion de l'arbre n-aire utiliser par le parseur HTTP.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+</div>
+<p><a href="http__node_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Structures de données</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Représente un noeud de l'arbre utilisé par le parseur.  <a href="struct_h_t_t_p___node.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Définitions de type</h2></td></tr>
+<tr class="memitem:a51626b4032bebee9b84332d620d6dc67"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a51626b4032bebee9b84332d620d6dc67"></a>
+typedef struct <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a>&#160;</td><td class="memItemRight" valign="bottom"><b>HTTP_Node</b></td></tr>
+<tr class="separator:a51626b4032bebee9b84332d620d6dc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a39970aa0bb76ad973174bc8918ad9eb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__node_8h.html#a39970aa0bb76ad973174bc8918ad9eb6">init_HTTP_Node</a> (char *name, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
+<tr class="memdesc:a39970aa0bb76ad973174bc8918ad9eb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de création d'une nouvelle instance d'un objet <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>.  <a href="#a39970aa0bb76ad973174bc8918ad9eb6">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a39970aa0bb76ad973174bc8918ad9eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a749490919bbf65d0092ce0cd72d25899"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__node_8h.html#a749490919bbf65d0092ce0cd72d25899">addChild_HTTP_Node</a> (<a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *child)</td></tr>
+<tr class="memdesc:a749490919bbf65d0092ce0cd72d25899"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'ajout d'un fils à un noeud.  <a href="#a749490919bbf65d0092ce0cd72d25899">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a749490919bbf65d0092ce0cd72d25899"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e30384896a2e89d4a9ad758f575e512"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__node_8h.html#a9e30384896a2e89d4a9ad758f575e512">free_HTTP_Node</a> (<a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
+<tr class="memdesc:a9e30384896a2e89d4a9ad758f575e512"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de suppression d'un noeud.  <a href="#a9e30384896a2e89d4a9ad758f575e512">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9e30384896a2e89d4a9ad758f575e512"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad20b9bbf21990a03a15d900f7282edda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__node_8h.html#ad20b9bbf21990a03a15d900f7282edda">free_HTTP_Tree</a> (<a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *root)</td></tr>
+<tr class="memdesc:ad20b9bbf21990a03a15d900f7282edda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de suppression d'un arbre.  <a href="#ad20b9bbf21990a03a15d900f7282edda">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad20b9bbf21990a03a15d900f7282edda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08f479514031c0c747f2359b3de0a09f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__node_8h.html#a08f479514031c0c747f2359b3de0a09f">found_HTTP_Node</a> (<a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *root, char *string)</td></tr>
+<tr class="memdesc:a08f479514031c0c747f2359b3de0a09f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de recherche dans un arbre.  <a href="#a08f479514031c0c747f2359b3de0a09f">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a08f479514031c0c747f2359b3de0a09f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7848e7a8ffc970dcc2b505976450ad25"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7848e7a8ffc970dcc2b505976450ad25"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>foundAll_HTTP_Node</b> (<a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *root, char *string, int *nbFound, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> **result)</td></tr>
+<tr class="separator:a7848e7a8ffc970dcc2b505976450ad25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afff1a0b95a939d2c2f0a514a81bb4b29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__node_8h.html#afff1a0b95a939d2c2f0a514a81bb4b29">foundAll_HTTP_Node_rec</a> (<a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *root, char *string, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> **result, int *nbFound)</td></tr>
+<tr class="memdesc:afff1a0b95a939d2c2f0a514a81bb4b29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de recherche dans un arbre.  <a href="#afff1a0b95a939d2c2f0a514a81bb4b29">Plus de détails...</a><br /></td></tr>
+<tr class="separator:afff1a0b95a939d2c2f0a514a81bb4b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02425c1a80cc73294432b6ae4108d745"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__node_8h.html#a02425c1a80cc73294432b6ae4108d745">print_HTTP_Node</a> (char *request, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *node)</td></tr>
+<tr class="memdesc:a02425c1a80cc73294432b6ae4108d745"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour afficher le contenu d'un <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>.  <a href="#a02425c1a80cc73294432b6ae4108d745">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a02425c1a80cc73294432b6ae4108d745"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a783545319534979c2f75dc54a002037b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__node_8h.html#a783545319534979c2f75dc54a002037b">print_HTTP_Tree</a> (char *request, <a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *root, int level)</td></tr>
+<tr class="memdesc:a783545319534979c2f75dc54a002037b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction pour afficher le contenu d'un arbre de <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>.  <a href="#a783545319534979c2f75dc54a002037b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a783545319534979c2f75dc54a002037b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Gestion de l'arbre n-aire utiliser par le parseur HTTP. </p>
+<dl class="section author"><dt>Auteur</dt><dd>R. Vidal / A. Lorber / T. Jacumin </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="a749490919bbf65d0092ce0cd72d25899"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void addChild_HTTP_Node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>child</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'ajout d'un fils à un noeud. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud parent. </td></tr>
+    <tr><td class="paramname">child</td><td>Pointeur vers le noeud fils. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a08f479514031c0c747f2359b3de0a09f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a>* found_HTTP_Node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>root</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>string</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction de recherche dans un arbre. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">root</td><td>Pointeur vers le noeud racine de l'arbre à supprimer. </td></tr>
+    <tr><td class="paramname">string</td><td>La chaine à rechercher.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Le noeud qui à pour nom la chaine string. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="afff1a0b95a939d2c2f0a514a81bb4b29"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void foundAll_HTTP_Node_rec </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>root</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>string</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> **&#160;</td>
+          <td class="paramname"><em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>nbFound</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction de recherche dans un arbre. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">root</td><td>Pointeur vers le noeud racine de l'arbre à supprimer. </td></tr>
+    <tr><td class="paramname">string</td><td>La chaîne à rechercher. </td></tr>
+    <tr><td class="paramname">result</td><td>Tableau des noeuds correspondant à la recherche. </td></tr>
+    <tr><td class="paramname">nbFound</td><td>Le nombre de noeud trouvé. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9e30384896a2e89d4a9ad758f575e512"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_HTTP_Node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction de suppression d'un noeud. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud à supprimer. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ad20b9bbf21990a03a15d900f7282edda"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_HTTP_Tree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>root</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction de suppression d'un arbre. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud racine de l'arbre à supprimer. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a39970aa0bb76ad973174bc8918ad9eb6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_HTTP_Node </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction de création d'une nouvelle instance d'un objet <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Nom du noeud. </td></tr>
+    <tr><td class="paramname">node</td><td>Pointeur vers le noeud à initialiser. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a02425c1a80cc73294432b6ae4108d745"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_HTTP_Node </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour afficher le contenu d'un <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaîne contenant la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Noeud à afficher. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a783545319534979c2f75dc54a002037b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_HTTP_Tree </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_h_t_t_p___node.html">HTTP_Node</a> *&#160;</td>
+          <td class="paramname"><em>root</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction pour afficher le contenu d'un arbre de <a class="el" href="struct_h_t_t_p___node.html" title="Représente un noeud de l&#39;arbre utilisé par le parseur. ">HTTP_Node</a>. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>Chaîne contenant la requête. </td></tr>
+    <tr><td class="paramname">node</td><td>Noeud racine. </td></tr>
+    <tr><td class="paramname">level</td><td>Pour l'indentation (laisser à 0). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>
