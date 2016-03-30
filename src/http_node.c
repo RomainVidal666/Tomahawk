@@ -28,9 +28,6 @@ void addChild_HTTP_Node ( HTTP_Node * node, HTTP_Node * child ) {
 }
 
 void free_HTTP_Node ( HTTP_Node * node ) {
-	if ( node->childs )
-		free ( node->childs );
-
 	free ( node );
 }
 
@@ -38,11 +35,13 @@ void free_HTTP_Tree ( HTTP_Node * root ) {
 	int i;
 
 	for ( i = 0; i < root->nb_childs; i++ ) {
-		if ( root->childs [i] )
+		if ( root->childs [i] ) {
 			free_HTTP_Tree ( root->childs [i] );
+		}
 	}
 
-	free_HTTP_Node ( root );
+	//free_HTTP_Node ( root );
+	free ( root );
 }
 
 HTTP_Node* found_HTTP_Node ( HTTP_Node * root, char* string ) {

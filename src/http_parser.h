@@ -16,7 +16,7 @@
 
 #define SP ' '
 
-#define DEBUG 
+//#define DEBUG 
 #ifdef DEBUG
 	#define DEBUG_PRINT(x) printf(x)
 #else
