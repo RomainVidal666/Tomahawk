@@ -97,6 +97,20 @@ void foundAll_HTTP_Node_rec ( HTTP_Node * root, char* string, HTTP_Node** result
 	}
 }
 
+void count_HTTP_Node ( HTTP_Node * root, char * string, int * count ) {
+	int i = 0;
+
+	// On regarde le nom et on l'ajoute au besoin
+	if (!strcmp(root->name, string)) {
+		 (*count)++;
+	}
+
+	// On parcourt ses fils
+	for(i = 0; i < root->nb_childs; i++ ) {
+		// On recherche à partir de chacun de ces fils.
+		count_HTTP_Node(root->childs[i], string, count);
+	}
+}
 
 void print_HTTP_Node ( char * request, HTTP_Node * node ) {
 	if ( node ) {

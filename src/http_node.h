@@ -62,10 +62,10 @@ void free_HTTP_Node ( HTTP_Node * node );
 void free_HTTP_Tree ( HTTP_Node * root );
 
 /**
- * \fn HTTP_Node found_HTTP_Node ( HTTP_Node * root, char* string );
+ * \fn HTTP_Node found_HTTP_Node ( HTTP_Node * root, char* string )
  * \brief Fonction de recherche dans un arbre.
  *
- * \param root Pointeur vers le noeud racine de l'arbre à supprimer.
+ * \param root Pointeur vers le noeud racine de l'arbre.
  * \param string La chaine à rechercher.
  *
  * \return Le noeud qui à pour nom la chaine string.
@@ -76,7 +76,7 @@ HTTP_Node* found_HTTP_Node ( HTTP_Node * root, char* string );
  * \fn HTTP_Node* foundAll_HTTP_Node ( HTTP_Node * root, char* string, int* nbFound )
  * \brief Fonction de recherche dans un arbre.
  *
- * \param root Pointeur vers le noeud racine de l'arbre à supprimer.
+ * \param root Pointeur vers le noeud racine de l'arbre.
  * \param string La chaine à rechercher.
  * \param nbFound Le nombre de noeud trouvé.
  *
@@ -88,13 +88,24 @@ void foundAll_HTTP_Node ( HTTP_Node * root, char* string, int* nbFound, HTTP_Nod
  * \fn void foundAll_HTTP_Node_rec ( HTTP_Node * root, char* string, HTTP_Node** result, int* nbFound )
  * \brief Fonction de recherche dans un arbre.
  *
- * \param root Pointeur vers le noeud racine de l'arbre à supprimer.
+ * \param root Pointeur vers le noeud racine de l'arbre.
  * \param string La chaîne à rechercher.
  * \param result Tableau des noeuds correspondant à la recherche.
  * \param nbFound Le nombre de noeud trouvé.
  *
  */
 void foundAll_HTTP_Node_rec ( HTTP_Node * root, char* string, HTTP_Node** result, int* nbFound );
+
+/**
+ * \fn int count_HTTP_Node ( HTTP_Node * root, char* string )
+ * \brief Fonction de comptage d'elements dans un arbre.
+ *
+ * \param root Pointeur vers le noeud racine de l'arbre.
+ * \param string La chaine à rechercher.
+ * \param count Le nombre de noeud qui ont comme nom string.
+ * 
+ */
+void count_HTTP_Node ( HTTP_Node * root, char* string, int * count );
 
 /**
  * \fn void print_HTTP_Node ( char * request, HTTP_Node * node )

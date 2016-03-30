@@ -6,8 +6,8 @@ int parser (char *buf, unsigned int len, char *search ,void (*callback)()) {
 	int cursor = 0;
 	int i = 0;
 	HTTP_Node * root = malloc ( sizeof ( HTTP_Node ) );
-	HTTP_Node * nodes[200];
-	int result, nbResult;
+	HTTP_Node ** nodes;
+	int result, nbResult, nodesCount;
    	char * string;
 
    	// On parse la chaine pour obtenir un arbre
@@ -17,8 +17,11 @@ int parser (char *buf, unsigned int len, char *search ,void (*callback)()) {
 	if ( result != 1 ) {
 		return cursor;
 	}
-
+	
 	// On trouve les elements recherche
+	count_HTTP_Node(root, search, &nodesCount);
+	nodes = malloc( sizeof(HTTP_Node*) * nodesCount);
+	
 	foundAll_HTTP_Node ( root, search, &nbResult, nodes );
 
 	for(i = 0; i < nbResult; i++) {
@@ -31,8 +34,8 @@ int parser (char *buf, unsigned int len, char *search ,void (*callback)()) {
 	}
 
    	// Liberation de la memoire
+   	free ( nodes );
 	free_HTTP_Tree ( root );
-
 	return -1;
 }
 
