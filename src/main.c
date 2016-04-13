@@ -4,7 +4,7 @@
 #include "http_node.h"
 #include "http_parser.h"
 #include "api.h"
-#include "request.h"
+#include "http_response.h"
 
 void callback(char* string, int len) {
     printf("CALLBACK : Trouve : (%s)\n", string);
@@ -42,8 +42,18 @@ int main ( int argc, char * argv [] ) {
 	message *requete; 
 	message *reponse;
 
+	HTTP_GET_response rep;
+
+	int cursor = 0;
+
+	HTTP_Node * http_message;
+
 	while ( 1 ) {
 		// on attend la recepetion d'une requete 
+
+		http_message = malloc ( sizeof ( HTTP_Node ) );
+		cursor = 0;
+
 		requete=getRequest(8080);
 
 		// Affichage de debug 
@@ -51,22 +61,24 @@ int main ( int argc, char * argv [] ) {
 		printf("Client [%d] [%s:%d]\n",requete->clientId,inet_ntoa(requete->clientAddress->sin_addr),htons(requete->clientAddress->sin_port));
 		printf("Contenu de la demande %.*s\n\n",requete->len,requete->buf); 
 
-		// Si on a une reponse a faire
-		if (argv[1]) {
-			if (reponse=malloc(sizeof(message))) { 
-				reponse->buf=argv[1]; // on devrait l'allouer sinon
-				reponse->len=strlen(argv[1]); 
-				reponse->clientId=requete->clientId; 
-				sendReponse(reponse); 
-				// reponse est recopiée on peut tout de suite liberer la memoire
-				free(reponse); 
-				//optionnel, ici on clot la connexion tout de suite (HTTP/1.0) 
-				requestShutdownSocket(reponse->clientId); 
-			}
-		} 		
+		if ( parse_HTTP_message ( requete->buf, &cursor, http_message ) ) { 
+			printf ( "La requete est valide \n" );
+
+			print_HTTP_Tree ( requete->buf, http_message, 0 );
+
+			free_HTTP_Tree ( http_message );
+		}
+
+		//rep.body = "HTTP/1.0 200 OK\r\nDate: Fri, 31 Dec 1999 23:59:59 GMT\r\nServer: Tomahawk/0.8.4\r\nContent-Type: text/html\r\nContent-Length: 59\r\nExpires: Sat, 01 Jan 2000 00:59:59 GMT\r\nLast-modified: Fri, 09 Aug 1996 14:21:40 GMT\r\n\r\n<TITLE>Exemple</TITLE><P>Ceci est une page d'exemple.</P>\r\n";
+		
+		//send_HTTP_GET_response ( & rep, requete->clientId );
+
 		// on ne se sert plus de requete a partir de maintenant, on peut donc liberer... 
 		freeRequest(requete); 
 	}
+
+	
+
 
 	return 0;
 }
