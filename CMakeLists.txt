@@ -10,3 +10,8 @@ add_executable (
 	tomahawk
 	${src_files}
 )
+
+target_link_libraries(
+        tomahawk
+        /home/thomas/Documents/Development/Tomahawk/librequest.so
+)

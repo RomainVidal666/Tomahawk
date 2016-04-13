@@ -169,6 +169,21 @@ src/http_parser.s:
 .PHONY : src/http_parser.s
 
 # target to build an object file
+src/http_response.o:
+	$(MAKE) -f CMakeFiles/tomahawk.dir/build.make CMakeFiles/tomahawk.dir/src/http_response.o
+.PHONY : src/http_response.o
+
+# target to preprocess a source file
+src/http_response.i:
+	$(MAKE) -f CMakeFiles/tomahawk.dir/build.make CMakeFiles/tomahawk.dir/src/http_response.i
+.PHONY : src/http_response.i
+
+# target to generate assembly for a file
+src/http_response.s:
+	$(MAKE) -f CMakeFiles/tomahawk.dir/build.make CMakeFiles/tomahawk.dir/src/http_response.s
+.PHONY : src/http_response.s
+
+# target to build an object file
 src/main.o:
 	$(MAKE) -f CMakeFiles/tomahawk.dir/build.make CMakeFiles/tomahawk.dir/src/main.o
 .PHONY : src/main.o
@@ -201,6 +216,9 @@ help:
 	@echo "... src/http_parser.o"
 	@echo "... src/http_parser.i"
 	@echo "... src/http_parser.s"
+	@echo "... src/http_response.o"
+	@echo "... src/http_response.i"
+	@echo "... src/http_response.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
