@@ -325,4 +325,15 @@ int isFieldvchar ( char * request, int * cursor );
  */
 int isUnreserved ( char * request, int * cursor );
 
+/**
+ * \fn char * get_HTTP_Node_value ( char * request, HTTP_Node * node )
+ * \brief Fonction pour avoir la valeur sous forme de chaine de caractères d'une HTTP_Node.
+ *
+ * \param request chaîne contenant la requête.
+ * \param node Pointeur vers la HTTP_Node.
+ * 
+ * \return Retourne la valeur sous forme de chaine de caractères de la HTTP_Node.
+ */
+char * get_HTTP_Node_value ( char * request, HTTP_Node * node );
+
 #endif

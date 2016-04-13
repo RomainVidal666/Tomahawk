@@ -198,6 +198,21 @@ src/main.s:
 	$(MAKE) -f CMakeFiles/tomahawk.dir/build.make CMakeFiles/tomahawk.dir/src/main.s
 .PHONY : src/main.s
 
+# target to build an object file
+src/utilities.o:
+	$(MAKE) -f CMakeFiles/tomahawk.dir/build.make CMakeFiles/tomahawk.dir/src/utilities.o
+.PHONY : src/utilities.o
+
+# target to preprocess a source file
+src/utilities.i:
+	$(MAKE) -f CMakeFiles/tomahawk.dir/build.make CMakeFiles/tomahawk.dir/src/utilities.i
+.PHONY : src/utilities.i
+
+# target to generate assembly for a file
+src/utilities.s:
+	$(MAKE) -f CMakeFiles/tomahawk.dir/build.make CMakeFiles/tomahawk.dir/src/utilities.s
+.PHONY : src/utilities.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -222,6 +237,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/utilities.o"
+	@echo "... src/utilities.i"
+	@echo "... src/utilities.s"
 .PHONY : help
 
 

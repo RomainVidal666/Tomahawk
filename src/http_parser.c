@@ -681,3 +681,17 @@ int isUnreserved ( char * request, int * cursor ) {
 	}
 	return 0;
 }
+
+char * get_HTTP_Node_value ( char * request, HTTP_Node * node ) {
+	char * str = NULL;
+	int i;
+	if ( ( node ) && ( node->end > node->beg ) ) {
+		str = malloc ( sizeof ( char ) * ( node->end - node->beg + 1 ) );
+		for ( i = 0; i < node->end - node->beg; i++ ) {
+			str [i] = request [node->beg + i];
+		}
+		str [node->end - node->beg] = '\0';
+	}
+
+	return str;
+}

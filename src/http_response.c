@@ -88,45 +88,6 @@ char * cast_HTTP_GET_response_to_string ( HTTP_GET_response * response ) {
 	return str_reponse;
 }
 
-char * strcat_without_alloc ( char * s1, char * s2 ) {
-    int old_size;
-    char * t;
-
-    if ( s1 ) {
-    	old_size = strlen ( s1 );
-	} else {
-		old_size = 0;
-	}
-
-    t = malloc ( sizeof ( char ) * ( old_size + strlen ( s2 ) + 1 ) );
-    if ( s1 ) {
-    	strcpy ( t, s1 );
-	}
-    strcpy ( t + old_size, s2 );
-    
-	return t;
-}
-
-char * charcat_without_alloc ( char * s1, char c ) {
-    int old_size;
-    char * t;
-
-    if ( s1 ) {
-    	old_size = strlen ( s1 );
-	} else {
-		old_size = 0;
-	}
-
-    t = malloc ( sizeof ( char ) * ( old_size + 2 ) );
-    if ( s1 ) {
-    	strcpy ( t, s1 );
-	}
-    t[old_size] = c;
-    t[old_size + 1] = '\0';
-
-	return t;
-}
-
 HTTP_header * add_HTTP_header ( char * name, char * value, HTTP_header * root ) {
 	HTTP_header * current = root;
 	if ( root ) {
@@ -147,20 +108,33 @@ HTTP_header * add_HTTP_header ( char * name, char * value, HTTP_header * root ) 
 	return root;
 }
 
-char * read_from_file ( char * pathname ) {
+char * read_from_file ( char * pathname, char * root_dir ) {
 	FILE * fichier = NULL;
 	char caractereActuel;
 	char * content = NULL;
+	int i, length;
 
-    if ( fichier = fopen ( pathname, "r" ) ) {
+	char * real_pathname = NULL;
+
+	if ( pathname [0] == '/' ) { // on demande la racine du site */
+		length = strlen ( pathname );
+		real_pathname = malloc ( sizeof ( char ) * ( length - 1 ) );
+		for ( i = 1; i <= length; i++ ) {
+			real_pathname [i-1] = pathname [i];
+		}
+	} else {
+		real_pathname = pathname;
+	}
+
+	real_pathname = strcat_without_alloc ( root_dir, real_pathname );
+
+   	if ( fichier = fopen ( real_pathname, "r" ) ) {
     	caractereActuel = fgetc ( fichier );
     	while ( caractereActuel != EOF ) {
             content = charcat_without_alloc ( content, caractereActuel );
             caractereActuel = fgetc ( fichier );
         }
         fclose ( fichier );
-
     }
-
 	return content;
 }
