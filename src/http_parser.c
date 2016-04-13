@@ -106,7 +106,7 @@ int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) { /* TO
 				if ( parse_string ( request, cursor, " " ) ) { /* SP */
 					reason_phrase->beg = *cursor;
 					while ( ( requestlength > *cursor ) && ( ! end_status_line ) ) { /* reason-phrase */
-						end_status_line = parse_string ( request, cursor, "\n\r" );
+						end_status_line = parse_string ( request, cursor, "\r\n" );
 
 						if ( ! end_status_line ) {
 							*cursor = *cursor + 1;
@@ -115,7 +115,7 @@ int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) { /* TO
 					}
 					DEBUG_PRINT ( "-- reason-phrase valide\n" );
 					node->end = *cursor;
-					return end_status_line; /* retourne 1 si on a trouvé le \n\r, 0 sinon */
+					return end_status_line; /* retourne 1 si on a trouvé le \r\n, 0 sinon */
 				}
 			}
 		}
@@ -160,7 +160,7 @@ int parse_request_line ( char * request, int * cursor, HTTP_Node * node ) {
 
 				http_version->end = *cursor;
 
-				if ( parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+				if ( parse_string ( request, cursor, "\r\n" ) ) { /* CRLF */
 					DEBUG_PRINT ( "- HTTP-version valide\n" );
 					addChild_HTTP_Node ( node, request_target ); 
 					node->end = *cursor;
@@ -495,7 +495,7 @@ int parse_IPv4 ( char * request, int * cursor, HTTP_Node * node ) {
 int parse_header_field ( char * request, int * cursor, HTTP_Node * header_field ) {
 	DEBUG_PRINT("header-field\n");
 	
-	if ( parse_string ( request, cursor, "\n\r" ) ){ /* CRLF */
+	if ( parse_string ( request, cursor, "\r\n" ) ){ /* CRLF */
 
 		header_field -> end = *cursor;
 		return 1;	/* Message-Body */
@@ -537,14 +537,14 @@ int parse_field_value ( char * request, int * cursor, HTTP_Node * header_field, 
 		return ( parse_field_content ( request, cursor, header_field, field_name, field_value ) );
 	}
 	curs_sec = *cursor;							/* 2 possibilitees: retourner dans header field avec OWS CRLF, ou aller dans obs_fold avec CRLF */
-	if (parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+	if (parse_string ( request, cursor, "\r\n" ) ) { /* CRLF */
 		if ( parse_obs_fold ( request, cursor, header_field, field_name, field_value ) )
 			return 1;
 	}
 	*cursor = curs_sec;
 	field_value -> end = *cursor;
 	while ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) );	/* OWS */
-	if (parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+	if (parse_string ( request, cursor, "\r\n" ) ) { /* CRLF */
 		return ( parse_header_field ( request, cursor, header_field ) );
 	}
 	return 0;
@@ -562,14 +562,14 @@ int parse_field_content ( char * request, int * cursor, HTTP_Node * header_field
 				return 0;
 	}
 	curs_sec = *cursor;							/* 2 possibilitees: retourner dans header field avec OWS CRLF, ou aller dans obs_fold avec CRLF */
-	if (parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+	if (parse_string ( request, cursor, "\r\n" ) ) { /* CRLF */
 		if ( parse_obs_fold ( request, cursor, header_field, field_name, field_value ) )
 			return 1;
 	}
 	*cursor = curs_sec;
 	field_value -> end = *cursor;
 	while ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) );	/* OWS */
-	if (parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+	if (parse_string ( request, cursor, "\r\n" ) ) { /* CRLF */
 		return ( parse_header_field ( request, cursor, header_field ) );
 	}
 	return 0; 
@@ -582,7 +582,7 @@ int parse_obs_fold ( char * request, int * cursor, HTTP_Node * header_field , HT
 	if ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) ) {	/* SP or HTAB */
 		while ( parse_string ( request, cursor, " " ) || parse_string ( request, cursor, "	" ) );	/* OWS */
 		field_value -> end = *cursor;
-		if ( parse_string ( request, cursor, "\n\r" ) ) { /* CRLF */
+		if ( parse_string ( request, cursor, "\r\n" ) ) { /* CRLF */
 			curs_sec = *cursor;								/* on enregistre le curseur, car on va tester une branche ( car automate non deterministe à cet endroit ) */
 			if ( parse_obs_fold ( request, cursor, header_field, field_name, field_value ) )	/* soit on retourne en obs_fold_1 */
 				return 1;
