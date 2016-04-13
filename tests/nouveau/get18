@@ -1,0 +1,10 @@
+GET /ressource/index.html HTTP/1.1
+Cookie: one; two; three 
+Content-Length: 2039338 
+Transfer-Encoding: ,,,deflate,gzip
+Host: 10.10.10.10:443
+Referer: http://toto.com 
+Accept: toto/toto
+User-Agent: firefox
+Connection: Close,change
+
