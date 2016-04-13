@@ -26,6 +26,8 @@ void free_HTTP_header ( HTTP_header * root );
 
 char * get_message_code ( int code );
 
+char * strcat_without_alloc ( char * s1, char * s2 );
+
 
 /* bob */
 char * cast_HTTP_GET_response_to_string ( HTTP_GET_response * response );

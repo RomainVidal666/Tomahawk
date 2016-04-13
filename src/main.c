@@ -39,46 +39,55 @@ int main ( int argc, char * argv [] ) {
 
 	free_HTTP_Tree ( http_message );
 	*/
-	message *requete; 
-	message *reponse;
-
-	HTTP_GET_response rep;
-
-	int cursor = 0;
-
-	HTTP_Node * http_message;
-
+	message * requete;
+	HTTP_Node * http_message; 
+	HTTP_GET_response reponse;
+	int cursor;
+	
+	/*
 	while ( 1 ) {
-		// on attend la recepetion d'une requete 
-
+		
 		http_message = malloc ( sizeof ( HTTP_Node ) );
 		cursor = 0;
 
-		requete=getRequest(8080);
+		requete = getRequest ( 8080 ); // on attend la recepetion d'une requete 
 
 		// Affichage de debug 
 		printf("#########################################\nDemande recue depuis le client %d\n",requete->clientId); 
 		printf("Client [%d] [%s:%d]\n",requete->clientId,inet_ntoa(requete->clientAddress->sin_addr),htons(requete->clientAddress->sin_port));
 		printf("Contenu de la demande %.*s\n\n",requete->len,requete->buf); 
 
-		if ( parse_HTTP_message ( requete->buf, &cursor, http_message ) ) { 
+		if ( parse_HTTP_message ( requete->buf, & cursor, http_message ) ) { // la requete est valide 
+
 			printf ( "La requete est valide \n" );
+			//print_HTTP_Tree ( requete->buf, http_message, 0 );
+			
 
-			print_HTTP_Tree ( requete->buf, http_message, 0 );
-
-			free_HTTP_Tree ( http_message );
+		} else { // la requete est invalide => erreur 400  
+			reponse.code = 400;
+			send_HTTP_GET_response ( & reponse, requete->clientId );
 		}
 
-		//rep.body = "HTTP/1.0 200 OK\r\nDate: Fri, 31 Dec 1999 23:59:59 GMT\r\nServer: Tomahawk/0.8.4\r\nContent-Type: text/html\r\nContent-Length: 59\r\nExpires: Sat, 01 Jan 2000 00:59:59 GMT\r\nLast-modified: Fri, 09 Aug 1996 14:21:40 GMT\r\n\r\n<TITLE>Exemple</TITLE><P>Ceci est une page d'exemple.</P>\r\n";
 		
 		//send_HTTP_GET_response ( & rep, requete->clientId );
 
 		// on ne se sert plus de requete a partir de maintenant, on peut donc liberer... 
-		freeRequest(requete); 
+		freeRequest ( requete ); 
+		free_HTTP_Tree ( http_message );
 	}
+	*/
 
-	
+	reponse.headers = NULL;
+	reponse.headers = add_HTTP_header ( "test1", "schnappi", reponse.headers );
+	reponse.headers = add_HTTP_header ( "test2", "schnappi", reponse.headers );
+	reponse.headers = add_HTTP_header ( "test3", "schnappi", reponse.headers );
+
+	reponse.code = 400;
+	reponse.body = "Vous être trop con :'(";
+
+	printf ( "(%s)\n", cast_HTTP_GET_response_to_string ( & reponse ) );
 
 
+	//send_HTTP_GET_response ( & reponse, requete->clientId );
 	return 0;
 }
