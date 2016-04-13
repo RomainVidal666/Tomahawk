@@ -46,7 +46,7 @@ int main ( int argc, char * argv [] ) {
 	
 	
 	while ( 1 ) {
-		
+		reponse.headers = NULL;
 		http_message = malloc ( sizeof ( HTTP_Node ) );
 		cursor = 0;
 
@@ -62,13 +62,13 @@ int main ( int argc, char * argv [] ) {
 			printf ( "La requete est valide \n" );
 			//print_HTTP_Tree ( requete->buf, http_message, 0 );
 
-			reponse.headers = NULL;
 			reponse.code = 400;
-			reponse.body = "Vous êtes trop con :'(";
+			reponse.body = read_from_file ( "html_error_pages/400.html" );
 
 			send_HTTP_GET_response ( & reponse, requete->clientId );
 		} else { // la requete est invalide => erreur 400  
 			reponse.code = 400;
+			reponse.body = read_from_file ( "html_error_pages/400.html" );
 			send_HTTP_GET_response ( & reponse, requete->clientId );
 		}
 
@@ -79,5 +79,8 @@ int main ( int argc, char * argv [] ) {
 		freeRequest ( requete ); 
 		free_HTTP_Tree ( http_message );
 	}
+
+	
+
 	return 0;
 }

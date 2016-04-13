@@ -21,22 +21,21 @@ struct HTTP_GET_response {
 
 /* thomas */
 HTTP_header * add_HTTP_header ( char * name, char * value, HTTP_header * root );
-
 void free_HTTP_header ( HTTP_header * root );
 
 char * get_message_code ( int code );
 
 char * strcat_without_alloc ( char * s1, char * s2 );
+char * chatcat_without_alloc ( char * s1, char c );
 
+char * read_from_file ( char * pathname );
 
 /* bob */
 char * cast_HTTP_GET_response_to_string ( HTTP_GET_response * response );
-
 int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId );
 
 
 /* romain666 */
 
 char * cast_HTTP_POST_response_to_string ( HTTP_GET_response * response );
-
 int send_HTTP_POST_response ( HTTP_GET_response * http_reponse, unsigned int clientId );

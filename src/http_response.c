@@ -7,6 +7,7 @@ int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clie
 	
 	if ( reponse = malloc ( sizeof ( message ) ) ) { 
 
+		/* headers minimaux si il y a un message-body */
 		http_reponse->headers = add_HTTP_header ( "Server", "Tomahawk/1.0", http_reponse->headers );
 		http_reponse->headers = add_HTTP_header ( "Content-Type", "text/html", http_reponse->headers );
 		http_reponse->headers = add_HTTP_header ( "Content-Length", content_length, http_reponse->headers );
@@ -106,6 +107,26 @@ char * strcat_without_alloc ( char * s1, char * s2 ) {
 	return t;
 }
 
+char * charcat_without_alloc ( char * s1, char c ) {
+    int old_size;
+    char * t;
+
+    if ( s1 ) {
+    	old_size = strlen ( s1 );
+	} else {
+		old_size = 0;
+	}
+
+    t = malloc ( sizeof ( char ) * ( old_size + 2 ) );
+    if ( s1 ) {
+    	strcpy ( t, s1 );
+	}
+    t[old_size] = c;
+    t[old_size + 1] = '\0';
+
+	return t;
+}
+
 HTTP_header * add_HTTP_header ( char * name, char * value, HTTP_header * root ) {
 	HTTP_header * current = root;
 	if ( root ) {
@@ -124,4 +145,22 @@ HTTP_header * add_HTTP_header ( char * name, char * value, HTTP_header * root ) 
 	}
 
 	return root;
+}
+
+char * read_from_file ( char * pathname ) {
+	FILE * fichier = NULL;
+	char caractereActuel;
+	char * content = NULL;
+
+    if ( fichier = fopen ( pathname, "r" ) ) {
+    	caractereActuel = fgetc ( fichier );
+    	while ( caractereActuel != EOF ) {
+            content = charcat_without_alloc ( content, caractereActuel );
+            caractereActuel = fgetc ( fichier );
+        }
+        fclose ( fichier );
+
+    }
+
+	return content;
 }
