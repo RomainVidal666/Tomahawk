@@ -2,28 +2,27 @@
 
 int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId ) {
 	message * reponse;
-
-	reponse->buf = cast_HTTP_GET_response_to_string ( http_reponse );
-
-	printf ( "%s\n", reponse->buf );	
-
+	char content_length [512];
+	snprintf ( content_length, 512, "%d", strlen ( http_reponse->body ) );
 	
-
 	if ( reponse = malloc ( sizeof ( message ) ) ) { 
 
-		reponse->len = strlen ( http_reponse->body ); 
+		http_reponse->headers = add_HTTP_header ( "Server", "Tomahawk/1.0", http_reponse->headers );
+		http_reponse->headers = add_HTTP_header ( "Content-Type", "text/html", http_reponse->headers );
+		http_reponse->headers = add_HTTP_header ( "Content-Length", content_length, http_reponse->headers );
+		http_reponse->headers = add_HTTP_header ( "alcohol-type", "Rum", http_reponse->headers );
+
+		reponse->buf = cast_HTTP_GET_response_to_string ( http_reponse );
+		printf ( "(%s)\n", reponse->buf );	
+	
+		reponse->len = strlen ( reponse->buf ); 
 		reponse->clientId = clientId; 
-
 		sendReponse ( reponse ); 
-
 		free ( reponse ); 
-		
 		requestShutdownSocket ( clientId ); //optionnel, ici on clot la connexion tout de suite (HTTP/1.0) 
 
 		return 1;
 	}
-
-	
 
 	return 0;
 }
@@ -82,7 +81,7 @@ char * cast_HTTP_GET_response_to_string ( HTTP_GET_response * response ) {
 	}
 
 	/* body */
-	str_reponse = strcat_without_alloc ( str_reponse, "\r\n\r\n" );
+	str_reponse = strcat_without_alloc ( str_reponse, "\r\n" );
 	str_reponse = strcat_without_alloc ( str_reponse, response->body );
 
 	return str_reponse;
