@@ -1,6 +1,7 @@
 #include "api.h"
 #include "http_node.h"
 #include "http_parser.h"
+#include "utilities.h"
 
 int parser (char *buf, unsigned int len, char *search ,void (*callback)()) {
 	int cursor = 0;
@@ -37,19 +38,4 @@ int parser (char *buf, unsigned int len, char *search ,void (*callback)()) {
    	free ( nodes );
 	free_HTTP_Tree ( root );
 	return -1;
-}
-
-char* copierChaine(char *buf, char* res, int beg, int end) {
-    // Variables locale
-    int i = 0, j = 0;
-
-    // On recopie la chaine
-    for (i = beg; i < end; i++ ) {
-        res[j++] = buf[i];
-    }
-
-    // On ajoute un zero de fin de chaine
-    res[j] = '\0';
-
-    return res;
 }

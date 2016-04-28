@@ -38,3 +38,18 @@ char * charcat_without_alloc ( char * s1, char c ) {
 
 	return t;
 }
+
+char* copierChaine(char *buf, char* res, int beg, int end) {
+    // Variables locale
+    int i = 0, j = 0;
+
+    // On recopie la chaine
+    for (i = beg; i < end; i++ ) {
+        res[j++] = buf[i];
+    }
+
+    // On ajoute un zero de fin de chaine
+    res[j] = '\0';
+
+    return res;
+}

@@ -1,5 +1,41 @@
 #include "http_response.h"
 
+int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
+	HTTP_GET_response reponse;
+	reponse.headers = NULL;
+	char * rc_pathname = NULL;
+	
+	if ( rc_pathname = get_HTTP_Node_value ( requete->buf, & found_HTTP_Node ( http_message, "absolute-path" ) [0] ) ) { // on récupère l'absolute-path 
+			} else { // par défaut on envoie l'index
+				rc_pathname = "/index.html";
+			}
+			
+			if ( reponse.body = read_from_file ( rc_pathname, ROOT_DIR ) ) { // on essaie de trouver la ressources 
+
+				reponse.code = 200;
+				reponse.headers = add_HTTP_header ( "Content-Type", get_mime_type(http_message, requete), reponse.headers );
+				send_HTTP_GET_response ( & reponse, requete->clientId );
+
+			} else { // ressource non trouvée => erreur 404
+				send_HTTP_error( 404, requete->clientId );
+			}
+	return 1;
+}
+
+int send_HTTP_error ( int errNumber, int clientId ) {
+	HTTP_GET_response response;
+	response.headers = NULL;
+	
+	response.code = errNumber;
+	char str[3];
+	sprintf(str, "%d", errNumber);
+	printf("%s", strcat( strcat("html_error_pages/", str), ".html"));
+	response.body = read_from_file ( strcat( strcat("html_error_pages/", str), ".html") , ROOT_DIR);
+	send_HTTP_GET_response ( & response, clientId );
+	
+	return 1;
+}
+
 int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId ) {
 	message * reponse;
 	char content_length [512];
@@ -9,7 +45,7 @@ int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clie
 
 		/* headers minimaux si il y a un message-body */
 		http_reponse->headers = add_HTTP_header ( "Server", "Tomahawk/1.0", http_reponse->headers );
-		http_reponse->headers = add_HTTP_header ( "Content-Type", "text/html", http_reponse->headers );
+		//http_reponse->headers = add_HTTP_header ( "Content-Type", "text/html", http_reponse->headers );
 		http_reponse->headers = add_HTTP_header ( "Content-Length", content_length, http_reponse->headers );
 		http_reponse->headers = add_HTTP_header ( "alcohol-type", "Rum", http_reponse->headers );
 
@@ -73,7 +109,7 @@ char * cast_HTTP_GET_response_to_string ( HTTP_GET_response * response ) {
 	str_reponse = strcat_without_alloc ( str_reponse, "\r\n" );
 
 	/* headers */
-	while ( curr_head ) {
+	while ( curr_head ) {	
 		str_reponse = strcat_without_alloc ( str_reponse, curr_head->name );
 		str_reponse = strcat_without_alloc ( str_reponse, ": " );
 		str_reponse = strcat_without_alloc ( str_reponse, curr_head->value );
@@ -137,4 +173,24 @@ char * read_from_file ( char * pathname, char * root_dir ) {
         fclose ( fichier );
     }
 	return content;
+}
+
+char * get_mime_type(HTTP_Node * http_message, message * requete) {
+	HTTP_Node * node = found_HTTP_Node(http_message, "request-target" );
+	
+	char * str, * type ;
+	str = copierChaine(requete->buf, str, node->beg, node->end);
+	char * extension;
+	
+	// On cherche le point
+	strcpy (extension, strrchr (str, '.') + 1);
+	// Selon on decide du mime
+	//!\ Espace en trop ( pour toute "request-taget" ):/
+	if (!strcmp (extension, "png ")) {
+		type = malloc(10 * sizeof (char));
+		type = "image/png"; }
+	else {
+		type = malloc(9 * sizeof (char));
+		type = "text/html"; }
+	return type;
 }
