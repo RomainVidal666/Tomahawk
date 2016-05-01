@@ -6,7 +6,7 @@
 #include <string.h>
 
 char * strcat_without_alloc ( char * s1, char * s2 );
-char * chatcat_without_alloc ( char * s1, char c );
-char* copierChaine(char *buf, char* res, int beg, int end);
+char * charcat_without_alloc ( char * s1, char c );
+char * copierChaine(char *buf, char* res, int beg, int end);
 
 #endif

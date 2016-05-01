@@ -32,6 +32,7 @@ int main ( int argc, char * argv [] ) {
 		printf("Contenu de la demande %.*s\n\n",requete->len,requete->buf); 
 
 		if ( parse_HTTP_message ( requete->buf, & cursor, http_message ) ) { // la requete est valide 
+			//print_HTTP_Tree ( requete->buf, http_message, 0 );
 			make_HTTP_requete(http_message, requete );
 
 		} else { // la requete est invalide => erreur 400  

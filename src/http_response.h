@@ -29,7 +29,7 @@ struct HTTP_GET_response {
 
 
 
-
+int make_HTTP_requete( HTTP_Node * http_message, message * requete );
 /* thomas */
 HTTP_header * add_HTTP_header ( char * name, char * value, HTTP_header * root );
 void free_HTTP_header ( HTTP_header * root );
@@ -42,6 +42,7 @@ char * read_from_file ( char * pathname, char * root_dir );
 /* bob */
 char * cast_HTTP_GET_response_to_string ( HTTP_GET_response * response );
 int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId );
+int send_HTTP_error ( int errNumber, int clientId );
 
 
 /* romain666 */
