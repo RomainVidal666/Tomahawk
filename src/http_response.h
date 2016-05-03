@@ -37,7 +37,7 @@ void free_HTTP_header ( HTTP_header * root );
 char * get_message_code ( int code );
 char * get_mime_type(HTTP_Node * http_message, message * requete);
 
-char * read_from_file ( char * pathname, char * root_dir );
+char * read_from_file ( char * pathname, char * root_dir, int * taille );
 
 /* bob */
 char * cast_HTTP_GET_response_to_string ( HTTP_GET_response * response );
