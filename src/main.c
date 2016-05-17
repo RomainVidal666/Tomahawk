@@ -20,11 +20,11 @@ int main ( int argc, char * argv [] ) {
 	int cursor;
 	char * rc_pathname = NULL;
 
-	init_percent_table();
+	init_percent_table ();
 
-	char url [] = "https://en.wikipedia.org:80/%30%2f../.%2Fwiki/Percent-encoding";
-	normalizeURL(url);
-	printf("%s\n", url);
+	//char url [] = "https://en.wikipedia.org:80/%30%2f../.%2Fwiki/Percent-encoding";
+	//normalizeURL(url);
+	//printf("%s\n", url);
 	
 	while ( 1 ) {
 		reponse.headers = NULL;

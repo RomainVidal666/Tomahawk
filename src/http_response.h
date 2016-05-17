@@ -22,7 +22,7 @@ struct HTTP_header {
 typedef struct HTTP_GET_response HTTP_GET_response;
 struct HTTP_GET_response {
 	int code;
-	char * body;
+	unsigned char * body;
 	HTTP_header * headers;
 	/* d'autre */
 };
@@ -41,7 +41,7 @@ char * read_from_file ( char * pathname, char * root_dir, int * taille );
 
 /* bob */
 char * cast_HTTP_GET_response_to_string ( HTTP_GET_response * response );
-int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId );
+int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId, int body_length );
 int send_HTTP_error ( int errNumber, int clientId );
 
 
