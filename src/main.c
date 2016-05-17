@@ -5,6 +5,7 @@
 #include "http_parser.h"
 //#include "api.h"
 #include "http_response.h"
+#include "percent_encoding.h"
 
 #define ROOT_DIR "www/"
 
@@ -18,6 +19,12 @@ int main ( int argc, char * argv [] ) {
 	HTTP_GET_response reponse;
 	int cursor;
 	char * rc_pathname = NULL;
+
+	init_percent_table();
+
+	char url [] = "https://en.wikipedia.org:80/%30%2f../.%2Fwiki/Percent-encoding";
+	normalizeURL(url);
+	printf("%s\n", url);
 	
 	while ( 1 ) {
 		reponse.headers = NULL;
@@ -32,6 +39,7 @@ int main ( int argc, char * argv [] ) {
 		printf("Contenu de la demande %.*s\n\n",requete->len,requete->buf); 
 
 		if ( parse_HTTP_message ( requete->buf, & cursor, http_message ) ) { // la requete est valide 
+			
 			//print_HTTP_Tree ( requete->buf, http_message, 0 );
 			make_HTTP_requete(http_message, requete );
 

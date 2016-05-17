@@ -1,28 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-void init_percent_table(char percent_table[350][3]);
-void normalizeURL (char * url, char table[350][3]);
+#include "percent_encoding.h"
 
 
-int main ( int argc, char * argv [] ) {
-	char url[150]= "https://en.wikipedia.org:80/%30%2f../.%2Fwiki/Percent-encoding"; //=> https://en.wikipedia.org/0/..//wiki/Percent-encoding => https://en.wikipedia.org/wiki/Percent-encoding
-	char percent_table[350][3];
-	init_percent_table(percent_table);
-	normalizeURL(url, percent_table);
-	printf("%s\n", url);
-	return 0;
-}
-
-void str_del(char* str, int i){
+void str_del(char * str, int i){
 	while(str[i]!='\0'){
-		str[i]= str[i+1];
+		str[i] = str[i+1];
 		i++;
 	}
 }
 
-void percent_encoding(char * url, char percent_table[350][3]){
+void percent_encoding(char * url){
 	int i=0, encoded=0;
 	if(url[1]>='a' && url[1]<='z')
 		url[1]-=32;
@@ -40,17 +26,17 @@ void percent_encoding(char * url, char percent_table[350][3]){
 		str_del(url, 1);
 	}
 	else{
-		printf("ERROR: percent-caractere inconnu\n");
+		printf("ERROR: unknown percent-character\n");
 	}
 }
 
-void normalizeURL (char * url, char table[350][3]){
+void normalizeURL (char * url){
 	int i, j, k;
 	
 	i=0;
 	while(url[i]!='\0'){
 		if(url[i]=='%'){							/////////////////////////percent-encoding//////////////////////////
-			percent_encoding(&url[i], table);
+			percent_encoding(&url[i]);
 		}
 		if(url[i]>='A' && url[i]<='Z')				//////////////////////Convert to lower case////////////////////////
 			url[i]+= 32;
@@ -103,16 +89,16 @@ void normalizeURL (char * url, char table[350][3]){
 	}
 }
 
-void init_percent_table(char percent_table[350][3]){
+void init_percent_table(){
 	
-	char table[350][3] = {
+	char table[NB_PERCENT_CHAR][4] = {
 	//backspace      %08				///Mettre les codes hexa en lower case 
 	//tab            %09
 	//linefeed       %0A
-	//creturn        %0D
-	//space          %20
+	"\r",			  "%0D",
+	" ",	          "%20",
 	"!",              "%21",
-	"\"",              "%22",
+	"\"",             "%22",
 	"#",              "%23",
 	"$",              "%24",
 	"%",              "%25",
@@ -205,7 +191,6 @@ void init_percent_table(char percent_table[350][3]){
 	"|",              "%7C",
 	"}",              "%7D",
 	"~",              "%7E",
-	
 	"¢",              "%A2",
 	"£",              "%A3",
 	"¥",              "%A5",
@@ -288,11 +273,11 @@ void init_percent_table(char percent_table[350][3]){
 	"ÿ",              "%FF",
 	};
 	int i,j;
-	for(i=0;i<350;i++){
-		j=-1;
-		do{
-			j++;
+	for(i=0;i<NB_PERCENT_CHAR;i++){
+		j=0;
+		while ( table[i][j]!='\0' ) {
 			percent_table[i][j]= table[i][j];
-		}while(table[i][j]!='\0');
+			j++;
+		}
 	}
 }
