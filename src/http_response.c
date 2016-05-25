@@ -4,16 +4,15 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 	HTTP_GET_response reponse;
 	reponse.headers = NULL;
 	char * rc_pathname = NULL;
-	int taille;
+	unsigned long long taille;
 
 	if ( rc_pathname = get_HTTP_Node_value ( requete->buf, & found_HTTP_Node ( http_message, "absolute-path" ) [0] ) ) { // on récupère l'absolute-path 
-
+		normalizeURL ( rc_pathname );
 	} else { // par défaut on envoie l'index
 		rc_pathname = "/index.html";
 	}
 
 	if ( reponse.body = read_from_file ( rc_pathname, ROOT_DIR, &taille ) ) { // on essaie de trouver la ressources 
-		printf("taille: %d\n", taille );
 		reponse.code = 200;
 		reponse.headers = add_HTTP_header ( "Content-Type", get_mime_type(http_message, requete), reponse.headers );
 
@@ -29,7 +28,7 @@ int send_HTTP_error ( int errNumber, int clientId ) {
 	char * pathname = NULL;
 	HTTP_GET_response response;
 	char str[3];
-	int taille;
+	unsigned long long taille;
 
 	response.headers = NULL;
 	response.code = errNumber;
@@ -42,12 +41,12 @@ int send_HTTP_error ( int errNumber, int clientId ) {
 	return 1;
 }
 
-int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId, int body_length ) {
+int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId, unsigned long long body_length ) {
 	message * reponse;
 	char content_length [512];
 	int header_length;
 
-	snprintf ( content_length, 512, "%d", body_length );
+	snprintf ( content_length, 512, "%l", body_length );
 
 	if ( reponse = malloc ( sizeof ( message ) ) ) { 
 		/* headers minimaux si il y a un message-body */
@@ -59,10 +58,7 @@ int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clie
 		header_length = strlen ( reponse->buf );
 		//reponse->buf = strcat_without_alloc ( reponse->buf, http_reponse->body );
 		reponse->buf = strcat_without_alloc_with_length ( reponse->buf, http_reponse->body, body_length );	
-		reponse->len = header_length + body_length; 
-		printf ( "header_length:%d\n", header_length );	
-		printf ( "body_length:%d\n", body_length );	
-		printf ( "reponse->len:%d\n", reponse->len );	
+		reponse->len = header_length + body_length; 	
 
 		reponse->clientId = clientId; 
 		printf ( "(%s)\n", reponse->buf );	
@@ -164,7 +160,7 @@ HTTP_header * add_HTTP_header ( char * name, char * value, HTTP_header * root ) 
 	return root;
 }
 
-char * read_from_file ( char * pathname, char * root_dir, int * taille ) {
+char * read_from_file ( char * pathname, char * root_dir, unsigned long long * taille ) {
 	FILE * fichier = NULL;
 	unsigned char caractereActuel;
 	unsigned char * content = NULL;
@@ -190,7 +186,6 @@ char * read_from_file ( char * pathname, char * root_dir, int * taille ) {
     	while ( ( fread ( & caractereActuel, sizeof ( caractereActuel ), 1, fichier ) ) != 0 ) {
             content = charcat_without_alloc_with_length ( content, caractereActuel, (*taille) );
             (*taille) ++;
-            
         }
 
         fclose ( fichier );
@@ -233,4 +228,55 @@ char * get_mime_type(HTTP_Node * http_message, message * requete) {
 	}
 
 	return "text/html";	
+}
+
+
+HTTP_POST * add_HTTP_POST ( int beg, int end, HTTP_POST * root ) {
+	HTTP_POST * current = root;
+	if ( root ) {
+		while ( current->next != NULL ) {
+			current = current->next;
+		}
+		current->next = malloc ( sizeof ( HTTP_POST ) );
+		current->next->beg = beg;
+		current->next->end  = end;
+		current->next->next = NULL;
+	} else {
+		root = malloc ( sizeof ( HTTP_POST ) );
+		root->beg = beg;
+		root->end  = end;
+		root->next = NULL;
+	}
+
+	return root;
+}
+
+int parse_HTTP_POST ( HTTP_Node * http_message, message * requete ) {/*
+	HTTP_Node * body = found_HTTP_Node ( http_message, "message-body" );
+	int cursor = body->beg;
+	int etat = 0;
+
+	printf ( " creer " );
+	printf ( " curr->beg_name " );
+	while ( cursor < body->end ) {
+			printf ( "%c", requete->buf [cursor] );
+		if ( etat == 0 ) {
+			if ( requete->buf [cursor] == '=' ) {
+				etat = 1;
+				printf ( " curr->beg_value " );
+			} else {
+				printf ( " curr->end_name " );
+			}
+		} else if ( etat == 1 ) {
+			if ( requete->buf [cursor] == '&' ) {
+				etat = 0;
+			} else {
+				printf ( " curr->end_value " );
+			}
+		}
+		cursor++;
+	}
+	printf ( "&\n" );
+	*/
+	printf ( "Coucou gentil POST :) \n" );
 }

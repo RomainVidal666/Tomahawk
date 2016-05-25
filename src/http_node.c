@@ -148,3 +148,11 @@ void print_HTTP_Tree ( char * request, HTTP_Node * root, int level ) {
 		}
 	}
 }
+
+int HTTP_Node_is_equal ( char * request, HTTP_Node * node, char * str ) {
+	for ( int i = node->beg; i < node->end; i++ )
+		if ( request [i] != str [i-node->beg] )
+			return 0;
+
+	return 1;
+}

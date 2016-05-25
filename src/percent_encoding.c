@@ -38,8 +38,8 @@ void normalizeURL (char * url){
 		if(url[i]=='%'){							/////////////////////////percent-encoding//////////////////////////
 			percent_encoding(&url[i]);
 		}
-		if(url[i]>='A' && url[i]<='Z')				//////////////////////Convert to lower case////////////////////////
-			url[i]+= 32;
+		//if(url[i]>='A' && url[i]<='Z')				//////////////////////Convert to lower case////////////////////////
+		//	url[i]+= 32;
 		if(url[i]=='#')							//////////////////////removing the fragment////////////////////////
 			url[i]='\0';							
 		if(url[i]==':' && i>5){						//////////////////////removing default port////////////////////////
@@ -84,7 +84,8 @@ void normalizeURL (char * url){
 
 	//adding trailing
 	if(url[i-1]!='/'){
-		url[i]= '/';
+		//url[i]= '/';
+		url[i]= '\0';
 		url[i+1]= '\0';
 	}
 }

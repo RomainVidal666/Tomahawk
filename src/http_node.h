@@ -128,4 +128,16 @@ void print_HTTP_Node ( char * request, HTTP_Node * node );
  */
 void print_HTTP_Tree ( char * request, HTTP_Node * root, int level );
 
+/**
+ * \fn int HTTP_Node_is_equal ( char * request, HTTP_Node * node, char * str )
+ * \brief Fonction pour comparer la valeur d'un HTTP_Node
+ *
+ * \param request Chaîne contenant la requête.
+ * \param node Noeud à comparer.
+ * \param str Chaîne à comparer.
+ *
+ * \return 1 si la valeur de node est la même que contenue dans str. 0 sinon.
+ */
+int HTTP_Node_is_equal ( char * request, HTTP_Node * node, char * str );
+
 #endif

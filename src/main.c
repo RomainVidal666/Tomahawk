@@ -15,16 +15,12 @@ void callback(char* string, int len) {
 
 int main ( int argc, char * argv [] ) {
 	message * requete;
-	HTTP_Node * http_message; 
+	HTTP_Node * http_message, * method; 
 	HTTP_GET_response reponse;
 	int cursor;
 	char * rc_pathname = NULL;
 
 	init_percent_table ();
-
-	//char url [] = "https://en.wikipedia.org:80/%30%2f../.%2Fwiki/Percent-encoding";
-	//normalizeURL(url);
-	//printf("%s\n", url);
 	
 	while ( 1 ) {
 		reponse.headers = NULL;
@@ -40,8 +36,14 @@ int main ( int argc, char * argv [] ) {
 
 		if ( parse_HTTP_message ( requete->buf, & cursor, http_message ) ) { // la requete est valide 
 			
-			//print_HTTP_Tree ( requete->buf, http_message, 0 );
-			make_HTTP_requete(http_message, requete );
+			print_HTTP_Tree ( requete->buf, http_message, 0 );
+			/* /!\ POUR RECUPERER LE HOSTNAME /!\ => *///print_HTTP_Node ( requete->buf, found_HTTP_Node ( http_message, "field-name" )->childs[0] );
+			method = found_HTTP_Node ( http_message, "method" );
+			if ( HTTP_Node_is_equal ( requete->buf, method, "GET" ) ) {
+				make_HTTP_requete(http_message, requete );
+			} else if ( HTTP_Node_is_equal ( requete->buf, method, "POST" ) ) {
+				parse_HTTP_POST ( http_message, requete );
+			}
 
 		} else { // la requete est invalide => erreur 400  
 			send_HTTP_error(400, requete->clientId);
