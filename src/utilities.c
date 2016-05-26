@@ -22,6 +22,7 @@ char * strcat_without_alloc ( char * s1, char * s2 ) {
 char * strcat_without_alloc_with_length ( char * s1, char * s2, int length ) {
     int old_size;
     char * t;
+    int i;
 
     if ( s1 ) {
         old_size = strlen ( s1 );
@@ -32,12 +33,12 @@ char * strcat_without_alloc_with_length ( char * s1, char * s2, int length ) {
     t = malloc ( sizeof ( char ) * ( old_size + length + 1 ) );
     if ( s1 ) {
         //strcpy ( t, s1 );
-        for ( int i = 0; i < length; i++ ) {
+        for ( i = 0; i < length; i++ ) {
             t[i] = s1 [i];
         }
     }
     //strcpy ( t + old_size, s2 );
-    for ( int i = 0; i < length; i++ ) {
+    for ( i = 0; i < length; i++ ) {
         t[i + old_size] = s2 [i];
     }
     
@@ -67,6 +68,7 @@ char * charcat_without_alloc ( char * s1, char c ) {
 char * charcat_without_alloc_with_length ( char * s1, char c, int length ) {
     int old_size;
     char * t;
+    int i; 
 
     if ( s1 ) {
         old_size = length;
@@ -76,7 +78,7 @@ char * charcat_without_alloc_with_length ( char * s1, char c, int length ) {
 
     t = malloc ( sizeof ( char ) * ( old_size + 2 ) );
     if ( s1 ) {
-        for ( int i = 0; i < length; i++ ) 
+        for ( i = 0; i < length; i++ ) 
             t [i] = s1 [i];
     }
     t[old_size] = c;

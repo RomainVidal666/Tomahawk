@@ -1,0 +1,17 @@
+body {
+	background-color: #FB00C1;
+}
+
+p {
+	color: blue;
+}
+
+h1 {
+	color: yellow;
+	background-color: green;
+}
+
+a {
+	color: orange;
+	font-weight: bold;
+}

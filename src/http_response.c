@@ -4,7 +4,14 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 	HTTP_GET_response reponse;
 	reponse.headers = NULL;
 	char * rc_pathname = NULL;
+	char * root_dir = NULL;
+	char * host_name = NULL;
 	unsigned long long taille;
+
+	host_name = get_field_value( requete->buf, http_message, "Host" );
+	root_dir = findInConfig( host_name );
+	
+	free(host_name);
 
 	if ( rc_pathname = get_HTTP_Node_value ( requete->buf, & found_HTTP_Node ( http_message, "absolute-path" ) [0] ) ) { // on récupère l'absolute-path 
 		normalizeURL ( rc_pathname );
@@ -12,19 +19,19 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 		rc_pathname = "/index.html";
 	}
 
-	if ( reponse.body = read_from_file ( rc_pathname, ROOT_DIR, &taille ) ) { // on essaie de trouver la ressources 
+	if ( reponse.body = read_from_file ( rc_pathname, root_dir, &taille ) ) { // on essaie de trouver la ressources 
 		reponse.code = 200;
 		reponse.headers = add_HTTP_header ( "Content-Type", get_mime_type(http_message, requete), reponse.headers );
 
 		send_HTTP_GET_response ( & reponse, requete->clientId, taille );
 
 	} else { // ressource non trouvée => erreur 404
-		send_HTTP_error( 404, requete->clientId );
+		send_HTTP_error( 404, requete->clientId, root_dir );
 	}
 	return 1;
 }
 
-int send_HTTP_error ( int errNumber, int clientId ) {
+int send_HTTP_error ( int errNumber, int clientId, char * root_dir ) {
 	char * pathname = NULL;
 	HTTP_GET_response response;
 	char str[3];
@@ -33,8 +40,8 @@ int send_HTTP_error ( int errNumber, int clientId ) {
 	response.headers = NULL;
 	response.code = errNumber;
 	sprintf(str, "%d", errNumber);
-
-	response.body = read_from_file ( strcat_without_alloc ( strcat_without_alloc ( "html_error_pages/", str ), ".html" ), ROOT_DIR, &taille );
+	
+	response.body = read_from_file ( strcat_without_alloc ( strcat_without_alloc ( "html_error_pages/", str ), ".html" ), root_dir, &taille );
 
 	send_HTTP_GET_response ( & response, clientId, taille );
 	

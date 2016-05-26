@@ -48,7 +48,7 @@ char * read_from_file ( char * pathname, char * root_dir, unsigned long long * t
 
 char * cast_HTTP_GET_response_to_string ( HTTP_GET_response * response );
 int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId, unsigned long long body_length );
-int send_HTTP_error ( int errNumber, int clientId );
+int send_HTTP_error ( int errNumber, int clientId, char * root_dir );
 
 
 char * cast_HTTP_POST_response_to_string ( HTTP_GET_response * response );

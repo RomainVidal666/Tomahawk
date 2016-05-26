@@ -336,4 +336,17 @@ int isUnreserved ( char * request, int * cursor );
  */
 char * get_HTTP_Node_value ( char * request, HTTP_Node * node );
 
+
+/**
+ * \fn char * get_field_value( char * request, HTTP_Node * node)
+ * \brief Fonction pour avoir la valeur sous forme de chaine de caractères d'un field.
+ *
+ * \param request chaîne contenant la requête.
+ * \param root Pointeur vers la racine.
+ * \param search chaine contenant le field name recherche
+ * 
+ * \return Retourne la valeur sous forme de chaine de caractères de la HTTP_Node.
+ */
+char * get_field_value( char * request, HTTP_Node * root, char * search);
+
 #endif

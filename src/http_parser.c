@@ -605,7 +605,7 @@ int parse_message_body ( char * request, int * cursor, HTTP_Node * node ) {
         *cursor = *cursor + 1;
     };
 
-	node->end = (*cursor) - 1;                        // Sauvegarde de la fin du message body
+	node->end = *cursor;                        // Sauvegarde de la fin du message body
 
 	return 1;                                   // Il ne peut pas y avoir d'erreur sur le retour
 }
@@ -695,3 +695,25 @@ char * get_HTTP_Node_value ( char * request, HTTP_Node * node ) {
 
 	return str;
 }
+
+char * get_field_value( char * request, HTTP_Node * root, char * search) {
+	int count;
+	count_HTTP_Node(root, "field-name", &count);
+	HTTP_Node * nodeFound[count];
+	char * nodeValue;
+	int nbFound;
+	int i;
+	
+	foundAll_HTTP_Node ( root, "field-name", &nbFound, nodeFound );
+
+	for ( i = 0; i < nbFound; i++) {
+		nodeValue = get_HTTP_Node_value(request,nodeFound[i]);
+		if (! strcmp( nodeValue, search ) ){
+			free(nodeValue);
+			return (get_HTTP_Node_value(request, nodeFound[i]->childs[0]));
+		}
+		free(nodeValue);
+	}
+	return NULL;
+}
+

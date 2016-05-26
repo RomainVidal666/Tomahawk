@@ -1,16 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
 
 #include "http_node.h"
 #include "http_parser.h"
 //#include "api.h"
 #include "http_response.h"
 #include "percent_encoding.h"
-
-#define ROOT_DIR "www/"
+#include "config.h"
 
 void callback(char* string, int len) {
     printf("CALLBACK : Trouve : (%s)\n", string);
+}
+
+void quit(int signum) {
+	freeConfig();
+	exit(0);
 }
 
 int main ( int argc, char * argv [] ) {
@@ -19,9 +24,14 @@ int main ( int argc, char * argv [] ) {
 	HTTP_GET_response reponse;
 	int cursor;
 	char * rc_pathname = NULL;
+	char * root_dir = NULL;
+	char * host_name = NULL;
 
 	init_percent_table ();
+	loadConfig();
 	
+	signal(SIGINT, quit);
+
 	while ( 1 ) {
 		reponse.headers = NULL;
 		http_message = malloc ( sizeof ( HTTP_Node ) );
@@ -45,8 +55,12 @@ int main ( int argc, char * argv [] ) {
 				parse_HTTP_POST ( http_message, requete );
 			}
 
-		} else { // la requete est invalide => erreur 400  
-			send_HTTP_error(400, requete->clientId);
+		} else { // la requete est invalide => erreur 400
+		
+			host_name = get_field_value( requete->buf, http_message, "Host" );
+			root_dir = findInConfig( host_name );
+			free(host_name);
+			send_HTTP_error(400, requete->clientId, root_dir);
 		}
 
 		// on ne se sert plus de requete a partir de maintenant, on peut donc liberer... 
