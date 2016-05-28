@@ -248,42 +248,62 @@ HTTP_POST * add_HTTP_POST ( int beg, int end, HTTP_POST * root ) {
 		current->next->beg = beg;
 		current->next->end  = end;
 		current->next->next = NULL;
+		current->next->name = NULL;
 	} else {
 		root = malloc ( sizeof ( HTTP_POST ) );
 		root->beg = beg;
 		root->end  = end;
+		root->name = NULL;
 		root->next = NULL;
 	}
 
 	return root;
 }
 
-int parse_HTTP_POST ( HTTP_Node * http_message, message * requete ) {/*
+int parse_HTTP_POST ( HTTP_Node * http_message, message * requete ) {
 	HTTP_Node * body = found_HTTP_Node ( http_message, "message-body" );
+	HTTP_POST * post = NULL, * curr;
 	int cursor = body->beg;
 	int etat = 0;
 
-	printf ( " creer " );
-	printf ( " curr->beg_name " );
+	post = add_HTTP_POST ( 0, 0, post );
+	curr = post;
 	while ( cursor < body->end ) {
-			printf ( "%c", requete->buf [cursor] );
 		if ( etat == 0 ) {
 			if ( requete->buf [cursor] == '=' ) {
 				etat = 1;
-				printf ( " curr->beg_value " );
+				curr->beg = cursor + 1;
 			} else {
-				printf ( " curr->end_name " );
+				curr->name = charcat_without_alloc ( curr->name, requete->buf [cursor] );
 			}
 		} else if ( etat == 1 ) {
 			if ( requete->buf [cursor] == '&' ) {
 				etat = 0;
+				add_HTTP_POST ( 0, 0, curr );
+				curr = curr->next;
 			} else {
-				printf ( " curr->end_value " );
+				curr->end = cursor + 1;
 			}
 		}
 		cursor++;
 	}
-	printf ( "&\n" );
+
+	/* affichage pour le debug */
+	/*
+	printf ( "\n\n--- POST ---\n" )
+	curr = post;
+	while ( curr ) {
+		printf ( "%s = ", curr->name );
+
+		for ( int i = curr->beg; i < curr->end; i++ )
+			printf("%c", requete->buf [i] );
+
+		printf ( "\n" );
+
+		curr = curr->next;
+	}
+	printf ( "--- POST ---\n\n" )
 	*/
-	printf ( "Coucou gentil POST :) \n" );
+	/* /!\ ne pas oublier les percents encoding lors de l'envoie a php /!\ */
+	make_HTTP_requete ( http_message, requete );
 }

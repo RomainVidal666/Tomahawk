@@ -6,14 +6,9 @@
 	<body>
 		<h1>Faites un don !</h1>
 
-		<img src="imgs/mendiant.jpg" />
-
-		<form method="post" action="dons_trait.php">
-			<p><label>Nom Prénom</label> : <input name="nom" type="text" /></p>
-			<p><label>Numéro de carte bleu</label> : <input name="cb" type="text" /></p>
-			<p><label>Numéro de cryptage</label> : <input name="crypt" type="text" /></p>
-			<p><input type="submit" /></p>
-		</form>
+		<?php
+			echo '<p>Merci beaucoup ' + $_POST['nom'] ' !</p>';
+		?>
 
 		<a href="index.html">Index</a> <a href="page1.html">page 1</a> <a href="page2.html">page 2</a> <a href="dons.html">Faire un don</a>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>

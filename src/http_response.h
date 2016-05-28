@@ -10,6 +10,7 @@
 #include "http_parser.h"
 #include "request.h"
 #include "percent_encoding.h"
+#include "config.h"
 
 #define ROOT_DIR "www/"
 
@@ -25,7 +26,6 @@ struct HTTP_GET_response {
 	int code;
 	unsigned char * body;
 	HTTP_header * headers;
-	/* d'autre */
 };
 
 typedef struct HTTP_POST HTTP_POST;

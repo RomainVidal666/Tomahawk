@@ -605,7 +605,7 @@ int parse_message_body ( char * request, int * cursor, HTTP_Node * node ) {
         *cursor = *cursor + 1;
     };
 
-	node->end = *cursor;                        // Sauvegarde de la fin du message body
+	node->end = (*cursor) - 1;                        // Sauvegarde de la fin du message body
 
 	return 1;                                   // Il ne peut pas y avoir d'erreur sur le retour
 }

@@ -46,9 +46,10 @@ int main ( int argc, char * argv [] ) {
 
 		if ( parse_HTTP_message ( requete->buf, & cursor, http_message ) ) { // la requete est valide 
 			
-			print_HTTP_Tree ( requete->buf, http_message, 0 );
-			/* /!\ POUR RECUPERER LE HOSTNAME /!\ => *///print_HTTP_Node ( requete->buf, found_HTTP_Node ( http_message, "field-name" )->childs[0] );
+			//print_HTTP_Tree ( requete->buf, http_message, 0 );
+
 			method = found_HTTP_Node ( http_message, "method" );
+
 			if ( HTTP_Node_is_equal ( requete->buf, method, "GET" ) ) {
 				make_HTTP_requete(http_message, requete );
 			} else if ( HTTP_Node_is_equal ( requete->buf, method, "POST" ) ) {
@@ -56,7 +57,6 @@ int main ( int argc, char * argv [] ) {
 			}
 
 		} else { // la requete est invalide => erreur 400
-		
 			host_name = get_field_value( requete->buf, http_message, "Host" );
 			root_dir = findInConfig( host_name );
 			free(host_name);
