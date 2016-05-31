@@ -605,7 +605,7 @@ int parse_message_body ( char * request, int * cursor, HTTP_Node * node ) {
         *cursor = *cursor + 1;
     };
 
-	node->end = (*cursor) - 1;                        // Sauvegarde de la fin du message body
+	node->end = (*cursor) + 1;                        // Sauvegarde de la fin du message body
 
 	return 1;                                   // Il ne peut pas y avoir d'erreur sur le retour
 }
@@ -680,40 +680,5 @@ int isUnreserved ( char * request, int * cursor ) {
 		return 1;
 	}
 	return 0;
-}
-
-char * get_HTTP_Node_value ( char * request, HTTP_Node * node ) {
-	char * str = NULL;
-	int i;
-	if ( ( node ) && ( node->end > node->beg ) ) {
-		str = malloc ( sizeof ( char ) * ( node->end - node->beg + 1 ) );
-		for ( i = 0; i < node->end - node->beg; i++ ) {
-			str [i] = request [node->beg + i];
-		}
-		str [node->end - node->beg] = '\0';
-	}
-
-	return str;
-}
-
-char * get_field_value( char * request, HTTP_Node * root, char * search) {
-	int count;
-	count_HTTP_Node(root, "field-name", &count);
-	HTTP_Node * nodeFound[count];
-	char * nodeValue;
-	int nbFound;
-	int i;
-	
-	foundAll_HTTP_Node ( root, "field-name", &nbFound, nodeFound );
-
-	for ( i = 0; i < nbFound; i++) {
-		nodeValue = get_HTTP_Node_value(request,nodeFound[i]);
-		if (! strcmp( nodeValue, search ) ){
-			free(nodeValue);
-			return (get_HTTP_Node_value(request, nodeFound[i]->childs[0]));
-		}
-		free(nodeValue);
-	}
-	return NULL;
 }
 
