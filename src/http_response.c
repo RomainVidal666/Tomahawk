@@ -21,8 +21,7 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 
 	if ( reponse.body = read_from_file ( rc_pathname, root_dir, &taille ) ) { // on essaie de trouver la ressources 
 		reponse.code = 200;
-		
-                reponse.headers = add_HTTP_header ( "Content-Type", get_mime_type(http_message, requete), reponse.headers );
+		reponse.headers = add_HTTP_header ( "Content-Type", get_mime_type(http_message, requete), reponse.headers );
                 
 		send_HTTP_GET_response ( & reponse, requete->clientId, taille );
 
@@ -34,7 +33,7 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 
 int send_HTTP_error ( int errNumber, int clientId, char * root_dir ) {
 	char * pathname = NULL;
-        HTTP_GET_response response;
+    HTTP_GET_response response;
 	char str[3];
 	unsigned long long taille;
 
@@ -42,19 +41,20 @@ int send_HTTP_error ( int errNumber, int clientId, char * root_dir ) {
 	response.code = errNumber;
 	sprintf(str, "%d", errNumber);
 	
-	response.body = read_from_file ( strcat_without_alloc ( strcat_without_alloc ( "html_error_pages/", str ), ".html" ), root_dir, &taille );
+	if ( response.body = read_from_file ( strcat_without_alloc ( strcat_without_alloc ( "html_error_pages/", str ), ".html" ), root_dir, &taille ) ) {
+		send_HTTP_GET_response ( & response, clientId, taille );
+		return 1;
+	} 
 
-	send_HTTP_GET_response ( & response, clientId, taille );
-	
-	return 1;
+	return 0;
 }
 
 int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId, unsigned long long body_length ) {
 	message * reponse;
 	char content_length [512];
         char * header = NULL;
-	int header_length;
-        int i, j, k;
+	unsigned long long header_length;
+        unsigned long long i, j, k;
         
 	snprintf ( content_length, 512, "%d", body_length );
 
@@ -66,7 +66,7 @@ int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clie
 
             header = cast_HTTP_GET_response_to_string ( http_reponse );
             header_length = strlen( header );
-            reponse->buf = malloc(sizeof(char) * (header_length + body_length ) );
+            reponse->buf = malloc(sizeof(char) * (header_length + body_length) );
             
             k = 0;
             for (i = 0; i < header_length; i++) {
@@ -88,12 +88,15 @@ int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clie
             reponse->len = header_length + body_length; 	
 
             reponse->clientId = clientId; 
-	    printf ( "(%s)\n", reponse->buf );	
-	    sendReponse ( reponse ); 
-	    
+	    	//printf ( "(%s)\n", reponse->buf );	
+
+	    	sendReponse ( reponse ); 
+	    	
             free ( http_reponse->body );
             free ( reponse->buf );
-            free ( reponse ); 
+            free ( reponse );
+
+            
 	    
             requestShutdownSocket ( clientId ); //optionnel, ici on clot la connexion tout de suite (HTTP/1.0) 
 
@@ -196,11 +199,9 @@ char * read_from_file ( char * pathname, char * root_dir, unsigned long long * t
 	unsigned char * content = NULL;
 	int i, length;
         
-        char * a[100000];
 	char * real_pathname = NULL;
-        printf("Le champs 'Host' est invalide (plusieurs ou aucune occurence) !\n");
-
-	if ( pathname [0] == '/' ) { // on demande la racine du site */
+      
+	if ( pathname [0] == '/' ) { // on demande la racine du site 
 		length = strlen ( pathname );
 		real_pathname = malloc ( sizeof ( char ) * ( length - 1 ) );
 		for ( i = 1; i <= length; i++ ) {
@@ -213,32 +214,21 @@ char * read_from_file ( char * pathname, char * root_dir, unsigned long long * t
 	real_pathname = strcat_without_alloc ( root_dir, real_pathname );
 
 	*taille = 0;
-    
-        printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 
 	if ( fichier = fopen ( real_pathname, "rb" ) ) {
 
             fseek( fichier ,0 ,SEEK_END);
             length = ftell(fichier);
-            //fseek( fichier ,0 ,SEEK_SET);
             rewind(fichier);
-
-            printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %d\n", length);
             content = (char *) malloc( length * sizeof(char) );
             if (content == NULL)
                 printf("BUFFER ERROR ------------------------------\n");
-            printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
-            fread( content, 1, length, fichier);
-    	    //while ( ( fread ( & caractereActuel, sizeof ( caractereActuel ), 1, fichier ) ) != 0 ) {
-            //    content = charcat_without_alloc_with_length ( content, caractereActuel, (*taille) );
-            //    (*taille) ++;
-            //}
-            printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 
+            fread( content, 1, length, fichier);
             fclose ( fichier );
-        }
-        printf("Le champs 'Fichier' est valide (plusieurs ou aucune occurence) !\n");
-        *taille = length;
+            *taille = length;
+    }
+
 	return content;
 }
 

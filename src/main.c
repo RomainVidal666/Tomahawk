@@ -47,7 +47,7 @@ int main ( int argc, char * argv [] ) {
 
 		if ( parse_HTTP_message ( requete->buf, & cursor, http_message ) ) { // la requete est valide 
 			
-			print_HTTP_Tree ( requete->buf, http_message, 0 );
+			//print_HTTP_Tree ( requete->buf, http_message, 0 );
                         
                         // TODO - Envoyer une erreur
                         // PROBLEME : On a pas acces a host par ce que ... ! Voilà !
@@ -57,7 +57,7 @@ int main ( int argc, char * argv [] ) {
                         else
 			    send_HTTP_error();*/
 
-                        method = found_HTTP_Node ( http_message, "method" );
+            method = found_HTTP_Node ( http_message, "method" );
 
 			if ( HTTP_Node_is_equal ( requete->buf, method, "GET" ) ) {
 				make_HTTP_requete(http_message, requete );
