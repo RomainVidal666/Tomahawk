@@ -8,6 +8,7 @@
 #include "http_response.h"
 #include "percent_encoding.h"
 #include "config.h"
+#include "http_analyseur.h"
 
 void callback(char* string, int len) {
     printf("CALLBACK : Trouve : (%s)\n", string);
@@ -31,7 +32,7 @@ int main ( int argc, char * argv [] ) {
 	loadConfig();
 	
 	signal(SIGINT, quit);
-
+        
 	while ( 1 ) {
 		reponse.headers = NULL;
 		http_message = malloc ( sizeof ( HTTP_Node ) );
@@ -47,8 +48,14 @@ int main ( int argc, char * argv [] ) {
 		if ( parse_HTTP_message ( requete->buf, & cursor, http_message ) ) { // la requete est valide 
 			
 			print_HTTP_Tree ( requete->buf, http_message, 0 );
+                        
+                        // TODO - Envoyer une erreur
+                        /*if (!analyse(requete->buf, http_message))
+                            send_HTTP_error();
+                        else
+			    send_HTTP_error();*/
 
-			method = found_HTTP_Node ( http_message, "method" );
+                        method = found_HTTP_Node ( http_message, "method" );
 
 			if ( HTTP_Node_is_equal ( requete->buf, method, "GET" ) ) {
 				make_HTTP_requete(http_message, requete );
