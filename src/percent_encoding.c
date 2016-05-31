@@ -34,9 +34,10 @@ void normalizeURL (char * url){
 	int i, j, k;
 	int pos_sl=0;					//position du dernier slash pour ne pas modifier la casse des noms de fichier
 	
-	while(url[pos_sl]!='/')
+	int nb=0;
+	while(url[pos_sl]!='/' && nb<=3 && url[pos_sl]!='\0')
 		pos_sl++;
-	
+
 	i=0;
 	while(url[i]!='\0'){
 		if(url[i]=='%'){							/////////////////////////percent-encoding//////////////////////////
