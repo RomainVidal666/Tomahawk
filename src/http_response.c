@@ -14,15 +14,16 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 	free(host_name);
 
 	if ( rc_pathname = get_HTTP_Node_value ( requete->buf, & found_HTTP_Node ( http_message, "absolute-path" ) [0] ) ) { // on récupère l'absolute-path 
-		normalizeURL ( rc_pathname );
+            normalizeURL ( rc_pathname );
 	} else { // par défaut on envoie l'index
 		rc_pathname = "/index.html";
 	}
 
 	if ( reponse.body = read_from_file ( rc_pathname, root_dir, &taille ) ) { // on essaie de trouver la ressources 
 		reponse.code = 200;
-		reponse.headers = add_HTTP_header ( "Content-Type", get_mime_type(http_message, requete), reponse.headers );
-
+		
+                reponse.headers = add_HTTP_header ( "Content-Type", get_mime_type(http_message, requete), reponse.headers );
+                
 		send_HTTP_GET_response ( & reponse, requete->clientId, taille );
 
 	} else { // ressource non trouvée => erreur 404
@@ -33,7 +34,7 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 
 int send_HTTP_error ( int errNumber, int clientId, char * root_dir ) {
 	char * pathname = NULL;
-	HTTP_GET_response response;
+        HTTP_GET_response response;
 	char str[3];
 	unsigned long long taille;
 
@@ -51,27 +52,50 @@ int send_HTTP_error ( int errNumber, int clientId, char * root_dir ) {
 int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId, unsigned long long body_length ) {
 	message * reponse;
 	char content_length [512];
+        char * header = NULL;
 	int header_length;
-
+        int i, j, k;
+        
 	snprintf ( content_length, 512, "%d", body_length );
 
 	if ( reponse = malloc ( sizeof ( message ) ) ) { 
-		/* headers minimaux si il y a un message-body */
-		http_reponse->headers = add_HTTP_header ( "Server", "Tomahawk/1.0", http_reponse->headers );
+	    /* headers minimaux si il y a un message-body */
+	    http_reponse->headers = add_HTTP_header ( "Server", "Tomahawk/1.0", http_reponse->headers );
 		
-		http_reponse->headers = add_HTTP_header ( "Content-Length", content_length, http_reponse->headers );
+	    http_reponse->headers = add_HTTP_header ( "Content-Length", content_length, http_reponse->headers );
 
-		reponse->buf = cast_HTTP_GET_response_to_string ( http_reponse );
-		header_length = strlen ( reponse->buf );
-		//reponse->buf = strcat_without_alloc ( reponse->buf, http_reponse->body );
-		reponse->buf = strcat_without_alloc_with_length ( reponse->buf, http_reponse->body, body_length );	
-		reponse->len = header_length + body_length; 	
+            header = cast_HTTP_GET_response_to_string ( http_reponse );
+            header_length = strlen( header );
+            reponse->buf = malloc(sizeof(char) * (header_length + body_length ) );
+            
+            k = 0;
+            for (i = 0; i < header_length; i++) {
+                reponse->buf[k] = header[i];
+                k++;
+            }
+            for (j = 0; j < body_length; j++) {
+                reponse->buf[k] = http_reponse->body[j];
+                k++;
+            }
 
-		reponse->clientId = clientId; 
-		printf ( "(%s)\n", reponse->buf );	
-		sendReponse ( reponse ); 
-		free ( reponse ); 
-		requestShutdownSocket ( clientId ); //optionnel, ici on clot la connexion tout de suite (HTTP/1.0) 
+            //reponse->buf = cast_HTTP_GET_response_to_string ( http_reponse );
+	    //header_length = strlen ( reponse->buf );
+	    //reponse->buf = strcat_without_alloc ( reponse->buf, http_reponse->body );
+	    //reponse->buf = strcat_without_alloc_with_length ( reponse->buf, http_reponse->body, body_length );
+            
+            // ... snprintf( reponse->buf, header_length + body_length, "%s...", reponse->buf, 
+                
+            reponse->len = header_length + body_length; 	
+
+            reponse->clientId = clientId; 
+	    printf ( "(%s)\n", reponse->buf );	
+	    sendReponse ( reponse ); 
+	    
+            free ( http_reponse->body );
+            free ( reponse->buf );
+            free ( reponse ); 
+	    
+            requestShutdownSocket ( clientId ); //optionnel, ici on clot la connexion tout de suite (HTTP/1.0) 
 
 		return 1;
 	}
@@ -171,8 +195,10 @@ char * read_from_file ( char * pathname, char * root_dir, unsigned long long * t
 	unsigned char caractereActuel;
 	unsigned char * content = NULL;
 	int i, length;
-
+        
+        char * a[100000];
 	char * real_pathname = NULL;
+        printf("Le champs 'Host' est invalide (plusieurs ou aucune occurence) !\n");
 
 	if ( pathname [0] == '/' ) { // on demande la racine du site */
 		length = strlen ( pathname );
@@ -187,16 +213,32 @@ char * read_from_file ( char * pathname, char * root_dir, unsigned long long * t
 	real_pathname = strcat_without_alloc ( root_dir, real_pathname );
 
 	*taille = 0;
+    
+        printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 
 	if ( fichier = fopen ( real_pathname, "rb" ) ) {
-    	while ( ( fread ( & caractereActuel, sizeof ( caractereActuel ), 1, fichier ) ) != 0 ) {
-            content = charcat_without_alloc_with_length ( content, caractereActuel, (*taille) );
-            (*taille) ++;
+
+            fseek( fichier ,0 ,SEEK_END);
+            length = ftell(fichier);
+            //fseek( fichier ,0 ,SEEK_SET);
+            rewind(fichier);
+
+            printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %d\n", length);
+            content = (char *) malloc( length * sizeof(char) );
+            if (content == NULL)
+                printf("BUFFER ERROR ------------------------------\n");
+            printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+            fread( content, 1, length, fichier);
+    	    //while ( ( fread ( & caractereActuel, sizeof ( caractereActuel ), 1, fichier ) ) != 0 ) {
+            //    content = charcat_without_alloc_with_length ( content, caractereActuel, (*taille) );
+            //    (*taille) ++;
+            //}
+            printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+
+            fclose ( fichier );
         }
-
-        fclose ( fichier );
-    }
-
+        printf("Le champs 'Fichier' est valide (plusieurs ou aucune occurence) !\n");
+        *taille = length;
 	return content;
 }
 

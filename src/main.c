@@ -50,6 +50,8 @@ int main ( int argc, char * argv [] ) {
 			print_HTTP_Tree ( requete->buf, http_message, 0 );
                         
                         // TODO - Envoyer une erreur
+                        // PROBLEME : On a pas acces a host par ce que ... ! Voilà !
+                        //              L'erreur peut-être sur ce champs -> besoin de host pour trouver la page d'erreur.
                         /*if (!analyse(requete->buf, http_message))
                             send_HTTP_error();
                         else
