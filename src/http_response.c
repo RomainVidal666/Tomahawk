@@ -77,27 +77,15 @@ int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clie
                 reponse->buf[k] = http_reponse->body[j];
                 k++;
             }
-
-            //reponse->buf = cast_HTTP_GET_response_to_string ( http_reponse );
-	    //header_length = strlen ( reponse->buf );
-	    //reponse->buf = strcat_without_alloc ( reponse->buf, http_reponse->body );
-	    //reponse->buf = strcat_without_alloc_with_length ( reponse->buf, http_reponse->body, body_length );
-            
-            // ... snprintf( reponse->buf, header_length + body_length, "%s...", reponse->buf, 
                 
             reponse->len = header_length + body_length; 	
-
             reponse->clientId = clientId; 
-	    	//printf ( "(%s)\n", reponse->buf );	
-
 	    	sendReponse ( reponse ); 
 	    	
             free ( http_reponse->body );
             free ( reponse->buf );
             free ( reponse );
 
-            
-	    
             requestShutdownSocket ( clientId ); //optionnel, ici on clot la connexion tout de suite (HTTP/1.0) 
 
 		return 1;
