@@ -53,7 +53,7 @@ int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clie
 	char content_length [512];
 	int header_length;
 
-	snprintf ( content_length, 512, "%l", body_length );
+	snprintf ( content_length, 512, "%d", body_length );
 
 	if ( reponse = malloc ( sizeof ( message ) ) ) { 
 		/* headers minimaux si il y a un message-body */
