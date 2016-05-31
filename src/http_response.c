@@ -142,7 +142,6 @@ char * cast_HTTP_GET_response_to_string ( HTTP_GET_response * response ) {
 
 	/* body */
 	str_reponse = strcat_without_alloc ( str_reponse, "\r\n" );
-	//str_reponse = strcat_without_alloc ( str_reponse, response->body );
 
 	return str_reponse;
 }
@@ -306,4 +305,6 @@ int parse_HTTP_POST ( HTTP_Node * http_message, message * requete ) {
 	*/
 	/* /!\ ne pas oublier les percents encoding lors de l'envoie a php /!\ */
 	make_HTTP_requete ( http_message, requete );
+
+	return 1;
 }

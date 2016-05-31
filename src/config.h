@@ -1,6 +1,13 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+/*!
+ * \file config.h
+ * \brief Gestion du fichier de configuration et du multi-sites.
+ * \author R. Vidal / A. Lorber / T. Jacumin
+ * \version 1.0
+ */
+
 //===== INCLUDES =====//
 #include <stdio.h>
 #include <stdlib.h>

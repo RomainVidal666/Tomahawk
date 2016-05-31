@@ -1,6 +1,13 @@
 #ifndef PERCENT_ENCODING_H
 #define PERCENT_ENCODING_H
 
+/*!
+ * \file percent_encoding.h
+ * \brief Gestion de la normalisation de l'URL
+ * \author R. Vidal / A. Lorber / T. Jacumin
+ * \version 1.0
+ */
+ 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

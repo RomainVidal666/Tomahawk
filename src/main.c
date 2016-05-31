@@ -46,7 +46,7 @@ int main ( int argc, char * argv [] ) {
 
 		if ( parse_HTTP_message ( requete->buf, & cursor, http_message ) ) { // la requete est valide 
 			
-			//print_HTTP_Tree ( requete->buf, http_message, 0 );
+			print_HTTP_Tree ( requete->buf, http_message, 0 );
 
 			method = found_HTTP_Node ( http_message, "method" );
 
