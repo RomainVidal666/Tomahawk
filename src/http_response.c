@@ -52,41 +52,40 @@ int send_HTTP_error ( int errNumber, int clientId, char * root_dir ) {
 int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId, unsigned long long body_length ) {
 	message * reponse;
 	char content_length [512];
-        char * header = NULL;
+    char * header = NULL;
 	unsigned long long header_length;
-        unsigned long long i, j, k;
+    unsigned long long i, j, k;
         
 	snprintf ( content_length, 512, "%d", body_length );
 
 	if ( reponse = malloc ( sizeof ( message ) ) ) { 
 	    /* headers minimaux si il y a un message-body */
 	    http_reponse->headers = add_HTTP_header ( "Server", "Tomahawk/1.0", http_reponse->headers );
-		
 	    http_reponse->headers = add_HTTP_header ( "Content-Length", content_length, http_reponse->headers );
 
-            header = cast_HTTP_GET_response_to_string ( http_reponse );
-            header_length = strlen( header );
-            reponse->buf = malloc(sizeof(char) * (header_length + body_length) );
+        header = cast_HTTP_GET_response_to_string ( http_reponse );
+        header_length = strlen( header );
+        reponse->buf = malloc(sizeof(char) * (header_length + body_length) );
+        
+        k = 0;
+        for (i = 0; i < header_length; i++) {
+            reponse->buf[k] = header[i];
+            k++;
+        }
+        for (j = 0; j < body_length; j++) {
+            reponse->buf[k] = http_reponse->body[j];
+            k++;
+        }
             
-            k = 0;
-            for (i = 0; i < header_length; i++) {
-                reponse->buf[k] = header[i];
-                k++;
-            }
-            for (j = 0; j < body_length; j++) {
-                reponse->buf[k] = http_reponse->body[j];
-                k++;
-            }
-                
-            reponse->len = header_length + body_length; 	
-            reponse->clientId = clientId; 
-	    	sendReponse ( reponse ); 
-	    	
-            free ( http_reponse->body );
-            free ( reponse->buf );
-            free ( reponse );
+        reponse->len = header_length + body_length; 	
+        reponse->clientId = clientId; 
+    	sendReponse ( reponse ); 
+    	
+        free ( http_reponse->body );
+        free ( reponse->buf );
+        free ( reponse );
 
-            requestShutdownSocket ( clientId ); //optionnel, ici on clot la connexion tout de suite (HTTP/1.0) 
+        requestShutdownSocket ( clientId ); //optionnel, ici on clot la connexion tout de suite (HTTP/1.0) 
 
 		return 1;
 	}
