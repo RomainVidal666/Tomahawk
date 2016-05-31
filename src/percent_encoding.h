@@ -14,11 +14,44 @@
 
 #define NB_PERCENT_CHAR 352
 
-void init_percent_table();
-void normalizeURL (char * url);
-void percent_encoding(char * url);
-void str_del(char * str, int i);
-
+/**
+ * \var char percent_table[NB_PERCENT_CHAR][3]
+ * \brief Tableau de correspondance percent-encoding.
+ **/
 char percent_table[NB_PERCENT_CHAR][3];
+
+/**
+ * \fn void init_percent_table()
+ * \brief Fonction pour initialiser le tableau de caractère avec traduction percent encoding.
+ */
+void init_percent_table();
+
+/**
+ * \fn void normalizeURL (char * url)
+ * \brief Fonction principale pour normaliser l'URL.
+ *
+ * \param url Chaîne de caractère contenant l'URL à normaliser.
+ * 
+ */
+void normalizeURL (char * url);
+
+/**
+ * \fn void percent_encoding(char * url)
+ * \brief Fonction pour appliquer le percent encoding sur les 2 premiers caractères de url.
+ *
+ * \param url Chaine de caractère comportant la fin de l'URL (à partir du caractère à traiter).
+ *
+ */
+void percent_encoding(char * url);
+
+/**
+ * \fn void str_del(char * str, int i)
+ * \brief Fonction supprimer le caractère a l'emplacement i dans str.
+ *
+ * \param str Chaîne de caractère à traiter.
+ * \param i Indice du caractère à supprimer.
+ * 
+ */
+void str_del(char * str, int i);
 
 #endif

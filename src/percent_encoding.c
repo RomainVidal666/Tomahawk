@@ -14,7 +14,7 @@ void percent_encoding(char * url){
 		url[1]-=32;
 	if(url[2]>='a' && url[2]<='z')
 		url[2]-=32;
-	while((url[1]>percent_table[2*i+1][1] || (url[2]>=percent_table[2*i+1][2] && url[1]==percent_table[2*i+1][1])) && i<176){
+	while((url[1]>percent_table[2*i+1][1] || (url[2]>=percent_table[2*i+1][2] && url[1]==percent_table[2*i+1][1])) && i<176){ 		//parcours le tableau d'elements encodés tant que leurs code est superieur a celui-ci
 		if(url[1]==percent_table[2*i+1][1] && url[2]==percent_table[2*i+1][2]){
 			url[0]= percent_table[2*i][0];
 			encoded=1;
@@ -32,7 +32,7 @@ void percent_encoding(char * url){
 
 void normalizeURL (char * url){
 	int i, j, k;
-	int pos_sl=0;					//position du dernier slash pour ne pas modifier la casse des noms de fichier
+	int pos_sl=0;					//position du 3eme slash pour ne pas modifier la casse des noms de fichier et du chemin
 	
 	int nb=0;
 	while(url[pos_sl]!='/' && nb<=3 && url[pos_sl]!='\0')
@@ -78,7 +78,7 @@ void normalizeURL (char * url){
 						i-=i-j;
 					}
 				}
-				if(url[i+1]=='/'){				//1 point
+				if(url[i+1]=='/'){				//si 1 point entre 2 slash, on le supprime avec un slash
 					str_del(url, i);
 					str_del(url, i);
 				}
