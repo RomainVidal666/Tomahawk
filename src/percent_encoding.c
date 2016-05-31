@@ -32,14 +32,20 @@ void percent_encoding(char * url){
 
 void normalizeURL (char * url){
 	int i, j, k;
-	
+	pos_sl=0;					//position du dernier slash pour ne pas modifier la casse des noms de fichier
+	while(url[i]!='\0'){
+		if(url[i]=='/'){
+			pos_sl=i;
+			i++;
+		}
+	}
 	i=0;
 	while(url[i]!='\0'){
 		if(url[i]=='%'){							/////////////////////////percent-encoding//////////////////////////
 			percent_encoding(&url[i]);
 		}
-		//if(url[i]>='A' && url[i]<='Z')				//////////////////////Convert to lower case////////////////////////
-		//	url[i]+= 32;
+		if(url[i]>='A' && url[i]<='Z' && i<pos_sl)				//////////////////////Convert to lower case////////////////////////
+			url[i]+= 32;
 		if(url[i]=='#')							//////////////////////removing the fragment////////////////////////
 			url[i]='\0';							
 		if(url[i]==':' && i>5){						//////////////////////removing default port////////////////////////
