@@ -1,17 +1,106 @@
-body {
-	background-color: #FB00C1;
-}
-
-p {
-	color: blue;
+* {
+    margin: 0; padding: 0;
 }
 
 h1 {
-	color: yellow;
-	background-color: green;
+	font-size: 54px;
+	color: white;
+	font-family: "Loka";
 }
 
-a {
-	color: orange;
-	font-weight: bold;
+#container {
+    overflow: hidden;
+    height: 400px;
+    position: relative;
+}
+
+video {
+    position: absolute;
+                  
+    /* Vertical and Horizontal center*/
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* Flex box */
+.card {
+  /**
+   * Lay out the children of this container with
+   * flexbox, which is horizontal by default.
+   */
+
+  /**
+   * Rotate the main axis so that the children
+   * are laid out vertically.
+   */
+  flex-direction: column;
+
+  border: 1px solid #CAD0D2;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: beige;
+  /*!  */
+  height: 300px;
+  width: 200px;
+  display: inline-block;
+  float: right;
+}
+
+  .card__description {
+    /**
+     * Lay out the children of this container with
+     * flexbox.
+     */
+    display: flex;
+
+    /**
+     * We're going to lay out this element's children
+     * just like in the "Centered prompt" example.
+     * First we'll rotate the main axis so that the
+     * children are laid out vertically.
+     */
+    flex-direction: column;
+
+    /**
+     * Just like in the "Centered prompt" example,
+     * we'll align the children in the center, along
+     * the main axis.
+     */
+    align-items: center;
+
+    /**
+     * And just like in the "Centered prompt", we'll
+     * group the children in the center of their
+     * container.
+     */
+    justify-content: center;
+
+    padding: 15px 0;
+  }
+
+    .card__descriptionIcon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .card__descriptionText {
+      color: #57727C;
+      font-size: 12px;
+      text-align: center;
+      max-width: calc(100% - 30px);
+    }
+
+  .card__price {
+    text-align: center;
+    color: #57727C;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 15px;
+    border-top: 1px solid #D7DBDD;
+    background-color: #EEF3F5;
+  }
+
+.card--fixedWidth {
+  max-width: 300px;
 }

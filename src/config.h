@@ -19,16 +19,22 @@
 
 //===== PROTOTYPES =====//
 /**
-*  Charge la configuration en memoire
+*  \fn int loadConfig();
+*  \brief Charge la configuration en memoire
+*  \return 0 si pas d'erreur sinon exit(-1)
 **/
 int loadConfig();
+
 /**
-*  Cherche si domaine est present dans la configuration
-*  Retourne NULL si il n'est pas trouve, le chemin vers la racine sinon
+*  \fn char * findInConfig(char * domaine);
+*  \brief Cherche si domaine est present dans la configuration
+*  \return Retourne NULL si il n'est pas trouve, le chemin vers la racine sinon
 **/
 char * findInConfig(char * domaine);
+
 /**
-*  Libere la memoire allouee a la configuration
+*  \fn void freeConfig();
+*  \brief Libere la memoire allouee a la configuration
 **/
 void freeConfig();
 

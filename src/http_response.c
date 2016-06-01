@@ -243,7 +243,10 @@ char * get_mime_type(HTTP_Node * http_message, message * requete) {
 			} else if ( ! strcmp ( extension, ".js ") ) {
 				type = malloc(23 * sizeof (char));
 				type = "application/javascript"; 
-			} else {
+			}  else if ( ! strcmp ( extension, ".mp4 ") ) {
+				type = malloc(9 * sizeof (char));
+				type = "video/mp4"; 
+                        } else {
 				type = malloc(9 * sizeof (char));
 				type = "text/html"; 
 			} 
