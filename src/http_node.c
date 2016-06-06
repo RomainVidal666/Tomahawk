@@ -173,7 +173,7 @@ char * get_HTTP_Node_value ( char * request, HTTP_Node * node ) {
 }
 
 char * get_field_value( char * request, HTTP_Node * root, char * search) {
-	int count;
+	int count = 0;
 	count_HTTP_Node(root, "field-name", &count);
 	HTTP_Node * nodeFound[count];
 	char * nodeValue;
