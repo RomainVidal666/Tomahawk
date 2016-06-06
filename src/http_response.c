@@ -19,15 +19,19 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 		rc_pathname = "/index.html";
 	}
 
-	if ( reponse.body = read_from_file ( rc_pathname, root_dir, &taille ) ) { // on essaie de trouver la ressources 
-		reponse.code = 200;
-		reponse.headers = add_HTTP_header ( "Content-Type", get_mime_type(http_message, requete), reponse.headers );
-                
-		send_HTTP_GET_response ( & reponse, requete->clientId, taille );
-
-	} else { // ressource non trouvée => erreur 404
-		send_HTTP_error( 404, requete->clientId, root_dir );
+	if ( is_php ( http_message, requete ) ) {
+		printf ( "C'est du PHP\n" );
+	} else {
+		printf ( "C'est pas du PHP\n" );
+		if ( reponse.body = read_from_file ( rc_pathname, root_dir, &taille ) ) { // on essaie de trouver la ressources 
+			reponse.code = 200;
+			reponse.headers = add_HTTP_header ( "Content-Type", get_mime_type(http_message, requete), reponse.headers );
+			send_HTTP_GET_response ( & reponse, requete->clientId, taille );
+		} else { // ressource non trouvée => erreur 404
+			send_HTTP_error( 404, requete->clientId, root_dir );
+		}
 	}
+
 	return 1;
 }
 
@@ -243,10 +247,10 @@ char * get_mime_type(HTTP_Node * http_message, message * requete) {
 			} else if ( ! strcmp ( extension, ".js ") ) {
 				type = malloc(23 * sizeof (char));
 				type = "application/javascript"; 
-			}  else if ( ! strcmp ( extension, ".mp4 ") ) {
+			} else if ( ! strcmp ( extension, ".mp4 ") ) {
 				type = malloc(9 * sizeof (char));
 				type = "video/mp4"; 
-                        } else {
+            } else {
 				type = malloc(9 * sizeof (char));
 				type = "text/html"; 
 			} 
@@ -329,4 +333,22 @@ int parse_HTTP_POST ( HTTP_Node * http_message, message * requete ) {
 	make_HTTP_requete ( http_message, requete );
 
 	return 1;
+}
+
+int is_php ( HTTP_Node * http_message, message * requete ) {
+	HTTP_Node * node = found_HTTP_Node ( http_message, "request-target" );
+	char * str = NULL, * type = NULL, * extension = NULL;
+
+	str = copierChaine ( requete->buf, str, node->beg, node->end );
+
+	// On cherche le point
+	if ( str ) {
+		extension = strrchr ( str, '.' );
+		if ( extension ) {
+			if ( ! strcmp ( extension, ".php ") ) {
+				return 1;
+			}
+		}		
+	}
+	return 0;
 }

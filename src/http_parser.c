@@ -665,6 +665,7 @@ int isFieldvchar ( char * request, int * cursor ) {
 	if ( isObstext ( request, cursor ) || isVCHAR ( request, cursor ) ) {
 		return 1;
 	}
+	return 0;
 }
 
 int isUnreserved ( char * request, int * cursor ) {
