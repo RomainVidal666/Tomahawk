@@ -243,10 +243,10 @@ char * get_mime_type(HTTP_Node * http_message, message * requete) {
 			} else if ( ! strcmp ( extension, ".js ") ) {
 				type = malloc(23 * sizeof (char));
 				type = "application/javascript"; 
-			}  else if ( ! strcmp ( extension, ".mp4 ") ) {
+			} else if ( ! strcmp ( extension, ".mp4 ") ) {
 				type = malloc(9 * sizeof (char));
 				type = "video/mp4"; 
-                        } else {
+            } else {
 				type = malloc(9 * sizeof (char));
 				type = "text/html"; 
 			} 
@@ -329,4 +329,22 @@ int parse_HTTP_POST ( HTTP_Node * http_message, message * requete ) {
 	make_HTTP_requete ( http_message, requete );
 
 	return 1;
+}
+
+int is_php ( HTTP_Node * http_message, message * requete ) {
+	HTTP_Node * node = found_HTTP_Node ( http_message, "request-target" );
+	char * str = NULL, * type = NULL, * extension = NULL;
+
+	str = copierChaine ( requete->buf, str, node->beg, node->end );
+
+	// On cherche le point
+	if ( str ) {
+		extension = strrchr ( str, '.' );
+		if ( extension ) {
+			if ( ! strcmp ( extension, ".php ") ) {
+				return 1;
+			}
+		}		
+	}
+	return 0;
 }

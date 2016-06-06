@@ -185,4 +185,6 @@ HTTP_POST * add_HTTP_POST ( int beg, int end, HTTP_POST * root );
 
 int parse_HTTP_POST ( HTTP_Node * http_message, message * requete );
 
+int is_php ( HTTP_Node * http_message, message * requete );
+
 #endif
