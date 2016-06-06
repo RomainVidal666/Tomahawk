@@ -6,7 +6,7 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 	char * rc_pathname = NULL;
 	char * root_dir = NULL;
 	char * host_name = NULL;
-	unsigned long long taille;
+	unsigned long long taille=0;
 
 	host_name = get_field_value( requete->buf, http_message, "Host" );
 	root_dir = findInConfig( host_name );
@@ -33,9 +33,9 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 
 int send_HTTP_error ( int errNumber, int clientId, char * root_dir ) {
 	char * pathname = NULL;
-    HTTP_GET_response response;
+    	HTTP_GET_response response;
 	char str[3];
-	unsigned long long taille;
+	unsigned long long taille = 0;
 
 	response.headers = NULL;
 	response.code = errNumber;
@@ -52,9 +52,9 @@ int send_HTTP_error ( int errNumber, int clientId, char * root_dir ) {
 int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId, unsigned long long body_length ) {
 	message * reponse;
 	char content_length [512];
-    char * header = NULL;
+    	char * header = NULL;
 	unsigned long long header_length;
-    unsigned long long i, j, k;
+    	unsigned long long i, j, k;
         
 	snprintf ( content_length, 512, "%d", body_length );
 
@@ -184,7 +184,7 @@ char * read_from_file ( char * pathname, char * root_dir, unsigned long long * t
 	FILE * fichier = NULL;
 	unsigned char caractereActuel;
 	unsigned char * content = NULL;
-	int i, length;
+	int i, length = 0;
         
 	char * real_pathname = NULL;
       
