@@ -22,54 +22,54 @@
 
 		$( document ).ready(function() {
 				var video = document.querySelector('video')
-				, container = document.querySelector('#container');
+				, container = document.querySelector('#fond_video');
 
 				var setVideoDimensions = function () {
-				// Video's intrinsic dimensions
-				var w = video.videoWidth
-				, h = video.videoHeight;
+					// Video's intrinsic dimensions
+					var w = video.videoWidth
+					, h = video.videoHeight;
 
-				// Intrinsic Ratio
-				// Will be more than 1 if W > H and less if W < H
-				var videoRatio = (w / h).toFixed(2);
+					// Intrinsic Ratio
+					// Will be more than 1 if W > H and less if W < H
+					var videoRatio = (w / h).toFixed(2);
 
-				// Get the container's computed styles
-				//
-				// Also calculate the min dimensions required (this will be
-				// the container dimentions)
-				var containerStyles = window.getComputedStyle(container)
-				, minW = parseInt( containerStyles.getPropertyValue('width') )
-				, minH = parseInt( containerStyles.getPropertyValue('height') );
+					// Get the container's computed styles
+					//
+					// Also calculate the min dimensions required (this will be
+					// the container dimentions)
+					var containerStyles = window.getComputedStyle(container)
+					, minW = parseInt( containerStyles.getPropertyValue('width') )
+					, minH = parseInt( containerStyles.getPropertyValue('height') );
 
-				// What's the min:intrinsic dimensions
-				//
-				// The idea is to get which of the container dimension
-				// has a higher value when compared with the equivalents
-				// of the video. Imagine a 1200x700 container and
-				// 1000x500 video. Then in order to find the right balance
-				// and do minimum scaling, we have to find the dimension
-				// with higher ratio.
-				//
-				// Ex: 1200/1000 = 1.2 and 700/500 = 1.4 - So it is best to
-				// scale 500 to 700 and then calculate what should be the
-				// right width. If we scale 1000 to 1200 then the height
-				// will become 600 proportionately.
-				var widthRatio = minW / w
-				    , heightRatio = minH / h;
+					// What's the min:intrinsic dimensions
+					//
+					// The idea is to get which of the container dimension
+					// has a higher value when compared with the equivalents
+					// of the video. Imagine a 1200x700 container and
+					// 1000x500 video. Then in order to find the right balance
+					// and do minimum scaling, we have to find the dimension
+					// with higher ratio.
+					//
+					// Ex: 1200/1000 = 1.2 and 700/500 = 1.4 - So it is best to
+					// scale 500 to 700 and then calculate what should be the
+					// right width. If we scale 1000 to 1200 then the height
+					// will become 600 proportionately.
+					var widthRatio = minW / w
+						, heightRatio = minH / h;
 
-				// Whichever ratio is more, the scaling
-				// has to be done over that dimension
-				if (widthRatio > heightRatio) {
-				    var newWidth = minW;
-				    var newHeight = Math.ceil( newWidth / videoRatio );
-				}
-				else {
-				    var newHeight = minH;
-				    var newWidth = Math.ceil( newHeight * videoRatio );
-				}
+					// Whichever ratio is more, the scaling
+					// has to be done over that dimension
+					if (widthRatio > heightRatio) {
+						var newWidth = minW;
+						var newHeight = Math.ceil( newWidth / videoRatio );
+					}
+					else {
+						var newHeight = minH;
+						var newWidth = Math.ceil( newHeight * videoRatio );
+					}
 
-				video.style.width = newWidth + 'px';
-				video.style.height = newHeight + 'px';
+					video.style.width = newWidth + 'px';
+					video.style.height = newHeight + 'px';
 				};
 
 				video.addEventListener('loadedmetadata', setVideoDimensions, false);
@@ -89,13 +89,13 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
-			</button><a style="" class="navbar-brand" href="#">Tomahawk</a>
+			</button><a style="" class="navbar-brand" href="index.html">Tomahawk</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-			<li class="active"><a href="#">Accueil</a></li>
+			<li class="active"><a href="#">Dons</a></li>
 			<li><a href="dons.html">Dons</a></li>
-			<li><a href="exemples.html">Exemple</a></li>
+			<li><a href="exemples.html">Dons</a></li>
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -108,7 +108,7 @@
 		</nav>
 
 		<!-- VIDEO -->
-		<div class="fullscreen-bg">
+		<div id="fond_video" class="fullscreen-bg">
 			<video style="width: 1353px; height: 761px; z-index: -50;" autoplay="" loop="" class="fullscreen-bg__video">
 			<source src="./video/chat_mendiant.mp4" type="video/mp4">
 			</video>
@@ -121,9 +121,9 @@
 		<div class="col-md-4" style="color: white;">
 			<div style="margin: 40px;" class="description">		
 				<h1 style="text-align: center; font-weight: bold; margin-bottom: 30px;">Tomahawk</h1>
-				<p>Pour developper Tomahawk nous prenons sur notre temps d'étude et malheureusement cela prend du temps. C'est pourquoi nous sommes constamment à la recherche de donateurs.</p>
-				<p>Nous avons besoin de dons pour continuer ce projet afin de couvrir les frais de deplacement, les tickets de concert, payer le café et enfin de soutenir ses créateurs.</p>
-				<p>Grace à vous, Tomahawk deviendra meilleur !</p>
+				<p>Pour développer Tomahawk nous prenons sur notre temps d'étude et malheureusement cela prend du temps. C'est pourquoi nous sommes constamment à la recherche de donateurs.</p>
+				<p>Nous avons besoin de dons pour continuer ce projet afin de couvrir les frais de déplacement, les tickets de concerts, payer le café et enfin de soutenir ses créateurs.</p>
+				<p>Grâce à vous, Tomahawk deviendra meilleur !</p>
 			</div>
 		</div>
 		<div class="col-md-4" style="color: white;"></div>
