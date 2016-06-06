@@ -20,7 +20,7 @@ void quit(int signum) {
 }
 
 int main ( int argc, char * argv [] ) {
-	message * requete;
+	message * requete, * fast_cgi;
 	HTTP_Node * http_message, * method; 
 	HTTP_GET_response reponse;
 	int cursor;
@@ -45,18 +45,10 @@ int main ( int argc, char * argv [] ) {
 		printf("Client [%d] [%s:%d]\n",requete->clientId,inet_ntoa(requete->clientAddress->sin_addr),htons(requete->clientAddress->sin_port));
 		printf("Contenu de la demande %.*s\n\n",requete->len,requete->buf); 
 
-		if ( parse_HTTP_message ( requete->buf, & cursor, http_message ) ) { // la requete est valide 
+		if ( ( parse_HTTP_message ( requete->buf, & cursor, http_message ) ) && ( analyse(requete->buf, http_message) == 0 ) ) { // la requete est valide 
 			
 			//print_HTTP_Tree ( requete->buf, http_message, 0 );
                         
-                        // TODO - Envoyer une erreur
-                        // PROBLEME : On a pas acces a host par ce que ... ! Voilà !
-                        //              L'erreur peut-être sur ce champs -> besoin de host pour trouver la page d'erreur.
-                        /*if (!analyse(requete->buf, http_message))
-                            send_HTTP_error();
-                        else
-			    send_HTTP_error();*/
-
             method = found_HTTP_Node ( http_message, "method" );
 
 			if ( HTTP_Node_is_equal ( requete->buf, method, "GET" ) ) {
