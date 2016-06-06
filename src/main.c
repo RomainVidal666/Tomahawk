@@ -8,11 +8,8 @@
 #include "http_response.h"
 #include "percent_encoding.h"
 #include "config.h"
+#include "fcgi_api.h"
 #include "http_analyseur.h"
-
-void callback(char* string, int len) {
-    printf("CALLBACK : Trouve : (%s)\n", string);
-}
 
 void quit(int signum) {
 	freeConfig();
@@ -20,7 +17,7 @@ void quit(int signum) {
 }
 
 int main ( int argc, char * argv [] ) {
-	message * requete, * fast_cgi;
+	message * requete;
 	HTTP_Node * http_message, * method; 
 	HTTP_GET_response reponse;
 	int cursor;
@@ -32,6 +29,12 @@ int main ( int argc, char * argv [] ) {
 	loadConfig();
 	
 	signal(SIGINT, quit);
+
+	int sock_fcgi = init_connection ( "127.0.0.1", 9000 );
+	if ( ! sock_fcgi ) {
+		printf ( "Impossible de se connecter au serveur Fast CGI\n" );
+	}
+	//my_send ( "BIIITE", sock );
         
 	while ( 1 ) {
 		reponse.headers = NULL;
