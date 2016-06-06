@@ -310,8 +310,8 @@ int parse_HTTP_POST ( HTTP_Node * http_message, message * requete ) {
 	}
 
 	/* affichage pour le debug */
-	/*
-	printf ( "\n\n--- POST ---\n" )
+	
+	printf ( "\n\n--- POST ---\n" );
 	curr = post;
 	while ( curr ) {
 		printf ( "%s = ", curr->name );
@@ -323,8 +323,8 @@ int parse_HTTP_POST ( HTTP_Node * http_message, message * requete ) {
 
 		curr = curr->next;
 	}
-	printf ( "--- POST ---\n\n" )
-	*/
+	printf ( "--- POST ---\n\n" );
+	
 	/* /!\ ne pas oublier les percents encoding lors de l'envoie a php /!\ */
 	make_HTTP_requete ( http_message, requete );
 
