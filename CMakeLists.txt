@@ -13,5 +13,5 @@ add_executable (
 
 target_link_libraries(
         tomahawk
-        /home/thomas/Documents/Development/Tomahawk-recovery/Tomahawk/librequest.so
+        /home/romain/Documents/Esisar/Tomahawk/lib/librequest.so
 )
