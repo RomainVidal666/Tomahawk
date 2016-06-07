@@ -38,4 +38,25 @@ char * findInConfig(char * domaine);
 **/
 void freeConfig();
 
+/**
+* \fn char * getFastCGIAddress();
+  \brief Fonction pour obtenir l'interface fastCGI
+  \return L'adresse de l'interface FastCGI
+**/
+char * getFastCGIAddress();
+
+/**
+*  \fn int getFastCGIPort();
+*  \brief Fonction pour obtenir le port de l'interface FastCGI
+*  \return Retourne le port de l'interface FastCGI
+**/
+int getFastCGIPort();
+
+/**
+*  \fn int isFastCGIConfigure();
+*  \brief Fonction pour savoir si l'interface FastCGI à été configuree
+*  \return Retourne 1 si FastCGI a ete configure 0 sinon
+**/
+int isFastCGIConfigure();
+
 #endif
