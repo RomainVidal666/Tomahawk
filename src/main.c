@@ -29,12 +29,6 @@ int main ( int argc, char * argv [] ) {
 	loadConfig();
 	
 	signal(SIGINT, quit);
-
-	int sock_fcgi = init_connection ( "127.0.0.1", 9000 );
-	if ( ! sock_fcgi ) {
-		printf ( "Impossible de se connecter au serveur Fast CGI\n" );
-	}
-	//my_send ( "BIIITE", sock );
         
 	while ( 1 ) {
 		reponse.headers = NULL;

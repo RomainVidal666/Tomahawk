@@ -18,6 +18,7 @@
 #include "request.h"
 #include "percent_encoding.h"
 #include "config.h"
+#include "fcgi_api.h"
 
 #define ROOT_DIR "www/"
 

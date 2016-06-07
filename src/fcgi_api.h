@@ -8,11 +8,16 @@
 #include <string.h>
 #include <unistd.h>
 #include <netinet/in.h>
+#include "utilities.h"
 
-#define BUFFSIZE 128
+#define BUFFSIZE 1280
 
-int init_connection ( char * ip, int port );
-int my_send ( char * msg, int sock );
+int init_connection ( char * ip, int port, int * src_port );
 int my_recv ( int sock, char * msg );
+char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * taille );
+
+char * add_fcgi_beg ( uint8_t ver, uint16_t id, int * len );
+char * add_fcgi_param ( uint8_t ver, uint16_t id, char * name, char * value, char * req, int * len );
+char * add_fcgi_end ( int ver, int id, char * req, int * len );
 
 #endif
