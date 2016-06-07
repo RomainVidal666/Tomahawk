@@ -14,15 +14,20 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 	free(host_name);
 
 	if ( rc_pathname = get_HTTP_Node_value ( requete->buf, & found_HTTP_Node ( http_message, "absolute-path" ) [0] ) ) { // on récupère l'absolute-path 
-            normalizeURL ( rc_pathname );
+        normalizeURL ( rc_pathname );
 	} else { // par défaut on envoie l'index
 		rc_pathname = "/index.html";
 	}
 
-	if ( is_php ( http_message, requete ) ) {
-		printf ( "C'est du PHP\n" );
-	} else {
-		printf ( "C'est pas du PHP\n" );
+	if ( is_php ( http_message, requete ) ) { /* Le fichier est un script PHP */
+		if ( reponse.body = read_from_fcgi ( rc_pathname, root_dir, &taille ) ) { // on essaie de trouver la ressources 
+			reponse.code = 200;
+			reponse.headers = add_HTTP_header ( "Content-Type", get_mime_type(http_message, requete), reponse.headers );
+			send_HTTP_GET_response ( & reponse, requete->clientId, taille );
+		} else { // ressource non trouvée => erreur 404
+			send_HTTP_error( 404, requete->clientId, root_dir );
+		}
+	} else { /* Le fichier n'est pas un script PHP */
 		if ( reponse.body = read_from_file ( rc_pathname, root_dir, &taille ) ) { // on essaie de trouver la ressources 
 			reponse.code = 200;
 			reponse.headers = add_HTTP_header ( "Content-Type", get_mime_type(http_message, requete), reponse.headers );
