@@ -11,20 +11,22 @@ void init_HTTP_Node ( char * name, HTTP_Node * node ) {
 void addChild_HTTP_Node ( HTTP_Node * node, HTTP_Node * child ) {
 	int i;
 
-	HTTP_Node ** childs = malloc ( (node->nb_childs + 1) * sizeof ( HTTP_Node * ) ); // Créer un nouveau tableau avec une taille plus grande
+	node->childs = realloc ( node->childs, (node->nb_childs + 1) * sizeof ( HTTP_Node * ) ); // Créer un nouveau tableau avec une taille plus grande
+	node->childs[node->nb_childs++] = child;
+	//HTTP_Node ** childs = malloc ( (node->nb_childs + 1) * sizeof ( HTTP_Node * ) ); // Créer un nouveau tableau avec une taille plus grande
 
-	for ( i = 0; i < node->nb_childs; i++ ) { // Copier l'ancien tableau
-		childs [i] = node->childs [i];
-	}
+	//for ( i = 0; i < node->nb_childs; i++ ) { // Copier l'ancien tableau
+	//	childs [i] = node->childs [i];
+	//}
 
-	childs [node->nb_childs] = child; // Ajout du nouveau noeud
+	//childs [node->nb_childs] = child; // Ajout du nouveau noeud
 
-	if ( node->childs ) { // S'il y avait un tableau, on le supprime
-		free ( node->childs );
-	}
+	//if ( node->childs ) { // S'il y avait un tableau, on le supprime
+	//	free ( node->childs );
+	//}
 
-	node->childs = childs; // On installe le nouveau tableau sur le node
-	node->nb_childs ++;
+	//node->childs = childs; // On installe le nouveau tableau sur le node
+	//node->nb_childs ++;
 }
 
 void free_HTTP_Node ( HTTP_Node * node ) {
