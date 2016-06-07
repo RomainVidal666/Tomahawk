@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include "utilities.h"
+#include "request.h"
 
 #define BUFFSIZE 1280
 
