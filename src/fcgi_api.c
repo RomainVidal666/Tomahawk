@@ -179,6 +179,22 @@ char * add_fcgi_end ( int ver, int id, char * req, int * len ) {
 	return res;
 }
 
+int send_fcgi_nav ( char * msg, int sock, int clientId ) {
+	message * rep;
+	char * buf;
+	msg += 67;		//Correspond au champ content-length
+	int content_length= (unsigned short) msg;	//on le recupère
+	msg += 4;	//on passe le content-length et le padding
+	buf = strcat_without_alloc_with_length ( "HTTP/1.0 200 OK", msg, content_length );
+	
+	rep->clientId = clientId;
+	rep->len = content_length + strlen( "HTTP/1.0 200 OK" );
+	rep->buf =  buf;
+	
+	sendReponse( rep );
+	return 1;
+} 
+
 /*
 	PARAM:
 	|version|  type  | request id          | content-length    | padding-length | reserved: 0 | name-length | value-length | name | value |
