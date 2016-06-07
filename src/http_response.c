@@ -289,7 +289,7 @@ int parse_HTTP_POST ( HTTP_Node * http_message, message * requete ) {
 	HTTP_Node * body = found_HTTP_Node ( http_message, "message-body" );
 	HTTP_POST * post = NULL, * curr;
 	int cursor = body->beg;
-	int etat = 0;
+	int etat = 0, i;
 
 	post = add_HTTP_POST ( 0, 0, post );
 	curr = post;
@@ -320,7 +320,7 @@ int parse_HTTP_POST ( HTTP_Node * http_message, message * requete ) {
 	while ( curr ) {
 		printf ( "%s = ", curr->name );
 
-		for ( int i = curr->beg; i < curr->end; i++ )
+		for ( i = curr->beg; i < curr->end; i++ )
 			printf("%c", requete->buf [i] );
 
 		printf ( "\n" );
