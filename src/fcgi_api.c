@@ -32,14 +32,13 @@ int init_connection ( char * ip, int port, int * src_port ) {
 
 int my_recv ( int sock, char * msg ) {
 
-	/* Receive the word back from the server */
 	int bytes = 0;
-    while ( ( bytes = recv ( sock, msg, BUFFSIZE - 1, 0 ) ) <= 0 ) {
-      	
-    }
+
+    while ( ( bytes = recv ( sock, msg, BUFFSIZE - 1, 0 ) ) <= 0 ); // on attend de recevoir qqch
+
     msg[bytes] = '\0'; 
     for ( int i = 0; i < bytes; i++ ) {
-    	printf("%c", msg[i]);
+    	printf ( "%c", msg[i]);
     }
     printf ( "\n" );
 }
@@ -51,7 +50,7 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 	snprintf ( src_port_str, 6, "%d", src_port );
 	char buff [BUFFSIZE];
 
-	if ( sock_fcgi == -1 ) { /* Si on n'arrive pas a se connecter au serveur FCGI */
+	if ( sock_fcgi == -1 ) { /* Si on n'arrive pas à se connecter au serveur FCGI */
 		printf ( "Impossible de se connecter au serveur Fast CGI\n" );
 		return NULL;
 	} else { /* Si on arrive à se connecter */
@@ -69,7 +68,7 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 		}
 		real_pathname = strcat_without_alloc ( root_dir, real_pathname );
 
-		/* on envoie a Fast CGI */
+		/* on envoie à Fast CGI */
 		int fcgi_len = 0;
 		char * fcgi_request = add_fcgi_beg ( 1, 1, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "HTTP_HOST", "127.0.0.1", fcgi_request, & fcgi_len );
@@ -83,21 +82,23 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_ADDR", "127.0.0.1", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_PORT", "8080", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REMOTE_ADDR", "127.0.0.1", fcgi_request, & fcgi_len );
-		fcgi_request = add_fcgi_param ( 1, 1, "REMOTE_PORT", src_port_str, fcgi_request, & fcgi_len ); // <======
+		fcgi_request = add_fcgi_param ( 1, 1, "REMOTE_PORT", src_port_str, fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_ROOT", "/home/thomas/Documents/Development/Tomahawk/www", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_URI", "/test.php", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_SCHEME", "http", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_ADMIN", "test@tomahawk.fr", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "GATEWAY_INTERFACE", "CGI/1.1", fcgi_request, & fcgi_len );
-		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_PROTOCOL", "HTTP/1.0", fcgi_request, & fcgi_len );
+		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_PROTOCOL", "HTTP/1.1", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_METHOD", "GET", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "QUERY_STRING", "", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_URI", "/test.php", fcgi_request, & fcgi_len ); // <=======
 		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_NAME", "/test.php", fcgi_request, & fcgi_len ); // <=======
+		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_FILENAME", "/home/thomas/Documents/Development/Tomahawk/www/test.php", fcgi_request, & fcgi_len ); // <=======
+		
 		fcgi_request = add_fcgi_end ( 1, 1, fcgi_request, & fcgi_len );
 
 		if ( send ( sock_fcgi, fcgi_request, fcgi_len, 0 ) != fcgi_len ) {
-      		printf("Mismatch in number of sent bytes\n");
+      		printf ( "Mismatch in number of sent bytes\n" );
    		}
 
    		my_recv ( sock_fcgi, buff );
@@ -183,7 +184,7 @@ int send_fcgi_nav ( char * msg, int sock, int clientId ) {
 	message * rep;
 	char * buf;
 	msg += 67;		//Correspond au champ content-length
-	int content_length= (unsigned short) msg;	//on le recupère
+	int content_length= *msg;	//on le recupère
 	msg += 4;	//on passe le content-length et le padding
 	buf = strcat_without_alloc_with_length ( "HTTP/1.0 200 OK", msg, content_length );
 	

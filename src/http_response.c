@@ -90,10 +90,10 @@ int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clie
         reponse->clientId = clientId; 
     	sendReponse ( reponse ); 
     	
-        free ( http_reponse->body );
+        /*free ( http_reponse->body );
         free ( reponse->buf );
         free ( reponse );
-
+	*/
         requestShutdownSocket ( clientId ); //optionnel, ici on clot la connexion tout de suite (HTTP/1.0) 
 
 		return 1;

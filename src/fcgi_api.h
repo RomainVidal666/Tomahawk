@@ -11,7 +11,7 @@
 #include "utilities.h"
 #include "request.h"
 
-#define BUFFSIZE 1280
+#define BUFFSIZE 12800
 
 int init_connection ( char * ip, int port, int * src_port );
 int my_recv ( int sock, char * msg );
