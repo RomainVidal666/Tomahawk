@@ -35,9 +35,9 @@ int my_recv ( int sock, char * msg ) {
 	int bytes = 0;
 
     while ( ( bytes = recv ( sock, msg, BUFFSIZE - 1, 0 ) ) <= 0 ); // on attend de recevoir qqch
-
+	int i;
     msg[bytes] = '\0'; 
-    for ( int i = 0; i < bytes; i++ ) {
+    for ( i = 0; i < bytes; i++ ) {
     	printf ( "%c", msg[i]);
     }
     printf ( "\n" );
@@ -83,7 +83,7 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_PORT", "8080", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REMOTE_ADDR", "127.0.0.1", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REMOTE_PORT", src_port_str, fcgi_request, & fcgi_len );
-		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_ROOT", "/home/thomas/Documents/Development/Tomahawk/www", fcgi_request, & fcgi_len );
+		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_ROOT", "/home/romain/Documents/Esisar/master2/Tomahawk/www", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_URI", "/test.php", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_SCHEME", "http", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_ADMIN", "test@tomahawk.fr", fcgi_request, & fcgi_len );
@@ -93,7 +93,7 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 		fcgi_request = add_fcgi_param ( 1, 1, "QUERY_STRING", "", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_URI", "/test.php", fcgi_request, & fcgi_len ); // <=======
 		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_NAME", "/test.php", fcgi_request, & fcgi_len ); // <=======
-		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_FILENAME", "/home/thomas/Documents/Development/Tomahawk/www/test.php", fcgi_request, & fcgi_len ); // <=======
+		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_FILENAME", "/home/romain/Documents/Esisar/master2/Tomahawk/www/test.php", fcgi_request, & fcgi_len ); // <=======
 		
 		fcgi_request = add_fcgi_end ( 1, 1, fcgi_request, & fcgi_len );
 
