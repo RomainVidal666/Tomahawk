@@ -180,22 +180,58 @@ char * add_fcgi_end ( int ver, int id, char * req, int * len ) {
 	return res;
 }
 
-int send_fcgi_nav ( char * msg, int sock, int clientId ) {
-	message * rep;
+int send_fcgi_nav ( char* msg, int clientId ) {
+	int size=0;
 	char * buf;
-	msg += 67;		//Correspond au champ content-length
-	int content_length= *msg;	//on le recupère
-	msg += 4;	//on passe le content-length et le padding
-	buf = strcat_without_alloc_with_length ( "HTTP/1.0 200 OK", msg, content_length );
+	int content_length;
+	int fin=0;
+	int type, padding;
+	int is_data= 0;
+	char * data;
+	HTTP_Node * headers;
+	HTTP_GET_response rep;	
+	msg+=42;		//on passe le TCP
 	
-	rep->clientId = clientId;
-	rep->len = content_length + strlen( "HTTP/1.0 200 OK" );
-	rep->buf =  buf;
+	while (!fin){	//FCGI STDOUT
+		msg++;			//on passe la version
+		type= msg[0];		//on recupere le type
+		msg++;
+		msg++;			//Request ID
+		content_length= (unsigned short) *msg;	//on recupere le content_length
+		msg+=2;
+		padding= (unsigned short) *msg;		//on recupere le padding
+		msg+=2;	
+		//Content Data
+		int i=0;
+		if( !is_data ){
+			if ( parse_header_field ( msg, &i, headers) == -1)
+				printf("ERREUR: champ field de fcgi invalide");
+			int j= 0;
+			for ( j=0; j<headers->nb_childs; j++ ){	//on parcours tous les headers
+				strcat_without_alloc_with_length( data, msg + headers->childs[j]->beg , headers->childs[j]->end - headers->childs[j]->beg ); 
+			}	
+			if ( i<content_length ){
+				is_data = 1;
+			}
+		}
+		if( is_data ){
+			while ( i<content_length && msg[i]!= '\0' )
+				i++;
+			strcat_without_alloc_with_length ( data, msg, i);
+		}
+		printf( "\nData:%s\n\n", msg );
+
 	
-	sendReponse( rep );
+		
+		size+= content_length;
+
+		if( type==3 ) fin=1;
+	}
+	rep.body = data;
+	rep.code = 20;
+	send_HTTP_GET_response( &rep, clientId, size );
 	return 1;
 } 
-
 /*
 	PARAM:
 	|version|  type  | request id          | content-length    | padding-length | reserved: 0 | name-length | value-length | name | value |

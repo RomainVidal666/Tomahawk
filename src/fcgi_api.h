@@ -10,6 +10,7 @@
 #include <netinet/in.h>
 #include "utilities.h"
 #include "request.h"
+#include "http_response.h"
 
 #define BUFFSIZE 12800
 

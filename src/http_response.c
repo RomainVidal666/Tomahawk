@@ -20,10 +20,9 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 	}
 
 	if ( is_php ( http_message, requete ) ) { /* Le fichier est un script PHP */
-		if ( reponse.body = read_from_fcgi ( rc_pathname, root_dir, &taille ) ) { // on essaie de trouver la ressources 
-			reponse.code = 200;
-			reponse.headers = add_HTTP_header ( "Content-Type", get_mime_type(http_message, requete), reponse.headers );
-			send_HTTP_GET_response ( & reponse, requete->clientId, taille );
+		char * msg;
+		if ( read_from_fcgi ( rc_pathname, root_dir, &taille ) ) { // on essaie de trouver la ressources 
+			//send_fcgi_nav( msg, requete->clientId );
 		} else { // ressource non trouvée => erreur 404
 			send_HTTP_error( 404, requete->clientId, root_dir );
 		}
