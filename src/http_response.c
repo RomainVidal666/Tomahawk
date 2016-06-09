@@ -202,7 +202,7 @@ char * read_from_file ( char * pathname, char * root_dir, unsigned long long * t
       
 	if ( pathname [0] == '/' ) { // on demande la racine du site 
 		length = strlen ( pathname );
-		real_pathname = malloc ( sizeof ( char ) * ( length - 1 ) );
+		real_pathname = malloc ( sizeof ( char ) * ( length ) );
 		for ( i = 1; i <= length; i++ ) {
 			real_pathname [i-1] = pathname [i];
 		}

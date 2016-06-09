@@ -54,7 +54,6 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 	int src_port;
 	int sock_fcgi;
 	char src_port_str [6];
-	snprintf ( src_port_str, 6, "%d", src_port );
 	char buff [BUFFSIZE];
 
 	if ( ! isFastCGIConfigure () ) {
@@ -63,6 +62,7 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 	}
 
 	sock_fcgi = init_connection ( getFastCGIAddress (), getFastCGIPort (), &src_port );
+	snprintf ( src_port_str, 6, "%d", src_port );
 
 	if ( sock_fcgi == -1 ) { /* Si on n'arrive pas à se connecter au serveur FCGI */
 		printf ( "Impossible de se connecter au serveur Fast CGI\n" );
@@ -73,7 +73,7 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 		int i, length;
 		if ( pathname [0] == '/' ) { // on demande la racine du site 
 			length = strlen ( pathname );
-			real_pathname = malloc ( sizeof ( char ) * ( length - 1 ) );
+			real_pathname = malloc ( sizeof ( char ) * ( length ) );
 			for ( i = 1; i <= length; i++ ) {
 				real_pathname [i-1] = pathname [i];
 			}
@@ -121,7 +121,7 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 }
 
 char * add_fcgi_beg ( uint8_t ver, uint16_t id, int * len ) {
-	char * res = malloc ( 15 );
+	char * res = malloc ( 16 );
 	res [0] = ver; // version
 	res [1] = 1; //type = FCGI_BEGIN_REQUEST
 	res [2] = ( id >> 8 ) & 0xFF; res [3] = id & 0xFF; // identifiant sur 2 octets
@@ -158,8 +158,8 @@ char * add_fcgi_param ( uint8_t ver, uint16_t id, char * name, char * value, cha
 	for ( i = i + 10; i < *(len) + 10 + name_length; i++ ) { // le reste : params
 		res [i] = name [i - *(len) - 10];
 	}
-	for ( i = i; i < *(len) + 10 + length; i++ ) { // le reste : params
-		res [i] = value [i - *(len) - 10 - name_length];
+	for ( i = i; i < *(len) + 10 + length - 1; i++ ) { // le reste : params
+		res [i] = value [i - *(len) - 10 - name_length]; /* TO DO : probleme sur value */
 	}
 
 	(*len) += 8 + length;
@@ -168,7 +168,7 @@ char * add_fcgi_param ( uint8_t ver, uint16_t id, char * name, char * value, cha
 }
 
 char * add_fcgi_end ( int ver, int id, char * req, int * len ) {
-	char * res = malloc ( *(len) + 7 );
+	char * res = malloc ( *(len) + 16 );
 	int i;
 	for ( i = 0; i < *(len); i++ ) { // on copie ce qui existe déjà 
 		res [i] = req [i];
