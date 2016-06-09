@@ -22,11 +22,13 @@ void freeConfig() {
 
 char * findInConfig(char * domaine) {
 	int i;
-	for (i = 0; i < entryNumber; i++) {
-		if(!strcmp(domaine, gl_config[i][0]) ) {
-			return gl_config[i][1];
-		}
-	}
+    if ( domaine ) {
+	   for (i = 0; i < entryNumber; i++) {
+    		if(!strcmp(domaine, gl_config[i][0]) ) {
+    			return gl_config[i][1];
+    		}
+    	}
+    }
 	return NULL;
 }
 
