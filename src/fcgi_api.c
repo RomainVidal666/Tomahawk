@@ -17,8 +17,8 @@ int init_connection ( char * ip, int port, int * src_port ) {
     echoserver.sin_addr.s_addr = inet_addr(ip);  /* IP address */
     echoserver.sin_port = htons(port);       /* server port */
     /* Establish connection */
-    if (connect(sock, (struct sockaddr *) &echoserver, sizeof(echoserver)) < 0) {
-      printf("Failed to connect with server\n");
+    if (connect(sock, (struct sockaddr *) & echoserver, sizeof(echoserver)) < 0) {
+      	printf("Failed to connect with server\n");
   		return -1;
     }
 
@@ -93,8 +93,7 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 		fcgi_request = add_fcgi_param ( 1, 1, "QUERY_STRING", "", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_URI", "/test.php", fcgi_request, & fcgi_len ); // <=======
 		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_NAME", "/test.php", fcgi_request, & fcgi_len ); // <=======
-		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_FILENAME", "/home/romain/Documents/Esisar/master2/Tomahawk/www/test.php", fcgi_request, & fcgi_len ); // <=======
-		
+		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_FILENAME", "/home/thomas/Documents/Development/Tomahawk/www/test.php", fcgi_request, & fcgi_len ); // <=======
 		fcgi_request = add_fcgi_end ( 1, 1, fcgi_request, & fcgi_len );
 
 		if ( send ( sock_fcgi, fcgi_request, fcgi_len, 0 ) != fcgi_len ) {
