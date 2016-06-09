@@ -49,8 +49,17 @@ int analyse(char * request, HTTP_Node * root) {
         printf("Le champs 'methode' est invalide (plusieurs ou aucune occurence) !\n");
         return -1;
     } else {
-        if (!(HTTP_Node_is_equal(request, node_method, "GET") | HTTP_Node_is_equal(request, node_method, "POST"))) {
-            printf("Le champs 'method' est invalide (methode non-supporte) !\n");
+        if (!(HTTP_Node_is_equal(request, node_method, "GET")
+           || HTTP_Node_is_equal(request, node_method, "POST")
+           || HTTP_Node_is_equal(request, node_method, "HEAD")
+           || HTTP_Node_is_equal(request, node_method, "OPTIONS")
+           || HTTP_Node_is_equal(request, node_method, "CONNECT")
+           || HTTP_Node_is_equal(request, node_method, "TRACE")
+           || HTTP_Node_is_equal(request, node_method, "PUT")
+           || HTTP_Node_is_equal(request, node_method, "PATCH")
+           || HTTP_Node_is_equal(request, node_method, "DELETE"))) {
+            
+            printf("Le champs 'method' est invalide !\n");
             return -1;
         }
     }

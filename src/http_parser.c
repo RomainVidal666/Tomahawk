@@ -69,9 +69,16 @@ int parse_start_line ( char * request, int * cursor, HTTP_Node * node ) {
 }
 
 int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) { /* TO DO : annuler les déplacement du curseur si le mot n'est pas accepté */
-	int requestlength = strlen ( request );
+	int requestlength;
 	int end_status_line = 0;
 	int old_cursor = *cursor;
+
+	if ( ! request ) {
+		return 0;
+	}
+
+	requestlength = strlen ( request );
+
 	HTTP_Node * http_version = malloc ( sizeof ( HTTP_Node ) );
 	HTTP_Node * status_code = malloc ( sizeof ( HTTP_Node ) );
 	HTTP_Node * reason_phrase = malloc ( sizeof ( HTTP_Node ) );
@@ -127,6 +134,10 @@ int parse_status_line ( char * request, int * cursor, HTTP_Node * node ) { /* TO
 
 int parse_request_line ( char * request, int * cursor, HTTP_Node * node ) {
 
+	if ( ! request ) {
+		return 0;
+	} 
+
 	HTTP_Node * http_version = malloc ( sizeof ( HTTP_Node ) );
 	HTTP_Node * request_target = malloc ( sizeof ( HTTP_Node ) );
 	HTTP_Node * method = malloc ( sizeof ( HTTP_Node ) );
@@ -137,6 +148,7 @@ int parse_request_line ( char * request, int * cursor, HTTP_Node * node ) {
 	init_HTTP_Node ( "method", method );
 	addChild_HTTP_Node ( node, method ); 
 	method->beg = *cursor;
+
 	isVCHAR ( request, cursor ); /* au moins 1 TCHAR */
 	while ( ( request [*cursor] != SP ) && ( isVCHAR ( request, cursor ) ) ); /* TCHAR ici est non pas VCHAR */
 	method->end = *cursor;

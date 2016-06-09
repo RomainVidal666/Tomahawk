@@ -91,7 +91,7 @@ void normalizeURL (char * url){
 	if(url[i-1]!='/'){
 		//url[i]= '/';
 		url[i]= '\0';
-		url[i+1]= '\0';
+		//url[i+1]= '\0';
 	}
 }
 

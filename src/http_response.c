@@ -26,7 +26,7 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 		} else { // ressource non trouvée => erreur 404
 			send_HTTP_error( 404, requete->clientId, root_dir );
 		}
-	} else { /* Le fichier n'est pas un script PHP */
+	} else { /* Le fichier n'est pas un script PHP */ 
 		if ( reponse.body = read_from_file ( rc_pathname, root_dir, &taille ) ) { // on essaie de trouver la ressources 
 			reponse.code = 200;
 			reponse.headers = add_HTTP_header ( "Content-Type", get_mime_type(http_message, requete), reponse.headers );
@@ -47,7 +47,7 @@ int send_HTTP_error ( int errNumber, int clientId, char * root_dir ) {
 
 	response.headers = NULL;
 	response.code = errNumber;
-	sprintf(str, "%d", errNumber);
+	sprintf(str, "%03.3d", errNumber);
 	
 	if ( response.body = read_from_file ( strcat_without_alloc ( strcat_without_alloc ( "html_error_pages/", str ), ".html" ), root_dir, &taille ) ) {
 		send_HTTP_GET_response ( & response, clientId, taille );
@@ -89,10 +89,10 @@ int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clie
         reponse->clientId = clientId; 
     	sendReponse ( reponse ); 
     	
-        /*free ( http_reponse->body );
+        free ( http_reponse->body );
         free ( reponse->buf );
         free ( reponse );
-	*/
+	
         requestShutdownSocket ( clientId ); //optionnel, ici on clot la connexion tout de suite (HTTP/1.0) 
 
 		return 1;
@@ -125,6 +125,10 @@ char * get_message_code ( int code ) {
 
 		case 418:
 			return "I’m a teapot";
+			break;
+
+		case 501:
+			return "Not Implemented";
 			break;
 	}
 
@@ -198,7 +202,7 @@ char * read_from_file ( char * pathname, char * root_dir, unsigned long long * t
       
 	if ( pathname [0] == '/' ) { // on demande la racine du site 
 		length = strlen ( pathname );
-		real_pathname = malloc ( sizeof ( char ) * ( length - 1 ) );
+		real_pathname = malloc ( sizeof ( char ) * ( length ) );
 		for ( i = 1; i <= length; i++ ) {
 			real_pathname [i-1] = pathname [i];
 		}

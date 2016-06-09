@@ -17,8 +17,8 @@ int init_connection ( char * ip, int port, int * src_port ) {
     echoserver.sin_addr.s_addr = inet_addr(ip);  /* IP address */
     echoserver.sin_port = htons(port);       /* server port */
     /* Establish connection */
-    if (connect(sock, (struct sockaddr *) &echoserver, sizeof(echoserver)) < 0) {
-      printf("Failed to connect with server\n");
+    if (connect(sock, (struct sockaddr *) & echoserver, sizeof(echoserver)) < 0) {
+      	printf("Failed to connect with server\n");
   		return -1;
     }
 
@@ -33,22 +33,36 @@ int init_connection ( char * ip, int port, int * src_port ) {
 int my_recv ( int sock, char * msg ) {
 
 	int bytes = 0;
+	clock_t timeout;
 
-    while ( ( bytes = recv ( sock, msg, BUFFSIZE - 1, 0 ) ) <= 0 ); // on attend de recevoir qqch
-	int i;
-    msg[bytes] = '\0'; 
-    for ( i = 0; i < bytes; i++ ) {
-    	printf ( "%c", msg[i]);
-    }
-    printf ( "\n" );
+	while ( ( clock () - timeout <= FCGI_TIMEOUT ) && ( 1 ) ) { // tant qu'on a pas reçus une réponse de type FCGI_END_REQUEST et si on est pas en timeout
+		timeout = clock ();
+	    while ( ( clock () - timeout <= FCGI_TIMEOUT ) && ( bytes = recv ( sock, msg, BUFFSIZE - 1, 0 ) ) <= 0 ); // on attend de recevoir qqch
+	}
+
+	if ( clock () - timeout > FCGI_TIMEOUT ) {
+		printf ( "Erreur timeout\n" ); 
+	} else {
+		for ( int i = 0; i < bytes; i++ ) {
+	    	printf ( "%c", msg[i]);
+	    }
+	    printf ( "\n" );
+	}
 }
 
 char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * taille ) {
 	int src_port;
-	int sock_fcgi = init_connection ( "127.0.0.1", 9000, &src_port );
+	int sock_fcgi;
 	char src_port_str [6];
-	snprintf ( src_port_str, 6, "%d", src_port );
 	char buff [BUFFSIZE];
+
+	if ( ! isFastCGIConfigure () ) {
+		printf(" FastCGI non configurer\n");
+		return NULL;
+	}
+
+	sock_fcgi = init_connection ( getFastCGIAddress (), getFastCGIPort (), &src_port );
+	snprintf ( src_port_str, 6, "%d", src_port );
 
 	if ( sock_fcgi == -1 ) { /* Si on n'arrive pas à se connecter au serveur FCGI */
 		printf ( "Impossible de se connecter au serveur Fast CGI\n" );
@@ -59,7 +73,7 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 		int i, length;
 		if ( pathname [0] == '/' ) { // on demande la racine du site 
 			length = strlen ( pathname );
-			real_pathname = malloc ( sizeof ( char ) * ( length - 1 ) );
+			real_pathname = malloc ( sizeof ( char ) * ( length ) );
 			for ( i = 1; i <= length; i++ ) {
 				real_pathname [i-1] = pathname [i];
 			}
@@ -83,18 +97,17 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_PORT", "8080", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REMOTE_ADDR", "127.0.0.1", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REMOTE_PORT", src_port_str, fcgi_request, & fcgi_len );
-		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_ROOT", "/home/romain/Documents/Esisar/master2/Tomahawk/www", fcgi_request, & fcgi_len );
-		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_URI", "/test.php", fcgi_request, & fcgi_len );
+		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_ROOT", root_dir, fcgi_request, & fcgi_len );
+		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_URI", pathname, fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_SCHEME", "http", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_ADMIN", "test@tomahawk.fr", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "GATEWAY_INTERFACE", "CGI/1.1", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_PROTOCOL", "HTTP/1.1", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_METHOD", "GET", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "QUERY_STRING", "", fcgi_request, & fcgi_len );
-		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_URI", "/test.php", fcgi_request, & fcgi_len ); // <=======
-		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_NAME", "/test.php", fcgi_request, & fcgi_len ); // <=======
-		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_FILENAME", "/home/romain/Documents/Esisar/master2/Tomahawk/www/test.php", fcgi_request, & fcgi_len ); // <=======
-		
+		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_URI", pathname, fcgi_request, & fcgi_len ); // <=======
+		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_NAME", pathname, fcgi_request, & fcgi_len ); // <=======
+		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_FILENAME", real_pathname, fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_end ( 1, 1, fcgi_request, & fcgi_len );
 
 		if ( send ( sock_fcgi, fcgi_request, fcgi_len, 0 ) != fcgi_len ) {
@@ -108,7 +121,7 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 }
 
 char * add_fcgi_beg ( uint8_t ver, uint16_t id, int * len ) {
-	char * res = malloc ( 15 );
+	char * res = malloc ( 16 );
 	res [0] = ver; // version
 	res [1] = 1; //type = FCGI_BEGIN_REQUEST
 	res [2] = ( id >> 8 ) & 0xFF; res [3] = id & 0xFF; // identifiant sur 2 octets
@@ -145,8 +158,8 @@ char * add_fcgi_param ( uint8_t ver, uint16_t id, char * name, char * value, cha
 	for ( i = i + 10; i < *(len) + 10 + name_length; i++ ) { // le reste : params
 		res [i] = name [i - *(len) - 10];
 	}
-	for ( i = i; i < *(len) + 10 + length; i++ ) { // le reste : params
-		res [i] = value [i - *(len) - 10 - name_length];
+	for ( i = i; i < *(len) + 10 + length - 1; i++ ) { // le reste : params
+		res [i] = value [i - *(len) - 10 - name_length]; /* TO DO : probleme sur value */
 	}
 
 	(*len) += 8 + length;
@@ -155,7 +168,7 @@ char * add_fcgi_param ( uint8_t ver, uint16_t id, char * name, char * value, cha
 }
 
 char * add_fcgi_end ( int ver, int id, char * req, int * len ) {
-	char * res = malloc ( *(len) + 7 );
+	char * res = malloc ( *(len) + 16 );
 	int i;
 	for ( i = 0; i < *(len); i++ ) { // on copie ce qui existe déjà 
 		res [i] = req [i];
@@ -190,7 +203,7 @@ int send_fcgi_nav ( char* msg, int clientId ) {
 	char * data;
 	HTTP_Node * headers;
 	HTTP_GET_response rep;	
-	msg+=42;		//on passe le TCP
+	//msg+=42;		//on passe le TCP
 	
 	while (!fin){	//FCGI STDOUT
 		msg++;			//on passe la version
@@ -228,7 +241,7 @@ int send_fcgi_nav ( char* msg, int clientId ) {
 		if( type==3 ) fin=1;
 	}
 	rep.body = data;
-	rep.code = 20;
+	rep.code = 200;
 	send_HTTP_GET_response( &rep, clientId, size );
 	return 1;
 } 

@@ -22,11 +22,13 @@ void freeConfig() {
 
 char * findInConfig(char * domaine) {
 	int i;
-	for (i = 0; i < entryNumber; i++) {
-		if(!strcmp(domaine, gl_config[i][0]) ) {
-			return gl_config[i][1];
-		}
-	}
+    if ( domaine ) {
+	   for (i = 0; i < entryNumber; i++) {
+    		if(!strcmp(domaine, gl_config[i][0]) ) {
+    			return gl_config[i][1];
+    		}
+    	}
+    }
 	return NULL;
 }
 
@@ -89,7 +91,7 @@ int loadConfig() {
                                     exit(-1);
                                 }
                                 
-                                gl_fastcgiAdress = malloc(sizeof(char) * strlen(configParameter));
+                                gl_fastcgiAdress = malloc(sizeof(char) * ( strlen(configParameter) + 1 ));
                                 strcpy( gl_fastcgiAdress, configParameter );
                                 if (configParameter == NULL) {
                                     printf("Bad configuration\n");
@@ -141,7 +143,7 @@ int loadConfig() {
                             exit(-1);
                         }
                         // On le stocke
-                        gl_config[entryNumber][0] = malloc(sizeof(char) * strlen(configParameter));
+                        gl_config[entryNumber][0] = malloc(sizeof(char) * (strlen(configParameter)+1));
                         strcpy(gl_config[entryNumber][0],configParameter);
 
                         // De meme pour le deuxime arguments
@@ -154,7 +156,7 @@ int loadConfig() {
                             exit(-1);
                         }
 
-                        gl_config[entryNumber][1] = malloc(sizeof(char) * strlen(configParameter));
+                        gl_config[entryNumber][1] = malloc(sizeof(char) * (strlen(configParameter)+1));
                         strcpy(gl_config[entryNumber][1], configParameter);
 
                         // On verifie que le nombre de site maximum n'est pas excede
