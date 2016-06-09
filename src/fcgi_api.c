@@ -17,8 +17,8 @@ int init_connection ( char * ip, int port, int * src_port ) {
     echoserver.sin_addr.s_addr = inet_addr(ip);  /* IP address */
     echoserver.sin_port = htons(port);       /* server port */
     /* Establish connection */
-    if (connect(sock, (struct sockaddr *) & echoserver, sizeof(echoserver)) < 0) {
-      	printf("Failed to connect with server\n");
+    if (connect(sock, (struct sockaddr *) &echoserver, sizeof(echoserver)) < 0) {
+      printf("Failed to connect with server\n");
   		return -1;
     }
 
@@ -32,37 +32,25 @@ int init_connection ( char * ip, int port, int * src_port ) {
 
 int my_recv ( int sock, char * msg ) {
 
-	int bytes = 0;
-	clock_t timeout;
+    int bytes = 0;
 
-	while ( ( clock () - timeout <= FCGI_TIMEOUT ) && ( 1 ) ) { // tant qu'on a pas reçus une réponse de type FCGI_END_REQUEST et si on est pas en timeout
-		timeout = clock ();
-	    while ( ( clock () - timeout <= FCGI_TIMEOUT ) && ( bytes = recv ( sock, msg, BUFFSIZE - 1, 0 ) ) <= 0 ); // on attend de recevoir qqch
-	}
+    while ( ( bytes = recv ( sock, msg, BUFFSIZE - 1, 0 ) ) <= 0 ); // on attend de recevoir qqch
+	int i;
+    msg[bytes] = '\0'; 
+    for ( i = 0; i < bytes; i++ ) {
+    	printf ( "%c", msg[i]);
+    }
+    printf ( "\n" );
 
-	if ( clock () - timeout > FCGI_TIMEOUT ) {
-		printf ( "Erreur timeout\n" ); 
-	} else {
-		for ( int i = 0; i < bytes; i++ ) {
-	    	printf ( "%c", msg[i]);
-	    }
-	    printf ( "\n" );
-	}
+    return bytes;
 }
 
 char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * taille ) {
 	int src_port;
-	int sock_fcgi;
+	int sock_fcgi = init_connection ( "127.0.0.1", 9000, &src_port );
 	char src_port_str [6];
-	char buff [BUFFSIZE];
-
-	if ( ! isFastCGIConfigure () ) {
-		printf(" FastCGI non configurer\n");
-		return NULL;
-	}
-
-	sock_fcgi = init_connection ( getFastCGIAddress (), getFastCGIPort (), &src_port );
 	snprintf ( src_port_str, 6, "%d", src_port );
+	char buff [BUFFSIZE];
 
 	if ( sock_fcgi == -1 ) { /* Si on n'arrive pas à se connecter au serveur FCGI */
 		printf ( "Impossible de se connecter au serveur Fast CGI\n" );
@@ -73,7 +61,7 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 		int i, length;
 		if ( pathname [0] == '/' ) { // on demande la racine du site 
 			length = strlen ( pathname );
-			real_pathname = malloc ( sizeof ( char ) * ( length ) );
+			real_pathname = malloc ( sizeof ( char ) * ( length - 1 ) );
 			for ( i = 1; i <= length; i++ ) {
 				real_pathname [i-1] = pathname [i];
 			}
@@ -97,31 +85,38 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_PORT", "8080", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REMOTE_ADDR", "127.0.0.1", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REMOTE_PORT", src_port_str, fcgi_request, & fcgi_len );
-		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_ROOT", root_dir, fcgi_request, & fcgi_len );
-		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_URI", pathname, fcgi_request, & fcgi_len );
+		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_ROOT", "/home/romain/Documents/Esisar/master2/Tomahawk/www", fcgi_request, & fcgi_len );
+		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_URI", "/test.php", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_SCHEME", "http", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_ADMIN", "test@tomahawk.fr", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "GATEWAY_INTERFACE", "CGI/1.1", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_PROTOCOL", "HTTP/1.1", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_METHOD", "GET", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "QUERY_STRING", "", fcgi_request, & fcgi_len );
-		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_URI", pathname, fcgi_request, & fcgi_len ); // <=======
-		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_NAME", pathname, fcgi_request, & fcgi_len ); // <=======
-		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_FILENAME", real_pathname, fcgi_request, & fcgi_len );
+		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_URI", "/test.php", fcgi_request, & fcgi_len ); // <=======
+		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_NAME", "test.php", fcgi_request, & fcgi_len ); // <=======
+		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_FILENAME", "/home/romain/Documents/Esisar/master2/Tomahawk/www/test.php", fcgi_request, & fcgi_len ); // <=======
+		
+                printf("add_fcgi_end\n");
+
 		fcgi_request = add_fcgi_end ( 1, 1, fcgi_request, & fcgi_len );
+                
+                printf("Avant send\n");
 
 		if ( send ( sock_fcgi, fcgi_request, fcgi_len, 0 ) != fcgi_len ) {
       		printf ( "Mismatch in number of sent bytes\n" );
    		}
+                
+                printf("Avant get_fcgi_response\n");
 
-   		my_recv ( sock_fcgi, buff );
+   		get_fcgi_response( sock_fcgi, buff );
 	}
 	
 	return NULL;
 }
 
 char * add_fcgi_beg ( uint8_t ver, uint16_t id, int * len ) {
-	char * res = malloc ( 16 );
+	char * res = malloc ( 15 );
 	res [0] = ver; // version
 	res [1] = 1; //type = FCGI_BEGIN_REQUEST
 	res [2] = ( id >> 8 ) & 0xFF; res [3] = id & 0xFF; // identifiant sur 2 octets
@@ -158,8 +153,8 @@ char * add_fcgi_param ( uint8_t ver, uint16_t id, char * name, char * value, cha
 	for ( i = i + 10; i < *(len) + 10 + name_length; i++ ) { // le reste : params
 		res [i] = name [i - *(len) - 10];
 	}
-	for ( i = i; i < *(len) + 10 + length - 1; i++ ) { // le reste : params
-		res [i] = value [i - *(len) - 10 - name_length]; /* TO DO : probleme sur value */
+	for ( i = i; i < *(len) + 10 + length; i++ ) { // le reste : params
+		res [i] = value [i - *(len) - 10 - name_length];
 	}
 
 	(*len) += 8 + length;
@@ -168,7 +163,7 @@ char * add_fcgi_param ( uint8_t ver, uint16_t id, char * name, char * value, cha
 }
 
 char * add_fcgi_end ( int ver, int id, char * req, int * len ) {
-	char * res = malloc ( *(len) + 16 );
+	char * res = malloc ( *(len) + 7 );
 	int i;
 	for ( i = 0; i < *(len); i++ ) { // on copie ce qui existe déjà 
 		res [i] = req [i];
@@ -191,6 +186,52 @@ char * add_fcgi_end ( int ver, int id, char * req, int * len ) {
 	(*len) += 16;
 	
 	return res;
+}
+
+int get_fcgi_response ( int sock_fcgi, char * buff ) {
+    int type = 0;
+    unsigned short int content_length;
+    char padding;
+
+    char msg [ BUFFSIZE ];
+    int buffExplore;
+    int tailleReponse, taillePart;
+    
+    int i=0, j=0;
+
+    buffExplore = 0;
+    tailleReponse = 0;
+    while ( type != 3 ) {
+        taillePart = my_recv ( sock_fcgi, msg );
+        for(i=0;i<taillePart/10;i=i+10){
+            printf("\t[%d, %d, %d, %d, %d, %d, %d, %d, %d, %d]\n", msg[i], msg[i+1], msg[i+2], msg[i+3], msg[i+4], msg[i+5], msg[i+6], msg[i+7], msg[i+8], msg[i+9] ) ;
+        }
+        if(taillePart == 0) {
+            printf("Pas de reponse du serveur FastCGI (ou incomplete, ou pas trouve, ou bug...)\n");
+            return -1;
+        }
+        printf("Strcat chelou\n");
+        buff = strcat_without_alloc_with_2_length ( buff, tailleReponse, msg, taillePart );
+        printf("Qui passe pas\n");
+        buffExplore++	;		//on passe la version
+        type= buff[buffExplore];		//on recupere le type
+        buffExplore ++;
+        buffExplore ++;  		//Request ID
+        content_length = (unsigned short) buff[buffExplore];	//on recupere le content_length
+        buffExplore += 2;
+        padding = (char) buff[buffExplore];		//on recupere le padding
+        buff += 2;	
+        //Content Data
+        buff += content_length;
+        buff += padding;
+        printf("\n\n\n============================ Type : %d\n\n\n\n", type);
+        
+        for(i=0;i<20;i++){
+            printf("\tbuff[%d]=%d\n", i, buff[i]);
+        }
+    }
+    printf("Salut ! J'ai fini ta fonction :)\n");
+    return 0;
 }
 
 int send_fcgi_nav ( char* msg, int clientId ) {
@@ -241,7 +282,7 @@ int send_fcgi_nav ( char* msg, int clientId ) {
 		if( type==3 ) fin=1;
 	}
 	rep.body = data;
-	rep.code = 200;
+	rep.code = 20;
 	send_HTTP_GET_response( &rep, clientId, size );
 	return 1;
 } 
