@@ -52,6 +52,8 @@ int main ( int argc, char * argv [] ) {
 				make_HTTP_requete(http_message, requete );
 			} else if ( HTTP_Node_is_equal ( requete->buf, method, "POST" ) ) {
 				parse_HTTP_POST ( http_message, requete );
+			} else {
+				send_HTTP_error(501, requete->clientId, root_dir);
 			}
 
 		} else { // la requete est invalide => erreur 400

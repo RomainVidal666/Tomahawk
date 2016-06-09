@@ -126,6 +126,10 @@ char * get_message_code ( int code ) {
 		case 418:
 			return "I’m a teapot";
 			break;
+
+		case 501:
+			return "Not Implemented";
+			break;
 	}
 
 }

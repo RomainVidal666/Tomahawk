@@ -8,11 +8,15 @@
 #include <string.h>
 #include <unistd.h>
 #include <netinet/in.h>
+#include <time.h>
+
+#include "config.h"
 #include "utilities.h"
 #include "request.h"
 #include "http_response.h"
 
 #define BUFFSIZE 12800
+#define FCGI_TIMEOUT 200000
 
 int init_connection ( char * ip, int port, int * src_port );
 int my_recv ( int sock, char * msg );
