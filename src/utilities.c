@@ -45,6 +45,25 @@ char * strcat_without_alloc_with_length ( char * s1, char * s2, int length ) {
     return t;
 }
 
+char * strcat_without_alloc_with_2_length ( char * s1, int lengths1, char * s2, int lengths2 ) {
+    char * t;
+    int i;
+
+    t = malloc ( sizeof ( char ) * ( lengths1 + lengths2 ) );
+    //strcpy ( t, s1 );
+    printf("\n\n*********************\n %d : %d \n***********************\n", lengths1, lengths2);
+    for ( i = 0; i < lengths1; i++ ) {
+        t[i] = s1 [i];
+    }
+    
+    //strcpy ( t + old_size, s2 );
+    for ( i = 0; i < lengths2; i++ ) {
+        t[i + lengths1] = s2 [i];
+    }
+    
+    return t;
+}
+
 char * charcat_without_alloc ( char * s1, char c ) {
     int old_size;
     char * t;
