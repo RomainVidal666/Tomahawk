@@ -109,7 +109,7 @@ char * my_recv ( int sock ) {
 	if ( clock () - timeout > FCGI_TIMEOUT ) {
 		printf ( "Erreur timeout\n" ); 
 	} else {
-		for ( int i = 0; i < bytes; i++ ) {
+		for ( int i = 0; i < size; i++ ) {
 	    	printf ( "%c", msg[i]);
 	    }
 	    printf ( "\n" );

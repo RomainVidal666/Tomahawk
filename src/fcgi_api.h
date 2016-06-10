@@ -27,4 +27,5 @@ char * add_fcgi_beg ( uint8_t ver, uint16_t id, int * len );
 char * add_fcgi_param ( uint8_t ver, uint16_t id, char * name, char * value, char * req, int * len );
 char * add_fcgi_end ( int ver, int id, char * req, int * len );
 
+int send_fcgi_nav ( char * msg, int sock, int clientId );
 #endif

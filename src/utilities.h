@@ -76,4 +76,6 @@ char * charcat_without_alloc_with_length ( char * s1, char c, int length );
 
 char * copierChaine(char *buf, char* res, int beg, int end);
 
+char * strcat_without_alloc_with_2_length ( char * s1, long int lengths1, char * s2, long int lengths2 );
+
 #endif
