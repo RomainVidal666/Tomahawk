@@ -14,12 +14,13 @@
 #include "utilities.h"
 #include "request.h"
 #include "http_response.h"
+#include "config.h"
 
 #define BUFFSIZE 12800
 #define FCGI_TIMEOUT 200000
 
 int init_connection ( char * ip, int port, int * src_port );
-int my_recv ( int sock, char * msg );
+char * my_recv ( int sock ); 
 char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * taille );
 
 char * add_fcgi_beg ( uint8_t ver, uint16_t id, int * len );

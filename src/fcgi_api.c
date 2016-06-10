@@ -1,3 +1,4 @@
+
 #include "fcgi_api.h"
 
 int init_connection ( char * ip, int port, int * src_port ) {
@@ -30,14 +31,79 @@ int init_connection ( char * ip, int port, int * src_port ) {
     return sock;
 }
 
-int my_recv ( int sock, char * msg ) {
 
-	int bytes = 0;
+char * my_recv ( int sock ) {
+
+	HTTP_Node * headers = malloc ( sizeof ( HTTP_Node ) );
 	clock_t timeout;
-
-	while ( ( clock () - timeout <= FCGI_TIMEOUT ) && ( 1 ) ) { // tant qu'on a pas reçus une réponse de type FCGI_END_REQUEST et si on est pas en timeout
+	int fin=0;
+	long int i = 0;
+	char req[BUFFSIZE];
+	long int size_req = 0;
+	long int size = 0;
+	int content_length = 0;
+	int padding = 0;
+	int id;
+	int type;
+	int is_data = 0;
+	char * msg;
+	long int j;
+	
+	while ( ( clock () - timeout <= FCGI_TIMEOUT ) && ( !fin ) ) { // tant qu'on a pas reçus une réponse de type FCGI_END_REQUEST et si on est pas en timeout
 		timeout = clock ();
-	    while ( ( clock () - timeout <= FCGI_TIMEOUT ) && ( bytes = recv ( sock, msg, BUFFSIZE - 1, 0 ) ) <= 0 ); // on attend de recevoir qqch
+		while ( ( clock () - timeout <= FCGI_TIMEOUT ) && ( size_req = recv ( sock, req, BUFFSIZE - 1, 0 ) ) <= 0 ); // on attend de recevoir qqch
+		printf("Message recu\ntaille: %d\n", size_req );
+		msg = strcat_without_alloc_with_2_length ( msg, size, req, size_req );
+	    printf("Messages concatenes\n");		
+		
+		size += size_req;
+		while ( i<size ) {		
+			i++;			//on passe la version
+			type = (unsigned short) msg[i];
+			i++;
+			i++;			//Request ID
+			i++;
+			i++;
+			id = (unsigned short) msg[i];
+			
+			content_length= (unsigned short) msg[i];	//on recupere le content_lengt
+			i+=1;
+			padding= (unsigned char) msg[i];		//on recupere le padding
+			i+=2;
+			
+			/*			
+			if( !is_data ){
+				if ( parse_header_field ( msg, &i, headers) == -1)
+					printf("ERREUR: champ field de fcgi invalide");
+				printf("header field fini\n");
+			}
+			print_HTTP_Tree ( msg, headers, 0 );
+			*/
+			/*is_data = 1;
+			if( is_data ){
+				while ( i<content_length )
+					i++;
+				printf("data fini\n");
+			}*/
+			i += content_length;
+			printf("\n\npadding:\n");			
+			for(j=0; j<padding; j++)
+				printf("%d ", msg[i+j]);
+
+			i += padding;
+			printf("\n");
+
+			if(type==3)
+				fin=1;
+			printf("type:%d\n", type);
+			printf("content-length:%d\n", content_length);
+			printf("padding:%d\n", padding);
+			
+
+			/*for(j=0; j<size; j++)
+				printf("%d ", msg[j]); 
+			getchar();*/
+		}
 	}
 
 	if ( clock () - timeout > FCGI_TIMEOUT ) {
@@ -97,8 +163,8 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_PORT", "8080", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REMOTE_ADDR", "127.0.0.1", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REMOTE_PORT", src_port_str, fcgi_request, & fcgi_len );
-		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_ROOT", root_dir, fcgi_request, & fcgi_len );
-		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_URI", pathname, fcgi_request, & fcgi_len );
+		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_ROOT", "/home/romain/Documents/Esisar/master2/Tomahawk/www", fcgi_request, & fcgi_len );
+		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_URI", "/test.php", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_SCHEME", "http", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_ADMIN", "test@tomahawk.fr", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "GATEWAY_INTERFACE", "CGI/1.1", fcgi_request, & fcgi_len );
@@ -114,12 +180,11 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
       		printf ( "Mismatch in number of sent bytes\n" );
    		}
 
-   		my_recv ( sock_fcgi, buff );
+   		my_recv ( sock_fcgi );
 	}
 	
 	return NULL;
 }
-
 char * add_fcgi_beg ( uint8_t ver, uint16_t id, int * len ) {
 	char * res = malloc ( 16 );
 	res [0] = ver; // version
@@ -193,60 +258,27 @@ char * add_fcgi_end ( int ver, int id, char * req, int * len ) {
 	return res;
 }
 
-int send_fcgi_nav ( char* msg, int clientId ) {
-	int size=0;
+int send_fcgi_nav ( char * msg, int sock, int clientId ) {
+	message * rep;
 	char * buf;
-	int content_length;
-	int fin=0;
-	int type, padding;
-	int is_data= 0;
-	char * data;
-	HTTP_Node * headers;
-	HTTP_GET_response rep;	
-	//msg+=42;		//on passe le TCP
+	msg += 67;		//Correspond au champ content-length
+	int content_length= (unsigned short) msg;	//on le recupère
+	msg += 4;	//on passe le content-length et le padding
+	buf = strcat_without_alloc_with_length ( "HTTP/1.0 200 OK", msg, content_length );
 	
-	while (!fin){	//FCGI STDOUT
-		msg++;			//on passe la version
-		type= msg[0];		//on recupere le type
-		msg++;
-		msg++;			//Request ID
-		content_length= (unsigned short) *msg;	//on recupere le content_length
-		msg+=2;
-		padding= (unsigned short) *msg;		//on recupere le padding
-		msg+=2;	
-		//Content Data
-		int i=0;
-		if( !is_data ){
-			if ( parse_header_field ( msg, &i, headers) == -1)
-				printf("ERREUR: champ field de fcgi invalide");
-			int j= 0;
-			for ( j=0; j<headers->nb_childs; j++ ){	//on parcours tous les headers
-				strcat_without_alloc_with_length( data, msg + headers->childs[j]->beg , headers->childs[j]->end - headers->childs[j]->beg ); 
-			}	
-			if ( i<content_length ){
-				is_data = 1;
-			}
-		}
-		if( is_data ){
-			while ( i<content_length && msg[i]!= '\0' )
-				i++;
-			strcat_without_alloc_with_length ( data, msg, i);
-		}
-		printf( "\nData:%s\n\n", msg );
-
+	rep->clientId = clientId;
+	rep->len = content_length + strlen( "HTTP/1.0 200 OK" );
+	rep->buf =  buf;
 	
-		
-		size+= content_length;
-
-		if( type==3 ) fin=1;
-	}
-	rep.body = data;
-	rep.code = 200;
-	send_HTTP_GET_response( &rep, clientId, size );
+	sendReponse( rep );
 	return 1;
 } 
+
 /*
 	PARAM:
 	|version|  type  | request id          | content-length    | padding-length | reserved: 0 | name-length | value-length | name | value |
 	0       1        2                     4  				   6			    7			  8				9 			  10
 */
+
+
+
