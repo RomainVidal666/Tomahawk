@@ -22,6 +22,7 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 	if ( is_php ( http_message, requete ) ) { /* Le fichier est un script PHP */
 		char * msg;
 		if ( read_from_fcgi ( rc_pathname, root_dir, &taille ) ) { // on essaie de trouver la ressources 
+			printf("ok\n");
 			send_fcgi_nav( msg, requete->clientId );
 		} else { // ressource non trouvée => erreur 404
 			send_HTTP_error( 404, requete->clientId, root_dir );
