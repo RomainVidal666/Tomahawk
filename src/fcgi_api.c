@@ -46,7 +46,7 @@ char * my_recv ( int sock ) {
 	int id;
 	int type;
 	int is_data = 0;
-	char * msg;
+	char * msg = NULL;
 	long int j;
 	
 	while ( ( clock () - timeout <= FCGI_TIMEOUT ) && ( !fin ) ) { // tant qu'on a pas reçus une réponse de type FCGI_END_REQUEST et si on est pas en timeout
