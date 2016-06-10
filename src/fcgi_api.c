@@ -49,7 +49,7 @@ char * my_recv ( int sock ) {
 	while ( ( clock () - timeout <= FCGI_TIMEOUT ) && ( !fin ) ) { // tant qu'on a pas reçus une réponse de type FCGI_END_REQUEST et si on est pas en timeout
 		timeout = clock ();
 		while ( ( clock () - timeout <= FCGI_TIMEOUT ) && ( size_req = recv ( sock, req, BUFFSIZE - 1, 0 ) ) <= 0 ); // on attend de recevoir qqch
-		strcat_without_alloc_with_2_length ( msg, size_req, req, bytes );
+		strcat_without_alloc_with_2_length ( msg, size_req, req, size_req );
 		size += size_req;
 		while ( i<size ) {		
 			i++;			//on passe la version
@@ -130,7 +130,7 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 		fcgi_request = add_fcgi_param ( 1, 1, "REMOTE_ADDR", "127.0.0.1", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REMOTE_PORT", src_port_str, fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_ROOT", root_dir, fcgi_request, & fcgi_len );
--		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_URI", pathname, fcgi_request, & fcgi_len );
+		fcgi_request = add_fcgi_param ( 1, 1, "DOCUMENT_URI", pathname, fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_SCHEME", "http", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "SERVER_ADMIN", "test@tomahawk.fr", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "GATEWAY_INTERFACE", "CGI/1.1", fcgi_request, & fcgi_len );
@@ -138,8 +138,8 @@ char * read_from_fcgi ( char * pathname, char * root_dir, unsigned long long * t
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_METHOD", "GET", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "QUERY_STRING", "", fcgi_request, & fcgi_len );
 		fcgi_request = add_fcgi_param ( 1, 1, "REQUEST_URI", pathname, fcgi_request, & fcgi_len ); // <=======
--		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_NAME", pathname, fcgi_request, & fcgi_len ); // <=======
--		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_FILENAME", real_pathname, fcgi_request, & fcgi_len );
+		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_NAME", pathname, fcgi_request, & fcgi_len ); // <=======
+		fcgi_request = add_fcgi_param ( 1, 1, "SCRIPT_FILENAME", real_pathname, fcgi_request, & fcgi_len );
 
                 if ( send ( sock_fcgi, fcgi_request, fcgi_len, 0 ) != fcgi_len ) {
       		printf ( "Mismatch in number of sent bytes\n" );
@@ -222,52 +222,6 @@ char * add_fcgi_end ( int ver, int id, char * req, int * len ) {
 	(*len) += 16;
 	
 	return res;
-}
-
-int get_fcgi_response ( int sock_fcgi, char * buff ) {
-    int type = 0;
-    unsigned short int content_length;
-    char padding;
-
-    char msg [ BUFFSIZE ];
-    int buffExplore;
-    int tailleReponse, taillePart;
-    
-    int i=0, j=0;
-
-    buffExplore = 0;
-    tailleReponse = 0;
-    while ( type != 3 ) {
-        taillePart = my_recv ( sock_fcgi, msg );
-        for(i=0;i<taillePart/10;i=i+10){
-            printf("\t[%d, %d, %d, %d, %d, %d, %d, %d, %d, %d]\n", msg[i], msg[i+1], msg[i+2], msg[i+3], msg[i+4], msg[i+5], msg[i+6], msg[i+7], msg[i+8], msg[i+9] ) ;
-        }
-        if(taillePart == 0) {
-            printf("Pas de reponse du serveur FastCGI (ou incomplete, ou pas trouve, ou bug...)\n");
-            return -1;
-        }
-        printf("Strcat chelou\n");
-        buff = strcat_without_alloc_with_2_length ( buff, tailleReponse, msg, taillePart );
-        printf("Qui passe pas\n");
-        buffExplore++	;		//on passe la version
-        type= buff[buffExplore];		//on recupere le type
-        buffExplore ++;
-        buffExplore ++;  		//Request ID
-        content_length = (unsigned short) buff[buffExplore];	//on recupere le content_length
-        buffExplore += 2;
-        padding = (char) buff[buffExplore];		//on recupere le padding
-        buff += 2;	
-        //Content Data
-        buff += content_length;
-        buff += padding;
-        printf("\n\n\n============================ Type : %d\n\n\n\n", type);
-        
-        for(i=0;i<20;i++){
-            printf("\tbuff[%d]=%d\n", i, buff[i]);
-        }
-    }
-    printf("Salut ! J'ai fini ta fonction :)\n");
-    return 0;
 }
 
 int send_fcgi_nav ( char* msg, int clientId ) {
