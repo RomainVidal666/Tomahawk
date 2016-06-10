@@ -13,5 +13,5 @@ add_executable (
 
 target_link_libraries(
         tomahawk
-	/home/thomas/Documents/Development/Tomahawk/librequest.so
+	/home/userir/Documents/api-fcgi/Tomahawk/lib/librequest.so
 )
