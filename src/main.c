@@ -29,19 +29,20 @@ int main ( int argc, char * argv [] ) {
 	loadConfig();
 	
 	signal(SIGINT, quit);
-        
+       
 	while ( 1 ) {
 		reponse.headers = NULL;
 		http_message = malloc ( sizeof ( HTTP_Node ) );
 		cursor = 0;
 
 		requete = getRequest ( 8080 ); // on attend la recepetion d'une requete 
+		
 
 		// Affichage de debug 
-		/*printf("#########################################\nDemande recue depuis le client %d\n",requete->clientId); 
+		printf("#########################################\nDemande recue depuis le client %d\n",requete->clientId); 
 		printf("Client [%d] [%s:%d]\n",requete->clientId,inet_ntoa(requete->clientAddress->sin_addr),htons(requete->clientAddress->sin_port));
 		printf("Contenu de la demande %.*s\n\n",requete->len,requete->buf); 
-	*/
+
 		if ( ( parse_HTTP_message ( requete->buf, & cursor, http_message ) ) && ( analyse(requete->buf, http_message) == 0 ) ) { // la requete est valide 
 			
 			//print_HTTP_Tree ( requete->buf, http_message, 0 );
