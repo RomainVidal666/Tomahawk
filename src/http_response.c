@@ -1,6 +1,7 @@
 #include "http_response.h"
 
 int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
+	printf("make_HTTP_requete");
 	HTTP_GET_response reponse;
 	reponse.headers = NULL;
 	char * rc_pathname = NULL;
@@ -40,6 +41,7 @@ int make_HTTP_requete( HTTP_Node * http_message, message * requete ) {
 }
 
 int send_HTTP_error ( int errNumber, int clientId, char * root_dir ) {
+	printf("send_HTTP_error");
 	char * pathname = NULL;
     HTTP_GET_response response;
 	char str[3];
@@ -58,6 +60,7 @@ int send_HTTP_error ( int errNumber, int clientId, char * root_dir ) {
 }
 
 int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clientId, unsigned long long body_length ) {
+	printf("send_HTTP_GET_response");
 	message * reponse;
 	char content_length [512];
     char * header = NULL;
@@ -102,6 +105,7 @@ int send_HTTP_GET_response ( HTTP_GET_response * http_reponse, unsigned int clie
 }
 
 char * get_message_code ( int code ) {
+	printf("get_message_code");
 	switch ( code ) {
 		case 100:
 			return "Continue";
@@ -135,6 +139,8 @@ char * get_message_code ( int code ) {
 }
 
 char * cast_HTTP_GET_response_to_string ( HTTP_GET_response * response ) {
+	printf("cast_HTTP_GET_response_to_string");
+
 	char * str_reponse = NULL;
 	char code [4];
 
@@ -173,6 +179,7 @@ char * cast_HTTP_GET_response_to_string ( HTTP_GET_response * response ) {
 }
 
 HTTP_header * add_HTTP_header ( char * name, char * value, HTTP_header * root ) {
+	printf("add_HTTP_header");
 	HTTP_header * current = root;
 	if ( root ) {
 		while ( current->next != NULL ) {
@@ -193,6 +200,7 @@ HTTP_header * add_HTTP_header ( char * name, char * value, HTTP_header * root ) 
 }
 
 char * read_from_file ( char * pathname, char * root_dir, unsigned long long * taille ) {
+	printf("read_from_file");
 	FILE * fichier = NULL;
 	unsigned char caractereActuel;
 	unsigned char * content = NULL;
@@ -232,6 +240,7 @@ char * read_from_file ( char * pathname, char * root_dir, unsigned long long * t
 }
 
 char * get_mime_type(HTTP_Node * http_message, message * requete) {
+	printf("get_mime_type");
 	HTTP_Node * node = found_HTTP_Node ( http_message, "request-target" );
 	char * str = NULL, * type = NULL, * extension = NULL;
 
@@ -272,6 +281,7 @@ char * get_mime_type(HTTP_Node * http_message, message * requete) {
 
 
 HTTP_POST * add_HTTP_POST ( int beg, int end, HTTP_POST * root ) {
+	printf("add_HTTP_POST");
 	HTTP_POST * current = root;
 	if ( root ) {
 		while ( current->next != NULL ) {
@@ -294,6 +304,7 @@ HTTP_POST * add_HTTP_POST ( int beg, int end, HTTP_POST * root ) {
 }
 
 int parse_HTTP_POST ( HTTP_Node * http_message, message * requete ) {
+	printf("parse_HTTP_POST");
 	HTTP_Node * body = found_HTTP_Node ( http_message, "message-body" );
 	HTTP_POST * post = NULL, * curr;
 	int cursor = body->beg;
